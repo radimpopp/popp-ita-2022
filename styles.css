@@ -85,6 +85,9 @@ ul {
 .container::-webkit-scrollbar {
   display: none;
 }
+.reverse {
+  flex-direction: row-reverse;
+}
 
 .text-container {
   font-weight: 400;
@@ -144,4 +147,37 @@ footer a:visited {
 
 .active {
   border: 2px solid black;
+}
+
+/* Responsive styles */
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 20px;
+    text-align: center;
+  }
+  .text-container {
+    width: 100%;
+  }
+  .images-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  ul {
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+  }
+  ul li:nth-child(3) {
+    order: -2;
+  }
+  .container {
+    margin-top: 70px;
+    max-height: 45%;
+  }
 }
