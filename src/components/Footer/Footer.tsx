@@ -1,0 +1,22 @@
+import BodyText from '../typo/BodyText'
+import Link from '../Link/Link'
+import React from 'react'
+
+const Footer = () => {
+  return (
+    <footer>
+      <BodyText className='footer-text'>
+        Most of the text used for the website was stolen from{' '}
+        <Link
+          href='https://dev.to/dboateng/history-of-javascript-how-it-all-began-92a'
+          target='_blank'
+          className='footer-link'
+        >
+          this page.
+        </Link>
+      </BodyText>
+    </footer>
+  )
+}
+
+export default Footer
