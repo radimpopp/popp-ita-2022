@@ -1,7 +1,7 @@
 import React from 'react'
 
 export interface BodyTextProps {
-  className: string
+  className?: string
   children: React.ReactChild | React.ReactChild[]
 }
 
