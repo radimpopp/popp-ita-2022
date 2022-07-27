@@ -118,11 +118,11 @@ footer {
   width: 50%;
 }
 
-.home-text:not(:last-child) {
+.content-text:not(:last-child) {
   padding-bottom: 20px;
 }
 
-.home-text {
+.content-text {
   font-size: 1.5rem;
 }
 
@@ -136,4 +136,15 @@ footer {
   font-weight: 700;
   font-size: 2rem;
   padding-bottom: 20px;
+}
+
+.images-container {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content-img {
+  width: 100%;
 }

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/Footer/Footer'
+import History from './components/History/History'
 import HomePage from './components/HomePage/HomePage'
 import Navbar from './components/Navbar/Navbar'
 import React from 'react'
@@ -11,7 +12,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/history' />
+        <Route path='/history' element={<History />} />
         <Route path='/ECMAScript' />
         <Route path='/javascript-today' />
         <Route path='/javascript-java' />
