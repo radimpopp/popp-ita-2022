@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import BodyText from '../typo/BodyText'
 import Image from '../Image/Image'
 import React from 'react'
@@ -9,30 +10,38 @@ const Navbar = () => {
     <nav>
       <ul>
         <li>
-          <RouterLink to='/history' className='link'>
-            <BodyText className='nav-item'>History</BodyText>
-          </RouterLink>
+          <NavLink to='/history' className={({ isActive }) => (isActive ? 'active' : 'nav-link')}>
+            History
+          </NavLink>
         </li>
         <li>
-          <RouterLink to='/javascript-java' className='link'>
-            <BodyText className='nav-item'>JavaScript x Java</BodyText>
-          </RouterLink>
+          <NavLink
+            to='/javascript-java'
+            className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
+          >
+            JavaScript x Java
+          </NavLink>
         </li>
         <li>
-          <RouterLink to='/' className='link'>
+          <RouterLink to='/'>
             <Image src={jsLogo} className='nav-logo' alt='JavaScript logo' />
           </RouterLink>
         </li>
         <li>
-          {' '}
-          <RouterLink to='/ECMAScript' className='link'>
-            <BodyText className='nav-item'>ECMAScript</BodyText>
-          </RouterLink>
+          <NavLink
+            to='/ECMAScript'
+            className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
+          >
+            ECMAScript
+          </NavLink>
         </li>
         <li>
-          <RouterLink to='/javascript-today' className='link'>
-            <BodyText className='nav-item'>JavaScript Today</BodyText>
-          </RouterLink>
+          <NavLink
+            to='/javascript-today'
+            className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
+          >
+            JavaScript Today
+          </NavLink>
         </li>
       </ul>
     </nav>

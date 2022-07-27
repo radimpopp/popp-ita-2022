@@ -16,4 +16,3 @@ const RouterLink = ({ to, children, className }: RouterLinkProps) => {
 }
 
 export default RouterLink
-Link

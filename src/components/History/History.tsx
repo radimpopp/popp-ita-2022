@@ -13,9 +13,9 @@ const History = () => {
         <BodyText className='content-text'>
           <strong>JavaScript</strong> is a programming language that represents one of the three
           core languages used to develop websites, alongside <em>HTML</em> and <em>CSS</em>. Whereas
-          <em>HTML</em> and <em>CSS</em> give a website structure and style,
-          <strong>JavaScript</strong> lets you add functionality and behaviors to your website. This
-          allows visitors to interact with your website in various creative ways.
+          <em> HTML</em> and <em>CSS</em> give a website structure and style,
+          <strong> JavaScript</strong> lets you add functionality and behaviors to your website.
+          This allows visitors to interact with your website in various creative ways.
         </BodyText>
         <BodyText className='content-text'>
           Mosaic was the first web browser with a graphical user interface. It was first released in
@@ -32,7 +32,7 @@ const History = () => {
         <BodyText className='content-text'>
           In September 1995, a Netscape programmer named Brendan Eich developed a new scripting
           language in just 10 days. It was originally called
-          <strong>Mocha</strong>, but quickly became known as <strong>LiveScript</strong> and,
+          <strong> Mocha</strong>, but quickly became known as <strong>LiveScript</strong> and,
           later, <strong>JavaScript</strong>.
         </BodyText>
         <BodyText className='content-text'>
