@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import ECMAScript from './components/ECMAScript/ECMAScript'
 import Footer from './components/Footer/Footer'
 import History from './components/History/History'
 import HomePage from './components/HomePage/HomePage'
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/history' element={<History />} />
-        <Route path='/ECMAScript' />
+        <Route path='/ECMAScript' element={<ECMAScript />} />
         <Route path='/javascript-today' />
         <Route path='/javascript-java' element={<JavaScriptJava />} />
       </Routes>
