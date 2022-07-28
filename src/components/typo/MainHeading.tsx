@@ -1,11 +1,9 @@
 import React from 'react'
-export interface MainHeadingProps {
+type MainHeadingProps = {
   className?: string
-  children: string
+  headingText: string
 }
 
-const MainHeading = ({ className, children }: MainHeadingProps) => {
-  return <h1 className={className}>{children}</h1>
+export const MainHeading = (props: MainHeadingProps) => {
+  return <h1 className={props.className}>{props.headingText}</h1>
 }
-
-export default MainHeading

@@ -1,8 +1,8 @@
-import BodyText from '../typo/BodyText'
-import Link from '../Link/Link'
+import { BodyText } from '../typo/BodyText'
+import { Link } from '../Link/Link'
 import React from 'react'
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer>
       <BodyText className='footer-text'>
@@ -18,5 +18,3 @@ const Footer = () => {
     </footer>
   )
 }
-
-export default Footer

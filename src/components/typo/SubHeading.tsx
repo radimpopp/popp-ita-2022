@@ -1,11 +1,9 @@
 import React from 'react'
-export interface SubHeadingProps {
+type SubHeadingProps = {
   className?: string
-  children: string
+  subHeadingText: string
 }
 
-const SubHeading = ({ className, children }: SubHeadingProps) => {
-  return <h2 className={className}>{children}</h2>
+export const SubHeading = (props: SubHeadingProps) => {
+  return <h2 className={props.className}>{props.subHeadingText}</h2>
 }
-
-export default SubHeading

@@ -1,17 +1,15 @@
 import React from 'react'
 
-export interface LinkProps {
+type LinkProps = {
   href: string
   target?: string
   className?: string
   children: string
 }
-const Link = ({ href, target, className, children }: LinkProps) => {
+export const Link = (props: LinkProps) => {
   return (
-    <a href={href} className={className} target={target}>
-      {children}
+    <a href={props.href} className={props.className} target={props.target}>
+      {props.children}
     </a>
   )
 }
-
-export default Link

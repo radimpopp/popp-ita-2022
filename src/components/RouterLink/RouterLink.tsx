@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-export interface RouterLinkProps {
+type RouterLinkProps = {
   to: string
   children: JSX.Element
   className?: string
 }
 
-const RouterLink = ({ to, children, className }: RouterLinkProps) => {
+export const RouterLink = (props: RouterLinkProps) => {
   return (
-    <Link to={to} className={className}>
-      {children}
+    <Link to={props.to} className={props.className}>
+      {props.children}
     </Link>
   )
 }
-
-export default RouterLink

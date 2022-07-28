@@ -1,15 +1,15 @@
-import BodyText from '../typo/BodyText'
-import Image from '../Image/Image'
-import MainHeading from '../typo/MainHeading'
+import { BodyText } from '../typo/BodyText'
+import { Image } from '../Image/Image'
+import { MainHeading } from '../typo/MainHeading'
 import React from 'react'
 import ecma from '../../images/ecma.png'
 import evolution from '../../images/ecma-evolution.webp'
 
-const ECMAScript = () => {
+export const ECMAScript = () => {
   return (
     <div className='container'>
       <div className='text-container'>
-        <MainHeading className='heading'>ECMAScript</MainHeading>
+        <MainHeading className='heading' headingText='ECMAScript' />
         <BodyText className='content-text'>
           When JavaScript was first introduced by Netscape, there was a war going on between all the
           browser vendors on the market at the time. Microsoft and several other browser vendors
@@ -29,6 +29,7 @@ const ECMAScript = () => {
           languages like JScript and ActionScript are also based on the ECMAScript standard. They
           can be thought of like 3 different cars using the same engine.
         </BodyText>
+
         <BodyText className='content-text'>
           JavaScript has two major host environments: browsers and Node.js. These environments add
           some APIs to the language. If you strip all the external APIs from these environments, you
@@ -43,5 +44,3 @@ const ECMAScript = () => {
     </div>
   )
 }
-
-export default ECMAScript

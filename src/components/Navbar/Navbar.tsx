@@ -1,11 +1,11 @@
+import { BodyText } from '../typo/BodyText'
+import { Image } from '../Image/Image'
 import { NavLink } from 'react-router-dom'
-import BodyText from '../typo/BodyText'
-import Image from '../Image/Image'
+import { RouterLink } from '../RouterLink/RouterLink'
 import React from 'react'
-import RouterLink from '../RouterLink/RouterLink'
 import jsLogo from '../../images/js_logo.png'
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <nav>
       <ul>
@@ -47,5 +47,3 @@ const Navbar = () => {
     </nav>
   )
 }
-
-export default Navbar

@@ -1,15 +1,15 @@
-import BodyText from '../typo/BodyText'
-import Image from '../Image/Image'
-import MainHeading from '../typo/MainHeading'
+import { BodyText } from '../typo/BodyText'
+import { Image } from '../Image/Image'
+import { MainHeading } from '../typo/MainHeading'
 import React from 'react'
 import jsToday from '../../images/js-today.png'
 import jsToday1 from '../../images/js-today1.png'
 
-const JavaScriptToday = () => {
+export const JavaScriptToday = () => {
   return (
     <div className='container reverse'>
       <div className='text-container'>
-        <MainHeading className='heading'>JavaScript Today</MainHeading>
+        <MainHeading className='heading' headingText='JavaScript Today' />
         <BodyText className='content-text'>
           According to GitHub’s 2021 Octoverse report, there are more JavaScript code repositories
           than any other language, and that number is steadily on the rise.
@@ -43,5 +43,3 @@ const JavaScriptToday = () => {
     </div>
   )
 }
-
-export default JavaScriptToday

@@ -1,12 +1,10 @@
 import React from 'react'
 
-export interface BodyTextProps {
+type BodyTextProps = {
   className?: string
   children: React.ReactChild | React.ReactChild[]
 }
 
-const BodyText = ({ className, children }: BodyTextProps) => {
-  return <p className={className}>{children}</p>
+export const BodyText = (props: BodyTextProps) => {
+  return <p className={props.className}>{props.children}</p>
 }
-
-export default BodyText

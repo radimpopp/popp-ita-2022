@@ -1,14 +1,14 @@
-import BodyText from '../typo/BodyText'
-import MainHeading from '../typo/MainHeading'
+import { BodyText } from '../typo/BodyText'
+import { MainHeading } from '../typo/MainHeading'
+import { SubHeading } from '../typo/SubHeading'
 import React from 'react'
-import SubHeading from '../typo/SubHeading'
 
-const HomePage = () => {
+export const HomePage = () => {
   return (
     <div className='background-container'>
       <div className='container'>
         <div className='text-container'>
-          <MainHeading className='heading'>JavaScript</MainHeading>
+          <MainHeading className='heading' headingText='JavaScript' />
           <BodyText className='content-text'>
             JavaScript is a dynamic programming language that&apos;s used for web development, in
             web applications, for game development, and lots more. It allows you to implement
@@ -20,9 +20,10 @@ const HomePage = () => {
             dynamically changing element colors on a page, to name a few features, you&apos;re
             seeing the effects of JavaScript.
           </BodyText>
-          <SubHeading className='subheading'>
-            What Would the Web Look Like Without JavaScript?
-          </SubHeading>
+          <SubHeading
+            className='subheading'
+            subHeadingText='What Would the Web Look Like Without JavaScript?'
+          />
           <BodyText className='content-text'>
             Without JavaScript, all you would have on the web would be HTML and CSS. These alone
             limit you to a few web page implementations. 90% (if not more) of your webpages would be
@@ -33,5 +34,3 @@ const HomePage = () => {
     </div>
   )
 }
-
-export default HomePage

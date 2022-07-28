@@ -1,15 +1,15 @@
-import BodyText from '../typo/BodyText'
-import Image from '../Image/Image'
-import MainHeading from '../typo/MainHeading'
+import { BodyText } from '../typo/BodyText'
+import { Image } from '../Image/Image'
+import { MainHeading } from '../typo/MainHeading'
 import React from 'react'
 import mochaImg from '../../images/mocha-livescript-javascript.png'
 import netscapeImg from '../../images/netscape.png'
 
-const History = () => {
+export const History = () => {
   return (
     <div className='container'>
       <div className='text-container'>
-        <MainHeading className='heading'>History</MainHeading>
+        <MainHeading className='heading' headingText='History' />
         <BodyText className='content-text'>
           <strong>JavaScript</strong> is a programming language that represents one of the three
           core languages used to develop websites, alongside <em>HTML</em> and <em>CSS</em>. Whereas
@@ -35,6 +35,7 @@ const History = () => {
           <strong> Mocha</strong>, but quickly became known as <strong>LiveScript</strong> and,
           later, <strong>JavaScript</strong>.
         </BodyText>
+
         <BodyText className='content-text'>
           The language derived its syntax from <em>Java</em>, its first-class functions from Scheme,
           and its prototype-based inheritance from Self. Since then, <strong>JavaScript</strong> has
@@ -48,5 +49,3 @@ const History = () => {
     </div>
   )
 }
-
-export default History

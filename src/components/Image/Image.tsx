@@ -1,12 +1,10 @@
 import React from 'react'
-export interface ImageProps {
+type ImageProps = {
   src: string
   className?: string
   alt?: string
 }
 
-const Image = ({ src, className, alt }: ImageProps) => {
-  return <img src={src} className={className} alt={alt} />
+export const Image = (props: ImageProps) => {
+  return <img src={props.src} className={props.className} alt={props.alt} />
 }
-
-export default Image

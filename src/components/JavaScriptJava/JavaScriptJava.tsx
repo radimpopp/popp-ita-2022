@@ -1,15 +1,15 @@
-import BodyText from '../typo/BodyText'
-import Image from '../Image/Image'
-import MainHeading from '../typo/MainHeading'
+import { BodyText } from '../typo/BodyText'
+import { Image } from '../Image/Image'
+import { MainHeading } from '../typo/MainHeading'
 import React from 'react'
 import javaScriptXJava from '../../images/java-javascript.jpeg'
 import javaScriptXJava1 from '../../images/java-javascript1.jpeg'
 
-const JavaScriptJava = () => {
+export const JavaScriptJava = () => {
   return (
     <div className='container reverse'>
       <div className='text-container'>
-        <MainHeading className='heading'>JavaScript x Java</MainHeading>
+        <MainHeading className='heading' headingText='JavaScript x Java' />
         <BodyText className='content-text'>
           The choice of using the name “JavaScript” has always caused some confusion that the
           language is directly related to Java. However, except for syntactic resemblance,
@@ -31,5 +31,3 @@ const JavaScriptJava = () => {
     </div>
   )
 }
-
-export default JavaScriptJava
