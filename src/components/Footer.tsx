@@ -1,5 +1,5 @@
-import { BodyText } from '../typo/BodyText'
-import { Link } from '../Link/Link'
+import { BodyText } from './BodyText'
+import { Link } from './Link'
 import React from 'react'
 
 export const Footer = () => {

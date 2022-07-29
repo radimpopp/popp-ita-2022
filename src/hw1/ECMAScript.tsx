@@ -1,9 +1,9 @@
-import { BodyText } from '../typo/BodyText'
-import { Image } from '../Image/Image'
-import { MainHeading } from '../typo/MainHeading'
+import { BodyText } from '../components/BodyText'
+import { Image } from '../components/Image'
+import { MainHeading } from '../components/MainHeading'
 import React from 'react'
-import ecma from '../../images/ecma.png'
-import evolution from '../../images/ecma-evolution.webp'
+import ecma from '../images/ecma.png'
+import evolution from '../images/ecma-evolution.webp'
 
 export const ECMAScript = () => {
   return (

@@ -1,6 +1,6 @@
-import { BodyText } from '../typo/BodyText'
-import { MainHeading } from '../typo/MainHeading'
-import { SubHeading } from '../typo/SubHeading'
+import { BodyText } from '../components/BodyText'
+import { MainHeading } from '../components/MainHeading'
+import { SubHeading } from '../components/SubHeading'
 import React from 'react'
 
 export const HomePage = () => {

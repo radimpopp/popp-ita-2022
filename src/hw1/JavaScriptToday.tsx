@@ -1,9 +1,9 @@
-import { BodyText } from '../typo/BodyText'
-import { Image } from '../Image/Image'
-import { MainHeading } from '../typo/MainHeading'
+import { BodyText } from '../components/BodyText'
+import { Image } from '../components/Image'
+import { MainHeading } from '../components/MainHeading'
 import React from 'react'
-import jsToday from '../../images/js-today.png'
-import jsToday1 from '../../images/js-today1.png'
+import jsToday from '../images/js-today.png'
+import jsToday1 from '../images/js-today1.png'
 
 export const JavaScriptToday = () => {
   return (

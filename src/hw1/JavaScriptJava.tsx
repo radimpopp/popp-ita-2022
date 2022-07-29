@@ -1,9 +1,9 @@
-import { BodyText } from '../typo/BodyText'
-import { Image } from '../Image/Image'
-import { MainHeading } from '../typo/MainHeading'
+import { BodyText } from '../components/BodyText'
+import { Image } from '../components/Image'
+import { MainHeading } from '../components/MainHeading'
 import React from 'react'
-import javaScriptXJava from '../../images/java-javascript.jpeg'
-import javaScriptXJava1 from '../../images/java-javascript1.jpeg'
+import javaScriptXJava from '../images/java-javascript.jpeg'
+import javaScriptXJava1 from '../images/java-javascript1.jpeg'
 
 export const JavaScriptJava = () => {
   return (

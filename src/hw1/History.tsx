@@ -1,9 +1,9 @@
-import { BodyText } from '../typo/BodyText'
-import { Image } from '../Image/Image'
-import { MainHeading } from '../typo/MainHeading'
+import { BodyText } from '../components/BodyText'
+import { Image } from '../components/Image'
+import { MainHeading } from '../components/MainHeading'
 import React from 'react'
-import mochaImg from '../../images/mocha-livescript-javascript.png'
-import netscapeImg from '../../images/netscape.png'
+import mochaImg from '../images/mocha-livescript-javascript.png'
+import netscapeImg from '../images/netscape.png'
 
 export const History = () => {
   return (

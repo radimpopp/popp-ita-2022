@@ -1,35 +1,40 @@
-import { BodyText } from '../typo/BodyText'
-import { Image } from '../Image/Image'
+import { BodyText } from './BodyText'
+import { Image } from './Image'
 import { NavLink } from 'react-router-dom'
-import { RouterLink } from '../RouterLink/RouterLink'
+import { RouterLink } from './RouterLink'
+import { url } from 'inspector'
+import { urls } from '../helpers/urls'
 import React from 'react'
-import jsLogo from '../../images/js_logo.png'
+import jsLogo from '../images/js_logo.png'
 
 export const Navbar = () => {
   return (
     <nav>
       <ul>
         <li>
-          <NavLink to='/history' className={({ isActive }) => (isActive ? 'active' : 'nav-link')}>
+          <NavLink
+            to={urls.historyUrl}
+            className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
+          >
             History
           </NavLink>
         </li>
         <li>
           <NavLink
-            to='/javascript-java'
+            to={urls.jsxjUrl}
             className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
           >
             JavaScript x Java
           </NavLink>
         </li>
         <li>
-          <RouterLink to='/'>
+          <RouterLink to={urls.homeUrl}>
             <Image src={jsLogo} className='nav-logo' alt='JavaScript logo' />
           </RouterLink>
         </li>
         <li>
           <NavLink
-            to='/ECMAScript'
+            to={urls.ecmaUrl}
             className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
           >
             ECMAScript
@@ -37,7 +42,7 @@ export const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to='/javascript-today'
+            to={urls.jstUrl}
             className={({ isActive }) => (isActive ? 'active' : 'nav-link')}
           >
             JavaScript Today
