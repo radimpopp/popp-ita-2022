@@ -1,9 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
+
 type SubHeadingProps = {
-  className?: string
   subHeadingText: string
 }
 
 export const SubHeading = (props: SubHeadingProps) => {
-  return <h2 className={props.className}>{props.subHeadingText}</h2>
+  return <StyledSubHeading>{props.subHeadingText}</StyledSubHeading>
 }
+
+const StyledSubHeading = styled.h2`
+  font-weight: 700;
+  font-size: 2rem;
+  padding-bottom: 20px;
+`

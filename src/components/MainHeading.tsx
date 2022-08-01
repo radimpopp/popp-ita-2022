@@ -1,9 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
+
 type MainHeadingProps = {
-  className?: string
   headingText: string
 }
 
 export const MainHeading = (props: MainHeadingProps) => {
-  return <h1 className={props.className}>{props.headingText}</h1>
+  return <StyledMainHeading>{props.headingText}</StyledMainHeading>
 }
+
+const StyledMainHeading = styled.h1`
+  font-weight: 700;
+  font-size: 3rem;
+  padding-bottom: 30px;
+`

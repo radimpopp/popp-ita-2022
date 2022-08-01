@@ -1,15 +1,22 @@
 import React from 'react'
+import styled from 'styled-components'
 
 type LinkProps = {
   href: string
   target?: string
-  className?: string
   children: string
 }
 export const Link = (props: LinkProps) => {
   return (
-    <a href={props.href} className={props.className} target={props.target}>
+    <StyledLink href={props.href} target={props.target}>
       {props.children}
-    </a>
+    </StyledLink>
   )
 }
+const StyledLink = styled.a`
+  color: #d29909;
+  text-decoration: none;
+  &:visited {
+    color: #f26005a3;
+  }
+`
