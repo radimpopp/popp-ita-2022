@@ -6,11 +6,11 @@ type ImageProps = {
   alt?: string
 }
 
-export const ImageLogo = (props: ImageProps) => {
+export const Img_ImageLogo = (props: ImageProps) => {
   return <StyledImgLogo src={props.src} alt={props.alt} />
 }
 
-export const Image = (props: ImageProps) => {
+export const Img_Image = (props: ImageProps) => {
   return <StyledImg src={props.src} alt={props.alt} />
 }
 

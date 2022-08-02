@@ -5,7 +5,7 @@ type BodyTextProps = {
   children: React.ReactChild | React.ReactChild[]
 }
 
-export const BodyText = (props: BodyTextProps) => {
+export const P_BodyText = (props: BodyTextProps) => {
   return <StyledBodyText>{props.children}</StyledBodyText>
 }
 

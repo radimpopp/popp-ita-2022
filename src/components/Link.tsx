@@ -6,7 +6,7 @@ type LinkProps = {
   target?: string
   children: string
 }
-export const Link = (props: LinkProps) => {
+export const A_Link = (props: LinkProps) => {
   return (
     <StyledLink href={props.href} target={props.target}>
       {props.children}

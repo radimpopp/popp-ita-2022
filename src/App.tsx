@@ -9,12 +9,11 @@ import { Route, Routes } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { urls } from './helpers/urls'
 import React from 'react'
-import logo from './logo.svg'
 import styled from 'styled-components'
 
 export function App() {
   return (
-    <StyledApp>
+    <Div_StyledApp>
       <Navbar />
       <Routes>
         <Route path={urls.homeUrl} element={<HomePage />} />
@@ -25,11 +24,11 @@ export function App() {
       </Routes>
       <Footer />
       <GlobalStyle />
-    </StyledApp>
+    </Div_StyledApp>
   )
 }
 
-const StyledApp = styled.div`
+const Div_StyledApp = styled.div`
   width: 100%;
   height: 100%;
 `

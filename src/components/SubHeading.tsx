@@ -5,7 +5,7 @@ type SubHeadingProps = {
   subHeadingText: string
 }
 
-export const SubHeading = (props: SubHeadingProps) => {
+export const H2_SubHeading = (props: SubHeadingProps) => {
   return <StyledSubHeading>{props.subHeadingText}</StyledSubHeading>
 }
 

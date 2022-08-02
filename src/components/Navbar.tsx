@@ -1,8 +1,6 @@
-import { BodyText } from './BodyText'
-import { Image, ImageLogo } from './Image'
+import { Img_ImageLogo } from './Image'
 import { NavLink } from 'react-router-dom'
 import { RouterLink } from './RouterLink'
-import { url } from 'inspector'
 import { urls } from '../helpers/urls'
 import React from 'react'
 import jsLogo from '../images/js_logo.png'
@@ -10,42 +8,42 @@ import styled from 'styled-components'
 
 export const Navbar = () => {
   return (
-    <StyledNavbar>
-      <NavList>
-        <NavListItem>
-          <StyledNavLink
+    <Nav_StyledNavbar>
+      <Ul_NavList>
+        <Li_NavListItem>
+          <Link_NavLink
             to={urls.historyUrl}
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             History
-          </StyledNavLink>
-        </NavListItem>
-        <NavListItem>
-          <StyledNavLink to={urls.jsxjUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
+          </Link_NavLink>
+        </Li_NavListItem>
+        <Li_NavListItem>
+          <Link_NavLink to={urls.jsxjUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
             JavaScript x Java
-          </StyledNavLink>
-        </NavListItem>
-        <NavListItem>
+          </Link_NavLink>
+        </Li_NavListItem>
+        <Li_NavListItem>
           <RouterLink to={urls.homeUrl}>
-            <ImageLogo src={jsLogo} alt='JavaScript logo' />
+            <Img_ImageLogo src={jsLogo} alt='JavaScript logo' />
           </RouterLink>
-        </NavListItem>
-        <NavListItem>
-          <StyledNavLink to={urls.ecmaUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
+        </Li_NavListItem>
+        <Li_NavListItem>
+          <Link_NavLink to={urls.ecmaUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
             ECMAScript
-          </StyledNavLink>
-        </NavListItem>
-        <NavListItem>
-          <StyledNavLink to={urls.jstUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
+          </Link_NavLink>
+        </Li_NavListItem>
+        <Li_NavListItem>
+          <Link_NavLink to={urls.jstUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
             JavaScript Today
-          </StyledNavLink>
-        </NavListItem>
-      </NavList>
-    </StyledNavbar>
+          </Link_NavLink>
+        </Li_NavListItem>
+      </Ul_NavList>
+    </Nav_StyledNavbar>
   )
 }
 
-const StyledNavbar = styled.nav`
+const Nav_StyledNavbar = styled.nav`
   background-color: #b8860b;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.8);
   position: fixed;
@@ -54,7 +52,7 @@ const StyledNavbar = styled.nav`
   z-index: 2;
 `
 
-const NavList = styled.ul`
+const Ul_NavList = styled.ul`
   display: flex;
   list-style: none;
   justify-content: space-evenly;
@@ -65,7 +63,7 @@ const NavList = styled.ul`
     padding: 20px 0;
   }
 `
-const NavListItem = styled.li`
+const Li_NavListItem = styled.li`
   &:hover {
     transform: scale(1.1);
   }
@@ -76,7 +74,7 @@ const NavListItem = styled.li`
   }
 `
 
-const StyledNavLink = styled(NavLink)`
+const Link_NavLink = styled(NavLink)`
   font-weight: 500;
   text-decoration: none;
   font-size: 1.8rem;

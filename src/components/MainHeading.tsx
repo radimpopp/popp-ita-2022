@@ -5,7 +5,7 @@ type MainHeadingProps = {
   headingText: string
 }
 
-export const MainHeading = (props: MainHeadingProps) => {
+export const H1_MainHeading = (props: MainHeadingProps) => {
   return <StyledMainHeading>{props.headingText}</StyledMainHeading>
 }
 
