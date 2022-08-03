@@ -15,9 +15,9 @@ export const Navbar = () => {
       <Ul_NavList>
         <Li_NavListItem>
           <Link_NavLink
-            to={urls.historyUrl}
+            to={`${urls.jsWebUrl}${urls.historyUrl}`}
             style={
-              location.pathname === urls.historyUrl
+              location.pathname === `${urls.jsWebUrl}${urls.historyUrl}`
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }
@@ -27,9 +27,9 @@ export const Navbar = () => {
         </Li_NavListItem>
         <Li_NavListItem>
           <Link_NavLink
-            to={urls.jsxjUrl}
+            to={`${urls.jsWebUrl}${urls.jsxjUrl}`}
             style={
-              location.pathname === urls.jsxjUrl
+              location.pathname === `${urls.jsWebUrl}${urls.jsxjUrl}`
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }
@@ -38,15 +38,15 @@ export const Navbar = () => {
           </Link_NavLink>
         </Li_NavListItem>
         <Li_NavListItem>
-          <RouterLink to={urls.homeUrl}>
+          <RouterLink to={urls.jsWebUrl}>
             <Img_ImageLogo src={jsLogo} alt='JavaScript logo' />
           </RouterLink>
         </Li_NavListItem>
         <Li_NavListItem>
           <Link_NavLink
-            to={urls.ecmaUrl}
+            to={`${urls.jsWebUrl}${urls.ecmaUrl}`}
             style={
-              location.pathname === urls.ecmaUrl
+              location.pathname === `${urls.jsWebUrl}${urls.ecmaUrl}`
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }
@@ -56,9 +56,9 @@ export const Navbar = () => {
         </Li_NavListItem>
         <Li_NavListItem>
           <Link_NavLink
-            to={urls.jstUrl}
+            to={`${urls.jsWebUrl}${urls.jstUrl}`}
             style={
-              location.pathname === urls.jstUrl
+              location.pathname === `${urls.jsWebUrl}${urls.jstUrl}`
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }

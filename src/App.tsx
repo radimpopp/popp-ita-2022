@@ -1,10 +1,6 @@
-import { ECMAScript } from './hw1/ECMAScript'
-import { Footer } from './components/Footer'
-import { History } from './hw1/History'
-import { HomePage } from './hw1/HomePage'
-import { JavaScriptJava } from './hw1/JavaScriptJava'
-import { JavaScriptToday } from './hw1/JavaScriptToday'
-import { Navbar } from './components/Navbar'
+import { CounterApp } from './pages/CounterApp'
+import { Home } from './pages/Home'
+import { JsWeb } from './pages/JsWeb'
 import { Route, Routes } from 'react-router-dom'
 import { colors } from './helpers/themes'
 import { createGlobalStyle } from 'styled-components'
@@ -15,15 +11,11 @@ import styled from 'styled-components'
 export function App() {
   return (
     <Div_StyledApp>
-      <Navbar />
       <Routes>
-        <Route path={urls.homeUrl} element={<HomePage />} />
-        <Route path={urls.historyUrl} element={<History />} />
-        <Route path={urls.ecmaUrl} element={<ECMAScript />} />
-        <Route path={urls.jstUrl} element={<JavaScriptToday />} />
-        <Route path={urls.jsxjUrl} element={<JavaScriptJava />} />
+        <Route path={urls.homeUrl} element={<Home />} />
+        <Route path={`${urls.jsWebUrl}${urls.urlAll}`} element={<JsWeb />} />
+        <Route path={urls.counterAppUrl} element={<CounterApp />} />
       </Routes>
-      <Footer />
       <GlobalStyle />
     </Div_StyledApp>
   )

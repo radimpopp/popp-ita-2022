@@ -1,7 +1,10 @@
 export const urls = {
   homeUrl: '/',
+  jsWebUrl: '/js-web',
+  urlAll: '/*',
   historyUrl: '/history',
-  ecmaUrl: '/ECMAScript',
-  jsxjUrl: '/javascript-java',
-  jstUrl: '/javascript-today',
+  ecmaUrl: '/ecma',
+  jsxjUrl: '/js-java',
+  jstUrl: '/js-today',
+  counterAppUrl: '/counter-app',
 }

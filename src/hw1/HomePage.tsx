@@ -2,11 +2,13 @@ import { Div_Container, Div_TextContainer } from '../components/Container'
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { P_BodyText } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
 import { colors } from '../helpers/themes'
+import { urls } from '../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
-export const HomePage = () => {
+export const JavaScript = () => {
   return (
     <Div_BackgroundContainer>
       <Div_Container>
@@ -29,6 +31,9 @@ export const HomePage = () => {
             limit you to a few web page implementations. 90% (if not more) of your webpages would be
             static, and you&apos;d only have the dynamic changes like animations that CSS provides.
           </P_BodyText>
+          <RouterLink to={urls.homeUrl}>
+            <P_BodyText>Return home</P_BodyText>
+          </RouterLink>
         </Div_TextContainer>
       </Div_Container>
     </Div_BackgroundContainer>
