@@ -2,6 +2,7 @@ import { Div_Container, Div_TextContainer } from '../components/Container'
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { P_BodyText } from '../components/BodyText'
+import { colors } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -35,7 +36,7 @@ export const HomePage = () => {
 }
 
 const Div_BackgroundContainer = styled.div`
-  background-image: linear-gradient(#f7e018, #f26005);
+  background-image: linear-gradient(${colors.yellow100}, ${colors.orange100});
   position: absolute;
   top: 0;
   left: 0;

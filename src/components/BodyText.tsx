@@ -1,3 +1,4 @@
+import { fonts, mediaQueries, spacing } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -10,11 +11,11 @@ export const P_BodyText = (props: BodyTextProps) => {
 }
 
 const StyledBodyText = styled.p`
-  font-size: 1.5rem;
+  font-size: ${fonts.fontSmall};
   &:not(:last-child) {
-    padding-bottom: 20px;
+    padding-bottom: ${spacing.medium};
   }
-  @media (max-width: 1200px) {
+  ${mediaQueries.tablet} {
     width: 100%;
   }
 `

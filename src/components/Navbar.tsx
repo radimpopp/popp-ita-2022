@@ -1,25 +1,39 @@
 import { Img_ImageLogo } from './Image'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { RouterLink } from './RouterLink'
+import { colors, fontWeight, fonts, mediaQueries, spacing } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
 import jsLogo from '../images/js_logo.png'
 import styled from 'styled-components'
 
 export const Navbar = () => {
+  const location = useLocation()
+
   return (
     <Nav_StyledNavbar>
       <Ul_NavList>
         <Li_NavListItem>
           <Link_NavLink
             to={urls.historyUrl}
-            className={({ isActive }) => (isActive ? 'active' : '')}
+            style={
+              location.pathname === urls.historyUrl
+                ? { border: '2px solid black', margin: '-2px' }
+                : { border: 'none' }
+            }
           >
             History
           </Link_NavLink>
         </Li_NavListItem>
         <Li_NavListItem>
-          <Link_NavLink to={urls.jsxjUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
+          <Link_NavLink
+            to={urls.jsxjUrl}
+            style={
+              location.pathname === urls.jsxjUrl
+                ? { border: '2px solid black', margin: '-2px' }
+                : { border: 'none' }
+            }
+          >
             JavaScript x Java
           </Link_NavLink>
         </Li_NavListItem>
@@ -29,12 +43,26 @@ export const Navbar = () => {
           </RouterLink>
         </Li_NavListItem>
         <Li_NavListItem>
-          <Link_NavLink to={urls.ecmaUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
+          <Link_NavLink
+            to={urls.ecmaUrl}
+            style={
+              location.pathname === urls.ecmaUrl
+                ? { border: '2px solid black', margin: '-2px' }
+                : { border: 'none' }
+            }
+          >
             ECMAScript
           </Link_NavLink>
         </Li_NavListItem>
         <Li_NavListItem>
-          <Link_NavLink to={urls.jstUrl} className={({ isActive }) => (isActive ? 'active' : '')}>
+          <Link_NavLink
+            to={urls.jstUrl}
+            style={
+              location.pathname === urls.jstUrl
+                ? { border: '2px solid black', margin: '-2px' }
+                : { border: 'none' }
+            }
+          >
             JavaScript Today
           </Link_NavLink>
         </Li_NavListItem>
@@ -44,8 +72,8 @@ export const Navbar = () => {
 }
 
 const Nav_StyledNavbar = styled.nav`
-  background-color: #b8860b;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.8);
+  background-color: ${colors.yellow800};
+  box-shadow: 0 2px 4px 0 ${colors.blackBoxShadow};
   position: fixed;
   top: 0;
   width: 100%;
@@ -57,17 +85,17 @@ const Ul_NavList = styled.ul`
   list-style: none;
   justify-content: space-evenly;
   align-items: center;
-  @media (max-width: 600px) {
+  ${mediaQueries.phone} {
     flex-direction: column;
-    gap: 10px;
-    padding: 20px 0;
+    gap: ${spacing.small};
+    padding: ${spacing.medium} 0;
   }
 `
 const Li_NavListItem = styled.li`
   &:hover {
     transform: scale(1.1);
   }
-  @media (max-width: 600px) {
+  ${mediaQueries.phone} {
     &:nth-child(3) {
       order: -2;
     }
@@ -75,22 +103,13 @@ const Li_NavListItem = styled.li`
 `
 
 const Link_NavLink = styled(NavLink)`
-  font-weight: 500;
+  font-weight: ${fontWeight.fontWeightMedium};
   text-decoration: none;
-  font-size: 1.8rem;
-  color: #000000;
-  padding: 5px;
+  font-size: ${fonts.fontSmallPlus};
+  color: ${colors.black900};
+  padding: ${spacing.extraSmall};
   &:hover {
     text-decoration: underline;
     transform: scale(1.1);
-  }
-  &.active {
-    font-weight: 500;
-    text-decoration: none;
-    font-size: 1.8rem;
-    color: #000000;
-    padding: 5px;
-    border: 2px solid black;
-    margin: -2px;
   }
 `

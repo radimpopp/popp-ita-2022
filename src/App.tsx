@@ -6,6 +6,7 @@ import { JavaScriptJava } from './hw1/JavaScriptJava'
 import { JavaScriptToday } from './hw1/JavaScriptToday'
 import { Navbar } from './components/Navbar'
 import { Route, Routes } from 'react-router-dom'
+import { colors } from './helpers/themes'
 import { createGlobalStyle } from 'styled-components'
 import { urls } from './helpers/urls'
 import React from 'react'
@@ -45,7 +46,7 @@ html {
 }
 
 body {
-  background-color: #c1c1c1;
+  background-color: ${colors.grey100};
   height: 100%;
   min-height: 100vh;
   position: relative;

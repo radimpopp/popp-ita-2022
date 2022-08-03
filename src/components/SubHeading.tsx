@@ -1,3 +1,4 @@
+import { fontWeight, fonts, spacing } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -10,7 +11,7 @@ export const H2_SubHeading = (props: SubHeadingProps) => {
 }
 
 const StyledSubHeading = styled.h2`
-  font-weight: 700;
-  font-size: 2rem;
-  padding-bottom: 20px;
+  font-weight: ${fontWeight.fontWeightLarge};
+  font-size: ${fonts.fontMedium};
+  padding-bottom: ${spacing.medium};
 `
