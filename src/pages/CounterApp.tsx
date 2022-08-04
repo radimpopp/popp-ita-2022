@@ -1,5 +1,8 @@
 import { CounterButton } from '../components/CounterButton'
-import { StyledMainHeadings } from '../components/MainHeading'
+import { H1_MainHeading } from '../components/MainHeading'
+import { P_BodyText } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
+import { urls } from '../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -18,7 +21,7 @@ export class CounterApp extends React.Component<Props, State> {
   render() {
     return (
       <Div_StyledCounterApp>
-        <H1_CounterHeading>{this.state.counter}</H1_CounterHeading>
+        <H1_MainHeading>{this.state.counter}</H1_MainHeading>
         <CounterButton
           onClick={() => {
             this.setState({
@@ -37,6 +40,9 @@ export class CounterApp extends React.Component<Props, State> {
         >
           +
         </CounterButton>
+        <RouterLink to={urls.homeUrl}>
+          <P_BodyText>Return home</P_BodyText>
+        </RouterLink>
       </Div_StyledCounterApp>
     )
   }
@@ -49,7 +55,4 @@ const Div_StyledCounterApp = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`
-const H1_CounterHeading = styled.h1`
-  ${StyledMainHeadings}
 `

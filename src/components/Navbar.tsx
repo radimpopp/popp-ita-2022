@@ -1,7 +1,7 @@
 import { Img_ImageLogo } from './Image'
 import { NavLink, useLocation } from 'react-router-dom'
 import { RouterLink } from './RouterLink'
-import { colors, fontWeight, fonts, mediaQueries, spacing } from '../helpers/themes'
+import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
 import jsLogo from '../images/js_logo.png'
@@ -72,8 +72,8 @@ export const Navbar = () => {
 }
 
 const Nav_StyledNavbar = styled.nav`
-  background-color: ${colors.yellow800};
-  box-shadow: 0 2px 4px 0 ${colors.blackBoxShadow};
+  background-color: ${theme.color.yellowDark};
+  box-shadow: 0 2px 4px 0 ${theme.color.blackBoxShadow};
   position: fixed;
   top: 0;
   width: 100%;
@@ -85,17 +85,17 @@ const Ul_NavList = styled.ul`
   list-style: none;
   justify-content: space-evenly;
   align-items: center;
-  ${mediaQueries.phone} {
+  ${theme.mediaQueries.phone} {
     flex-direction: column;
-    gap: ${spacing.small};
-    padding: ${spacing.medium} 0;
+    gap: ${theme.spacing.small};
+    padding: ${theme.spacing.medium} 0;
   }
 `
 const Li_NavListItem = styled.li`
   &:hover {
     transform: scale(1.1);
   }
-  ${mediaQueries.phone} {
+  ${theme.mediaQueries.phone} {
     &:nth-child(3) {
       order: -2;
     }
@@ -103,11 +103,11 @@ const Li_NavListItem = styled.li`
 `
 
 const Link_NavLink = styled(NavLink)`
-  font-weight: ${fontWeight.fontWeightMedium};
+  font-weight: ${theme.fontWeight.medium};
   text-decoration: none;
-  font-size: ${fonts.fontSmallPlus};
-  color: ${colors.black900};
-  padding: ${spacing.extraSmall};
+  font-size: ${theme.fontSize.smallPlus};
+  color: ${theme.color.black};
+  padding: ${theme.spacing.extraSmall};
   &:hover {
     text-decoration: underline;
     transform: scale(1.1);

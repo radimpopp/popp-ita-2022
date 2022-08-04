@@ -1,4 +1,4 @@
-import { H1_MainHeading } from '../components/MainHeading'
+import { H1_HomeHeading } from '../components/MainHeading'
 import { RouterLink } from '../components/RouterLink'
 import { urls } from '../helpers/urls'
 import React from 'react'
@@ -8,10 +8,10 @@ export const Home = () => {
   return (
     <Div_StyledHome>
       <RouterLink to={urls.jsWebUrl}>
-        <H1_MainHeading headingText='JS web'></H1_MainHeading>
+        <H1_HomeHeading>JS web</H1_HomeHeading>
       </RouterLink>
       <RouterLink to={urls.counterAppUrl}>
-        <H1_MainHeading headingText='Counter app'></H1_MainHeading>
+        <H1_HomeHeading>Counter app</H1_HomeHeading>
       </RouterLink>
     </Div_StyledHome>
   )

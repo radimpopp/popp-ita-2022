@@ -10,7 +10,7 @@ export const ECMAScript = () => {
   return (
     <Div_Container>
       <Div_TextContainer>
-        <H1_MainHeading headingText='ECMAScript' />
+        <H1_MainHeading>ECMAScript</H1_MainHeading>
         <P_BodyText>
           When JavaScript was first introduced by Netscape, there was a war going on between all the
           browser vendors on the market at the time. Microsoft and several other browser vendors

@@ -14,7 +14,7 @@ export const JavaScriptToday = () => {
   return (
     <Div_ReverseContainer>
       <Div_TextContainer>
-        <H1_MainHeading headingText='JavaScript Today' />
+        <H1_MainHeading>JavaScript Today</H1_MainHeading>
         <P_BodyText>
           According to GitHub’s 2021 Octoverse report, there are more JavaScript code repositories
           than any other language, and that number is steadily on the rise.

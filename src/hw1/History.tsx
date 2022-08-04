@@ -10,7 +10,7 @@ export const History = () => {
   return (
     <Div_Container>
       <Div_TextContainer>
-        <H1_MainHeading headingText='History' />
+        <H1_MainHeading>History</H1_MainHeading>
         <P_BodyText>
           <strong>JavaScript</strong> is a programming language that represents one of the three
           core languages used to develop websites, alongside <em>HTML</em> and <em>CSS</em>. Whereas

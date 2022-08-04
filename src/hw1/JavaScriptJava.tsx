@@ -14,7 +14,7 @@ export const JavaScriptJava = () => {
   return (
     <Div_ReverseContainer>
       <Div_TextContainer>
-        <H1_MainHeading headingText='JavaScript x Java' />
+        <H1_MainHeading>JavaScript x Java</H1_MainHeading>
         <P_BodyText>
           The choice of using the name “JavaScript” has always caused some confusion that the
           language is directly related to Java. However, except for syntactic resemblance,

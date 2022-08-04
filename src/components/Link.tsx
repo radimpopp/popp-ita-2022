@@ -1,4 +1,4 @@
-import { colors } from '../helpers/themes'
+import { theme } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -15,9 +15,9 @@ export const A_Link = (props: LinkProps) => {
   )
 }
 const StyledLink = styled.a`
-  color: ${colors.yellow600};
+  color: ${theme.color.yellowUnvisitedLink};
   text-decoration: none;
   &:visited {
-    color: ${colors.orange600};
+    color: ${theme.color.orangeVisitedLink};
   }
 `

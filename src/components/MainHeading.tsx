@@ -1,20 +1,17 @@
-import { fontWeight, fonts, spacing } from '../helpers/themes'
+import { theme } from '../helpers/themes'
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-type MainHeadingProps = {
-  headingText: string
-}
-
-export const H1_MainHeading = (props: MainHeadingProps) => {
-  return <StyledMainHeading>{props.headingText}</StyledMainHeading>
-}
-
 export const StyledMainHeadings = css`
-  font-weight: ${fontWeight.fontWeightLarge};
-  font-size: ${fonts.fontLarge};
-  padding-bottom: ${spacing.large};
+  font-weight: ${theme.fontWeight.bold};
+  font-size: ${theme.fontSize.large};
 `
-const StyledMainHeading = styled.h1`
+export const H1_MainHeading = styled.h1`
   ${StyledMainHeadings}
+`
+
+export const H1_HomeHeading = styled.h1`
+  ${StyledMainHeadings};
+  padding: ${theme.spacing.medium};
+  border: ${theme.spacing.extraSmall} inset ${theme.color.orangeBright};
 `

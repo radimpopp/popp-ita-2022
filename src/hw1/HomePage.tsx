@@ -3,7 +3,7 @@ import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { colors } from '../helpers/themes'
+import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
@@ -13,7 +13,7 @@ export const JavaScript = () => {
     <Div_BackgroundContainer>
       <Div_Container>
         <Div_TextContainer>
-          <H1_MainHeading headingText='JavaScript' />
+          <H1_MainHeading>JavaScript</H1_MainHeading>
           <P_BodyText>
             JavaScript is a dynamic programming language that&apos;s used for web development, in
             web applications, for game development, and lots more. It allows you to implement
@@ -25,7 +25,7 @@ export const JavaScript = () => {
             dynamically changing element colors on a page, to name a few features, you&apos;re
             seeing the effects of JavaScript.
           </P_BodyText>
-          <H2_SubHeading subHeadingText='What Would the Web Look Like Without JavaScript?' />
+          <H2_SubHeading>What Would the Web Look Like Without JavaScript?</H2_SubHeading>
           <P_BodyText>
             Without JavaScript, all you would have on the web would be HTML and CSS. These alone
             limit you to a few web page implementations. 90% (if not more) of your webpages would be
@@ -41,7 +41,7 @@ export const JavaScript = () => {
 }
 
 const Div_BackgroundContainer = styled.div`
-  background-image: linear-gradient(${colors.yellow100}, ${colors.orange100});
+  background-image: linear-gradient(${theme.color.yellowBright}, ${theme.color.orangeBright});
   position: absolute;
   top: 0;
   left: 0;

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { colors, fonts, spacing } from '../helpers/themes'
+import { theme } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -13,6 +13,6 @@ export const RouterLink = (props: RouterLinkProps) => {
 }
 
 const StyledLink = styled(Link)`
-  padding: ${spacing.medium};
-  color: ${colors.black900};
+  padding: ${theme.spacing.medium};
+  color: ${theme.color.black};
 `

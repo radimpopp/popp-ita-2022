@@ -2,8 +2,8 @@ import { CounterApp } from './pages/CounterApp'
 import { Home } from './pages/Home'
 import { JsWeb } from './pages/JsWeb'
 import { Route, Routes } from 'react-router-dom'
-import { colors } from './helpers/themes'
 import { createGlobalStyle } from 'styled-components'
+import { theme } from './helpers/themes'
 import { urls } from './helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
@@ -38,7 +38,7 @@ html {
 }
 
 body {
-  background-color: ${colors.grey100};
+  background-color: ${theme.color.greyBright};
   height: 100%;
   min-height: 100vh;
   position: relative;

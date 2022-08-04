@@ -1,38 +1,40 @@
-export const colors = {
-  grey100: '#c1c1c1',
-  grey600: '#535353',
-  yellow100: '#f7e018',
-  yellow600: '#d29909',
-  yellow800: '#b8860b',
-  orange100: '#f26005',
-  orange600: '#f26005a3',
-  blackBoxShadow: 'rgba(0, 0, 0, 0.8)',
-  black900: '#000000',
-}
+export const theme = {
+  color: {
+    greyBright: '#c1c1c1',
+    greyDark: '#535353',
+    yellowBright: '#f7e018',
+    yellowUnvisitedLink: '#d29909',
+    yellowDark: '#b8860b',
+    orangeBright: '#f26005',
+    orangeVisitedLink: '#f26005a3',
+    blackBoxShadow: 'rgba(0, 0, 0, 0.8)',
+    black: '#000000',
+  },
 
-export const spacing = {
-  extraSmall: '5px',
-  small: '10px',
-  medium: '20px',
-  large: '30px',
-  extraLarge: '50px',
-  superSize: '75px',
-}
+  spacing: {
+    extraSmall: '5px',
+    small: '10px',
+    medium: '20px',
+    large: '30px',
+    extraLarge: '50px',
+    superSize: '75px',
+  },
 
-export const mediaQueries = {
-  phone: '@media (max-width: 600px)',
-  tablet: '@media (max-width: 1200px)',
-}
+  mediaQueries: {
+    phone: '@media (max-width: 600px)',
+    tablet: '@media (max-width: 1200px)',
+  },
 
-export const fonts = {
-  fontSmall: '1.5rem',
-  fontSmallPlus: '1.8rem',
-  fontMedium: '2rem',
-  fontLarge: '3rem',
-}
+  fontSize: {
+    small: '1.5rem',
+    smallPlus: '1.8rem',
+    medium: '2rem',
+    large: '3rem',
+  },
 
-export const fontWeight = {
-  fontWeightSmall: '400',
-  fontWeightMedium: '500',
-  fontWeightLarge: '700',
-}
+  fontWeight: {
+    light: '400',
+    medium: '500',
+    bold: '700',
+  },
+} as const

@@ -1,4 +1,4 @@
-import { spacing } from '../helpers/themes'
+import { theme } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -17,7 +17,7 @@ export const Img_Image = (props: ImageProps) => {
 
 const StyledImgLogo = styled.img`
   width: 40px;
-  padding: ${spacing.extraSmall} 0;
+  padding: ${theme.spacing.small} 0;
 `
 const StyledImg = styled.img`
   width: 100%;
