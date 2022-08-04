@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom'
+import { theme } from '../helpers/themes'
 import React from 'react'
+import styled from 'styled-components'
 
 type RouterLinkProps = {
   to: string
   children: JSX.Element
-  className?: string
 }
 
 export const RouterLink = (props: RouterLinkProps) => {
-  return (
-    <Link to={props.to} className={props.className}>
-      {props.children}
-    </Link>
-  )
+  return <StyledLink to={props.to}>{props.children}</StyledLink>
 }
+
+const StyledLink = styled(Link)`
+  padding: ${theme.spacing.medium};
+  color: ${theme.color.black};
+`

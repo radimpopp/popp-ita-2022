@@ -1,9 +1,9 @@
+import { theme } from '../helpers/themes'
 import React from 'react'
-type SubHeadingProps = {
-  className?: string
-  subHeadingText: string
-}
+import styled from 'styled-components'
 
-export const SubHeading = (props: SubHeadingProps) => {
-  return <h2 className={props.className}>{props.subHeadingText}</h2>
-}
+export const H2_SubHeading = styled.h2`
+  font-weight: ${theme.fontWeight.bold};
+  font-size: ${theme.fontSize.medium};
+  padding-bottom: ${theme.spacing.medium};
+`

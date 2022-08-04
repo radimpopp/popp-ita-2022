@@ -1,9 +1,17 @@
+import { theme } from '../helpers/themes'
 import React from 'react'
-type MainHeadingProps = {
-  className?: string
-  headingText: string
-}
+import styled, { css } from 'styled-components'
 
-export const MainHeading = (props: MainHeadingProps) => {
-  return <h1 className={props.className}>{props.headingText}</h1>
-}
+export const StyledMainHeadings = css`
+  font-weight: ${theme.fontWeight.bold};
+  font-size: ${theme.fontSize.large};
+`
+export const H1_MainHeading = styled.h1`
+  ${StyledMainHeadings}
+`
+
+export const H1_HomeHeading = styled.h1`
+  ${StyledMainHeadings};
+  padding: ${theme.spacing.medium};
+  border: ${theme.spacing.extraSmall} inset ${theme.color.orangeBright};
+`
