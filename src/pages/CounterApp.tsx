@@ -1,4 +1,4 @@
-import { CounterButton } from '../components/CounterButton'
+import { Button_CustomButton } from '../components/Button'
 import { H1_MainHeading } from '../components/MainHeading'
 import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -22,7 +22,7 @@ export class CounterApp extends React.Component<Props, State> {
     return (
       <Div_StyledCounterApp>
         <H1_MainHeading>{this.state.counter}</H1_MainHeading>
-        <CounterButton
+        <Button_CustomButton
           onClick={() => {
             this.setState({
               counter: this.state.counter - 1,
@@ -30,8 +30,8 @@ export class CounterApp extends React.Component<Props, State> {
           }}
         >
           -
-        </CounterButton>
-        <CounterButton
+        </Button_CustomButton>
+        <Button_CustomButton
           onClick={() => {
             this.setState({
               counter: this.state.counter + 1,
@@ -39,7 +39,7 @@ export class CounterApp extends React.Component<Props, State> {
           }}
         >
           +
-        </CounterButton>
+        </Button_CustomButton>
         <RouterLink to={urls.homeUrl}>
           <P_BodyText>Return home</P_BodyText>
         </RouterLink>

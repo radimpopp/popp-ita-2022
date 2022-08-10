@@ -30,7 +30,7 @@ export const Navbar = () => {
             to={`${urls.jsWebUrl}${urls.jsxjUrl}`}
             style={
               location.pathname === `${urls.jsWebUrl}${urls.jsxjUrl}`
-                ? { border: '2px solid black', margin: '-2px' }
+                ? { border: '2px solid black', margin: '-2px', maxWidth: '500px' }
                 : { border: 'none' }
             }
           >
@@ -73,7 +73,7 @@ export const Navbar = () => {
 
 const Nav_StyledNavbar = styled.nav`
   background-color: ${theme.color.yellowDark};
-  box-shadow: 0 2px 4px 0 ${theme.color.blackBoxShadow};
+  box-shadow: 0 ${theme.spacing.borderSmall} 4px 0 ${theme.color.blackBoxShadow};
   position: fixed;
   top: 0;
   width: 100%;
@@ -108,6 +108,7 @@ const Link_NavLink = styled(NavLink)`
   font-size: ${theme.fontSize.smallPlus};
   color: ${theme.color.black};
   padding: ${theme.spacing.extraSmall};
+  white-space: nowrap;
   &:hover {
     text-decoration: underline;
     transform: scale(1.1);

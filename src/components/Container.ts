@@ -1,7 +1,7 @@
 import { theme } from '../helpers/themes'
 import styled, { css } from 'styled-components'
 
-const ContainerStyles = css`
+const containerStyles = css`
   width: 80%;
   position: absolute;
   top: 50%;
@@ -35,10 +35,10 @@ const ContainerStyles = css`
 `
 
 export const Div_Container = styled.div`
-  ${ContainerStyles}
+  ${containerStyles}
 `
 export const Div_ReverseContainer = styled.div`
-  ${ContainerStyles};
+  ${containerStyles};
   flex-direction: row-reverse;
 `
 export const Div_TextContainer = styled.div`
