@@ -21,7 +21,7 @@ export const Footer = () => {
 
 const Footer_Footer = styled.footer`
   background-color: ${theme.color.greyDark};
-  box-shadow: 0 2px 4px 0 ${theme.color.blackBoxShadow};
+  box-shadow: 0 ${theme.spacing.borderSmall} 4px 0 ${theme.color.blackBoxShadow};
   position: fixed;
   bottom: 0;
   width: 100%;

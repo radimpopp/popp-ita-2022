@@ -12,6 +12,7 @@ export const theme = {
   },
 
   spacing: {
+    borderSmall: '2px',
     extraSmall: '5px',
     small: '10px',
     medium: '20px',

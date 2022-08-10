@@ -7,4 +7,5 @@ export const urls = {
   jsxjUrl: '/js-java',
   jstUrl: '/js-today',
   counterAppUrl: '/counter-app',
+  todoListUrl: '/todo-list',
 }

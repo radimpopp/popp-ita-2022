@@ -13,6 +13,9 @@ export const Home = () => {
       <RouterLink to={urls.counterAppUrl}>
         <H1_HomeHeading>Counter app</H1_HomeHeading>
       </RouterLink>
+      <RouterLink to={urls.todoListUrl}>
+        <H1_HomeHeading>Todo list</H1_HomeHeading>
+      </RouterLink>
     </Div_StyledHome>
   )
 }

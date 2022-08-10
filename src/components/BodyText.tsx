@@ -11,3 +11,19 @@ export const P_BodyText = styled.p`
     width: 100%;
   }
 `
+
+export const P_TodoBodyText = styled.p`
+  font-size: ${theme.fontSize.small};
+  padding: ${theme.spacing.small};
+  word-break: break-all;
+  width: 90%;
+  ${theme.mediaQueries.tablet} {
+    width: 85%;
+  }
+  ${theme.mediaQueries.phone} {
+    width: 60%;
+  }
+  &[aria-checked='true'] {
+    text-decoration: line-through;
+  }
+`
