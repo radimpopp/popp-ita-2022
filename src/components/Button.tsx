@@ -13,11 +13,7 @@ export const buttonStyles = css`
   cursor: pointer;
 `
 
-export const Button = (props: ComponentProps<'button'>) => {
-  return <button {...props}>{props.children}</button>
-}
-
-export const Button_CustomButton = styled(Button)`
+export const Button_CustomButton = styled.button`
   ${buttonStyles}
   width: ${theme.spacing.superSize};
   height: ${theme.spacing.large};

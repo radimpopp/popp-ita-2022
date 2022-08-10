@@ -2,11 +2,7 @@ import { theme } from '../helpers/themes'
 import React, { ComponentProps } from 'react'
 import styled from 'styled-components'
 
-const Input = (props: ComponentProps<'input'>) => {
-  return <input {...props}>{props.children}</input>
-}
-
-export const Input_Input = styled(Input)`
+export const Input_Input = styled.input`
   width: 500px;
   height: ${theme.spacing.large};
   margin-left: ${theme.spacing.medium};
@@ -26,7 +22,7 @@ export const Input_Input = styled(Input)`
   }
 `
 
-export const Input_Checkbox = styled(Input)`
+export const Input_Checkbox = styled.input`
   margin: ${theme.spacing.small};
   display: flex;
   align-items: center;

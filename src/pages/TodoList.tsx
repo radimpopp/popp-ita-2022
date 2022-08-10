@@ -1,11 +1,13 @@
-import { Button, buttonStyles } from '../components/Button'
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Input_Checkbox, Input_Input } from '../components/input'
 import { P_BodyText, P_TodoBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { buttonStyles } from '../components/Button'
+import { createId } from '../helpers/utils'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
+import { useLocalStorage } from '../helpers/hooks'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -15,41 +17,17 @@ type Task = {
   completed: boolean
 }
 
-const lsId = {
-  tasks: 'tasks:list',
-}
-
-const useLocalStorage = <T,>(key: string, initialValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const item = window.localStorage.getItem(key)
-      return item ? JSON.parse(item) : initialValue
-    } catch {
-      console.error
-      return initialValue
-    }
-  })
-  const setValue = (value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value
-      setStoredValue(valueToStore)
-      window.localStorage.setItem(key, JSON.stringify(valueToStore))
-    } catch {}
-  }
-  return [storedValue, setValue] as const
+const filterMap = {
+  all: () => true,
+  active: (task: Task) => !task.completed,
+  done: (task: Task) => task.completed,
 }
 
 export const TodoList = () => {
-  const [tasks, setTasks] = useLocalStorage(lsId.tasks, [] as Task[])
+  const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
   const [name, setName] = useState('')
-  const [filter, setFilter] = useState<'All' | 'Active' | 'Done'>('All')
-  const [error, setError] = useState(false)
-
-  const FILTER_MAP = {
-    All: () => true,
-    Active: (task: Task) => !task.completed,
-    Done: (task: Task) => task.completed,
-  }
+  const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
+  const [emptyInputErr, setEmptyInputErr] = useState(false)
 
   const handleChecked = (id: string) =>
     setTasks(tasks.map(task => (id === task.id ? { ...task, completed: !task.completed } : task)))
@@ -77,19 +55,19 @@ export const TodoList = () => {
         onSubmit={e => {
           e.preventDefault()
           if (name.length === 0) {
-            setError(true)
+            setEmptyInputErr(true)
             return
           }
           setTasks([
             {
-              id: Math.random().toString(),
+              id: createId(),
               name,
               completed: false,
             },
             ...tasks,
           ])
           setName('')
-          setError(false)
+          setEmptyInputErr(false)
         }}
       >
         <Div_InputContainer>
@@ -103,7 +81,11 @@ export const TodoList = () => {
           <Button_TodoButton type='submit'>Add task</Button_TodoButton>
         </Div_InputContainer>
       </form>
-      {error ? <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading> : ''}
+      {emptyInputErr ? (
+        <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
+      ) : (
+        ''
+      )}
       <Div_FilterButtonContainer>
         {tasksLeftCounter >= 1 ? (
           <H2_ItemsLeftHeading>
@@ -114,17 +96,17 @@ export const TodoList = () => {
         ) : (
           ''
         )}
-        <Button_FilterButton onClick={() => setFilter('All')} aria-pressed={filter === 'All'}>
+        <Button_FilterButton onClick={() => setFilter('all')} aria-pressed={filter === 'all'}>
           All
         </Button_FilterButton>
-        <Button_FilterButton onClick={() => setFilter('Active')} aria-pressed={filter === 'Active'}>
+        <Button_FilterButton onClick={() => setFilter('active')} aria-pressed={filter === 'active'}>
           Active
         </Button_FilterButton>
-        <Button_FilterButton onClick={() => setFilter('Done')} aria-pressed={filter === 'Done'}>
+        <Button_FilterButton onClick={() => setFilter('done')} aria-pressed={filter === 'done'}>
           Done
         </Button_FilterButton>
       </Div_FilterButtonContainer>
-      {tasks.filter(FILTER_MAP[filter]).map(task => (
+      {tasks.filter(filterMap[filter]).map(task => (
         <Div_TaskContainer key={task.id}>
           <Button_DeleteButton onClick={() => handleDelete(task.id)}>
             <P_TodoBodyText>X</P_TodoBodyText>
@@ -199,7 +181,7 @@ const H2_ErrorHeading = styled(H2_FormHeading)`
     white-space: unset;
   }
 `
-export const Button_TodoButton = styled(Button)`
+export const Button_TodoButton = styled.button`
   ${buttonStyles}
   width: 200px;
   height: 40px;
@@ -210,7 +192,7 @@ export const Button_TodoButton = styled(Button)`
   }
 `
 
-const Button_FilterButton = styled(Button)`
+const Button_FilterButton = styled.button`
   ${buttonStyles}
   width: 200px;
   height: 40px;
@@ -220,7 +202,7 @@ const Button_FilterButton = styled(Button)`
   }
 `
 
-const Button_DeleteButton = styled(Button)`
+const Button_DeleteButton = styled.button`
   ${buttonStyles}
   position: absolute;
   width: ${theme.spacing.medium};
