@@ -13,6 +13,6 @@ export const RouterLink = (props: RouterLinkProps) => {
 }
 
 const StyledLink = styled(Link)`
-  padding: ${theme.spacing.medium};
+  padding: ${theme.spacing.small};
   color: ${theme.color.black};
 `

@@ -5,7 +5,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const HackerTyper = () => {
-  const [codeInterface, setCodeInterface] = useState(0)
+  const [number, setNumber] = useState(0)
   const [alert, setAlert] = useState<'ACCESS DENIED!!!' | 'ACCESS GRANTED' | null>(null)
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -19,8 +19,8 @@ export const HackerTyper = () => {
   }
 
   const startHacking = () => {
-    const codeFragment = codeInterface + 4
-    !alert && setCodeInterface(codeFragment >= hackerCode.length ? 0 : codeFragment)
+    const codeFragment = number + 4
+    if (!alert) setNumber(codeFragment >= hackerCode.length ? 0 : codeFragment)
   }
 
   return (
@@ -36,7 +36,7 @@ export const HackerTyper = () => {
       ) : null}
       <Textarea_HackerArea
         onKeyDown={handleKeyDown}
-        value={hackerCode.substring(0, codeInterface)}
+        value={hackerCode.substring(0, number)}
         onChange={startHacking}
         spellCheck={'false'}
         autoFocus={true}
@@ -62,7 +62,7 @@ const Div_HackerContainer = styled.div`
 
 const Textarea_HackerArea = styled.textarea`
   width: 90%;
-  height: 90%;
+  height: 65%;
   padding: ${theme.spacing.large};
   background: ${theme.color.black};
   color: #03a062;

@@ -46,7 +46,7 @@ void CIeLoginHelper::EnumFrames(CComPtr<IHTMLDocument2>& spDocument)
         CComPtr<IIHTMLElementCollection> spElmntCol;
 
         hr = spDocument->get_forms(&spFrmCol);
-                if a page is a lgoin page
+                if a page is a login page
         hr = spDocument->get_all(&spElmntCol);
         if(IsLoginPage(spElmntCol))
                    EnableEvents(spFrmCol);    
