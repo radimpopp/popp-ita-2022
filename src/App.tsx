@@ -1,4 +1,5 @@
 import { CounterApp } from './pages/CounterApp'
+import { HackerTyper } from './hackertyper/Hackertyper'
 import { Home } from './pages/Home'
 import { JsWeb } from './pages/JsWeb'
 import { Route, Routes } from 'react-router-dom'
@@ -17,6 +18,7 @@ export function App() {
         <Route path={`${urls.jsWebUrl}${urls.urlAll}`} element={<JsWeb />} />
         <Route path={urls.counterAppUrl} element={<CounterApp />} />
         <Route path={urls.todoListUrl} element={<TodoList />} />
+        <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
       </Routes>
       <GlobalStyle />
     </Div_StyledApp>
