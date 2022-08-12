@@ -8,7 +8,6 @@ import { Navbar } from '../components/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import { urls } from '../helpers/urls'
 import React from 'react'
-import styled from 'styled-components'
 
 export const JsWeb = () => {
   return (
