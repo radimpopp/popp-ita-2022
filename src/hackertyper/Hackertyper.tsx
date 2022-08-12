@@ -5,38 +5,41 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 export const HackerTyper = () => {
-  const [number, setNumber] = useState(0)
-  const [alert, setAlert] = useState<'ACCESS DENIED!!!' | 'ACCESS GRANTED' | null>(null)
+  const [codeDelimiterIndex, setCodeDelimiterIndex] = useState(0)
+  const [accessAlertMessage, setAccessAlertMessage] = useState<
+    'ACCESS DENIED!!!' | 'ACCESS GRANTED' | null
+  >(null)
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.shiftKey) {
-      setAlert('ACCESS DENIED!!!')
+      setAccessAlertMessage('ACCESS DENIED!!!')
     } else if (e.key === 'Enter') {
-      setAlert('ACCESS GRANTED')
+      setAccessAlertMessage('ACCESS GRANTED')
     } else if (e.key === 'Escape') {
-      setAlert(null)
+      setAccessAlertMessage(null)
     }
   }
 
   const startHacking = () => {
-    const codeFragment = number + 4
-    if (!alert) setNumber(codeFragment >= hackerCode.length ? 0 : codeFragment)
+    const codeFragment = codeDelimiterIndex + 4
+    if (!accessAlertMessage)
+      setCodeDelimiterIndex(codeFragment >= hackerCode.length ? 0 : codeFragment)
   }
 
   return (
     <Div_HackerContainer>
-      {alert ? (
+      {accessAlertMessage ? (
         <div>
-          {alert === 'ACCESS DENIED!!!' ? (
-            <Div_AccessDenied>{alert}</Div_AccessDenied>
+          {accessAlertMessage === 'ACCESS DENIED!!!' ? (
+            <Div_AccessDenied>{accessAlertMessage}</Div_AccessDenied>
           ) : (
-            <Div_AccessGranted>{alert}</Div_AccessGranted>
+            <Div_AccessGranted>{accessAlertMessage}</Div_AccessGranted>
           )}
         </div>
       ) : null}
       <Textarea_HackerArea
         onKeyDown={handleKeyDown}
-        value={hackerCode.substring(0, number)}
+        value={hackerCode.substring(0, codeDelimiterIndex)}
         onChange={startHacking}
         spellCheck={'false'}
         autoFocus={true}
