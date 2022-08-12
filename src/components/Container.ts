@@ -16,7 +16,8 @@ const containerStyles = css`
   }
 
   ${theme.mediaQueries.tablet} {
-    max-height: 60%;
+    width: 90%;
+    max-height: 70%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -29,8 +30,9 @@ const containerStyles = css`
   }
 
   ${theme.mediaQueries.phone} {
-    margin-top: ${theme.spacing.extraLarge};
-    max-height: 45%;
+    margin-top: ${theme.spacing.superSize};
+    max-height: 40%;
+    width: 90%;
   }
 `
 
@@ -44,6 +46,9 @@ export const Div_ReverseContainer = styled.div`
 export const Div_TextContainer = styled.div`
   font-weight: ${theme.fontWeight.light};
   width: 50%;
+  ${theme.mediaQueries.tablet} {
+    width: 85%;
+  }
 `
 
 export const Div_ImagesContainer = styled.div`

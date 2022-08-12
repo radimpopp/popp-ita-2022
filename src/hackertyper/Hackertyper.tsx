@@ -1,5 +1,9 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { P_BodyText } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
 import { hackerCode } from './hackercode'
 import { theme } from '../helpers/themes'
+import { urls } from '../helpers/urls'
 import { useState } from 'react'
 import React from 'react'
 import styled, { css } from 'styled-components'
@@ -27,24 +31,36 @@ export const HackerTyper = () => {
   }
 
   return (
-    <Div_HackerContainer>
-      {accessAlertMessage ? (
-        <div>
-          {accessAlertMessage === 'ACCESS DENIED!!!' ? (
-            <Div_AccessDenied>{accessAlertMessage}</Div_AccessDenied>
-          ) : (
-            <Div_AccessGranted>{accessAlertMessage}</Div_AccessGranted>
-          )}
-        </div>
-      ) : null}
-      <Textarea_HackerArea
-        onKeyDown={handleKeyDown}
-        value={hackerCode.substring(0, codeDelimiterIndex)}
-        onChange={startHacking}
-        spellCheck={'false'}
-        autoFocus={true}
-      />
-    </Div_HackerContainer>
+    <HelmetProvider>
+      <Div_HackerContainer>
+        <Helmet>
+          <title>Radim Popp/HackerTyper</title>
+          <meta
+            name='Description'
+            content='Do you want to become a hacker? This app is a good start!'
+          />
+        </Helmet>
+        {accessAlertMessage ? (
+          <div>
+            {accessAlertMessage === 'ACCESS DENIED!!!' ? (
+              <Div_AccessDenied>{accessAlertMessage}</Div_AccessDenied>
+            ) : (
+              <Div_AccessGranted>{accessAlertMessage}</Div_AccessGranted>
+            )}
+          </div>
+        ) : null}
+        <Textarea_HackerArea
+          onKeyDown={handleKeyDown}
+          value={hackerCode.substring(0, codeDelimiterIndex)}
+          onChange={startHacking}
+          spellCheck={'false'}
+          autoFocus={true}
+        />
+        <RouterLink to={urls.homeUrl}>
+          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+        </RouterLink>
+      </Div_HackerContainer>
+    </HelmetProvider>
   )
 }
 
@@ -52,6 +68,7 @@ const Div_HackerContainer = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -77,6 +94,9 @@ const Textarea_HackerArea = styled.textarea`
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+  ${theme.mediaQueries.phone} {
+    width: 80%;
   }
 `
 
@@ -111,4 +131,9 @@ const Div_AccessGranted = styled.div`
       opacity: 0;
     }
   }
+`
+
+const P_BodyTextWhiteEdition = styled(P_BodyText)`
+  margin-top: ${theme.spacing.medium};
+  color: white;
 `
