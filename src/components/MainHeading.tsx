@@ -13,6 +13,13 @@ export const H1_MainHeading = styled.h1`
 
 export const H1_HomeHeading = styled.h1`
   ${styledMainHeadings};
-  padding: ${theme.spacing.medium};
+  width: 25vw;
+  padding: ${theme.spacing.small};
   border: ${theme.spacing.extraSmall} inset ${theme.color.orangeBright};
+  ${theme.mediaQueries.tablet} {
+    text-align: center;
+  }
+  ${theme.mediaQueries.phone} {
+    width: 60vw;
+  }
 `

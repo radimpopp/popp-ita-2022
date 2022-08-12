@@ -8,4 +8,5 @@ export const urls = {
   jstUrl: '/js-today',
   counterAppUrl: '/counter-app',
   todoListUrl: '/todo-list',
+  hackerTyperUrl: '/hackertyper',
 }
