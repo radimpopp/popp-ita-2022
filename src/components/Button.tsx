@@ -11,6 +11,7 @@ export const buttonStyles = css`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 1px solid ${theme.color.black};
 `
 
 export const Button_CustomButton = styled.button`

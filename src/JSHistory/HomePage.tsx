@@ -1,6 +1,7 @@
 import { Div_Container, Div_TextContainer } from '../components/Container'
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { theme } from '../helpers/themes'
@@ -10,33 +11,40 @@ import styled from 'styled-components'
 
 export const JavaScript = () => {
   return (
-    <Div_BackgroundContainer>
-      <Div_Container>
-        <Div_TextContainer>
-          <H1_MainHeading>JavaScript</H1_MainHeading>
-          <P_BodyText>
-            JavaScript is a dynamic programming language that&apos;s used for web development, in
-            web applications, for game development, and lots more. It allows you to implement
-            dynamic features on web pages that cannot be done with only HTML and CSS.
-          </P_BodyText>
-          <P_BodyText>
-            Many browsers use JavaScript as a scripting language for doing dynamic things on the
-            web. Any time you see a click-to-show dropdown menu, extra content added to a page, and
-            dynamically changing element colors on a page, to name a few features, you&apos;re
-            seeing the effects of JavaScript.
-          </P_BodyText>
-          <H2_SubHeading>What Would the Web Look Like Without JavaScript?</H2_SubHeading>
-          <P_BodyText>
-            Without JavaScript, all you would have on the web would be HTML and CSS. These alone
-            limit you to a few web page implementations. 90% (if not more) of your webpages would be
-            static, and you&apos;d only have the dynamic changes like animations that CSS provides.
-          </P_BodyText>
-          <RouterLink to={urls.homeUrl}>
-            <P_BodyText>Return home</P_BodyText>
-          </RouterLink>
-        </Div_TextContainer>
-      </Div_Container>
-    </Div_BackgroundContainer>
+    <HelmetProvider>
+      <Div_BackgroundContainer>
+        <Helmet>
+          <title>Radim Popp/JavaScript/Home</title>
+          <meta name='Description' content='What is JavaScript and what is it used for?' />
+        </Helmet>
+        <Div_Container>
+          <Div_TextContainer>
+            <H1_MainHeading>JavaScript</H1_MainHeading>
+            <P_BodyText>
+              JavaScript is a dynamic programming language that&apos;s used for web development, in
+              web applications, for game development, and lots more. It allows you to implement
+              dynamic features on web pages that cannot be done with only HTML and CSS.
+            </P_BodyText>
+            <P_BodyText>
+              Many browsers use JavaScript as a scripting language for doing dynamic things on the
+              web. Any time you see a click-to-show dropdown menu, extra content added to a page,
+              and dynamically changing element colors on a page, to name a few features, you&apos;re
+              seeing the effects of JavaScript.
+            </P_BodyText>
+            <H2_SubHeading>What Would the Web Look Like Without JavaScript?</H2_SubHeading>
+            <P_BodyText>
+              Without JavaScript, all you would have on the web would be HTML and CSS. These alone
+              limit you to a few web page implementations. 90% (if not more) of your webpages would
+              be static, and you&apos;d only have the dynamic changes like animations that CSS
+              provides.
+            </P_BodyText>
+            <RouterLink to={urls.homeUrl}>
+              <P_BodyText>Return home</P_BodyText>
+            </RouterLink>
+          </Div_TextContainer>
+        </Div_Container>
+      </Div_BackgroundContainer>
+    </HelmetProvider>
   )
 }
 

@@ -1,5 +1,6 @@
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Checkbox, Input_Input } from '../components/input'
 import { P_BodyText, P_TodoBodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -49,86 +50,95 @@ export const TodoList = () => {
   const deleteAllChecked = () => setTasks(tasks.filter(task => task.completed === false))
 
   return (
-    <Div_TodoContainer>
-      <H1_MainHeading>Todo List</H1_MainHeading>
-      <form
-        onSubmit={e => {
-          e.preventDefault()
-          if (name.length === 0) {
-            setEmptyInputErr(true)
-            return
-          }
-          setTasks([
-            {
-              id: createId(),
-              name,
-              completed: false,
-            },
-            ...tasks,
-          ])
-          setName('')
-          setEmptyInputErr(false)
-        }}
-      >
-        <Div_InputContainer>
-          <H2_FormHeading>New task:</H2_FormHeading>
-          <Input_Input
-            placeholder='What are you going to postpone as long as possible?'
-            type='text'
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-          <Button_TodoButton type='submit'>Add task</Button_TodoButton>
-        </Div_InputContainer>
-      </form>
-      {emptyInputErr ? (
-        <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
-      ) : (
-        ''
-      )}
-      <Div_FilterButtonContainer>
-        {tasksLeftCounter >= 1 ? (
-          <H2_ItemsLeftHeading>
-            {tasksLeftCounter === 1
-              ? `${tasksLeftCounter} item left`
-              : `${tasksLeftCounter} items left`}
-          </H2_ItemsLeftHeading>
+    <HelmetProvider>
+      <Div_TodoContainer>
+        <Helmet>
+          <title>Radim Popp/Todo List</title>
+          <meta name='Description' content='Todo List app' />
+        </Helmet>
+        <H1_MainHeading>Todo List</H1_MainHeading>
+        <form
+          onSubmit={e => {
+            e.preventDefault()
+            if (name.length === 0) {
+              setEmptyInputErr(true)
+              return
+            }
+            setTasks([
+              {
+                id: createId(),
+                name,
+                completed: false,
+              },
+              ...tasks,
+            ])
+            setName('')
+            setEmptyInputErr(false)
+          }}
+        >
+          <Div_InputContainer>
+            <H2_FormHeading>New task:</H2_FormHeading>
+            <Input_Input
+              placeholder='What are you going to postpone as long as possible?'
+              type='text'
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+            <Button_TodoButton type='submit'>Add task</Button_TodoButton>
+          </Div_InputContainer>
+        </form>
+        {emptyInputErr ? (
+          <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
         ) : (
           ''
         )}
-        <Button_FilterButton onClick={() => setFilter('all')} aria-pressed={filter === 'all'}>
-          All
-        </Button_FilterButton>
-        <Button_FilterButton onClick={() => setFilter('active')} aria-pressed={filter === 'active'}>
-          Active
-        </Button_FilterButton>
-        <Button_FilterButton onClick={() => setFilter('done')} aria-pressed={filter === 'done'}>
-          Done
-        </Button_FilterButton>
-      </Div_FilterButtonContainer>
-      {tasks.filter(filterMap[filter]).map(task => (
-        <Div_TaskContainer key={task.id}>
-          <Button_DeleteButton onClick={() => handleDelete(task.id)}>
-            <P_TodoBodyText>X</P_TodoBodyText>
-          </Button_DeleteButton>
-          <Input_Checkbox
-            type='checkbox'
-            checked={task.completed}
-            onChange={() => handleChecked(task.id)}
-          />
-          <P_TodoBodyText aria-checked={task.completed}>{task.name}</P_TodoBodyText>
-        </Div_TaskContainer>
-      ))}
+        <Div_FilterButtonContainer>
+          {tasksLeftCounter >= 1 ? (
+            <H2_ItemsLeftHeading>
+              {tasksLeftCounter === 1
+                ? `${tasksLeftCounter} item left`
+                : `${tasksLeftCounter} items left`}
+            </H2_ItemsLeftHeading>
+          ) : (
+            ''
+          )}
+          <Button_FilterButton onClick={() => setFilter('all')} aria-pressed={filter === 'all'}>
+            All
+          </Button_FilterButton>
+          <Button_FilterButton
+            onClick={() => setFilter('active')}
+            aria-pressed={filter === 'active'}
+          >
+            Active
+          </Button_FilterButton>
+          <Button_FilterButton onClick={() => setFilter('done')} aria-pressed={filter === 'done'}>
+            Done
+          </Button_FilterButton>
+        </Div_FilterButtonContainer>
+        {tasks.filter(filterMap[filter]).map(task => (
+          <Div_TaskContainer key={task.id}>
+            <Button_DeleteButton onClick={() => handleDelete(task.id)}>
+              <P_TodoBodyText>X</P_TodoBodyText>
+            </Button_DeleteButton>
+            <Input_Checkbox
+              type='checkbox'
+              checked={task.completed}
+              onChange={() => handleChecked(task.id)}
+            />
+            <P_TodoBodyText aria-checked={task.completed}>{task.name}</P_TodoBodyText>
+          </Div_TaskContainer>
+        ))}
 
-      <Div_FilterButtonContainer>
-        <Button_FilterButton onClick={() => checkedAll()}>Check All</Button_FilterButton>
-        <Button_FilterButton onClick={() => uncheckedAll()}>Uncheck All</Button_FilterButton>
-        <Button_FilterButton onClick={() => deleteAllChecked()}>Clear Done</Button_FilterButton>
-      </Div_FilterButtonContainer>
-      <RouterLink to={urls.homeUrl}>
-        <P_BodyText>Return home</P_BodyText>
-      </RouterLink>
-    </Div_TodoContainer>
+        <Div_FilterButtonContainer>
+          <Button_FilterButton onClick={() => checkedAll()}>Check All</Button_FilterButton>
+          <Button_FilterButton onClick={() => uncheckedAll()}>Uncheck All</Button_FilterButton>
+          <Button_FilterButton onClick={() => deleteAllChecked()}>Clear Done</Button_FilterButton>
+        </Div_FilterButtonContainer>
+        <RouterLink to={urls.homeUrl}>
+          <P_BodyText>Return home</P_BodyText>
+        </RouterLink>
+      </Div_TodoContainer>
+    </HelmetProvider>
   )
 }
 

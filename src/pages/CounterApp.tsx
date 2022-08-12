@@ -1,5 +1,6 @@
 import { Button_CustomButton } from '../components/Button'
 import { H1_MainHeading } from '../components/MainHeading'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { urls } from '../helpers/urls'
@@ -20,30 +21,39 @@ export class CounterApp extends React.Component<Props, State> {
   }
   render() {
     return (
-      <Div_StyledCounterApp>
-        <H1_MainHeading>{this.state.counter}</H1_MainHeading>
-        <Button_CustomButton
-          onClick={() => {
-            this.setState({
-              counter: this.state.counter - 1,
-            })
-          }}
-        >
-          -
-        </Button_CustomButton>
-        <Button_CustomButton
-          onClick={() => {
-            this.setState({
-              counter: this.state.counter + 1,
-            })
-          }}
-        >
-          +
-        </Button_CustomButton>
-        <RouterLink to={urls.homeUrl}>
-          <P_BodyText>Return home</P_BodyText>
-        </RouterLink>
-      </Div_StyledCounterApp>
+      <HelmetProvider>
+        <Div_StyledCounterApp>
+          <Helmet>
+            <title>Radim Popp/CounterApp</title>
+            <meta
+              name='Description'
+              content='CounterApp - a good helper for anyone who cannot count to one!'
+            />
+          </Helmet>
+          <H1_MainHeading>{this.state.counter}</H1_MainHeading>
+          <Button_CustomButton
+            onClick={() => {
+              this.setState({
+                counter: this.state.counter - 1,
+              })
+            }}
+          >
+            -
+          </Button_CustomButton>
+          <Button_CustomButton
+            onClick={() => {
+              this.setState({
+                counter: this.state.counter + 1,
+              })
+            }}
+          >
+            +
+          </Button_CustomButton>
+          <RouterLink to={urls.homeUrl}>
+            <P_BodyText>Return home</P_BodyText>
+          </RouterLink>
+        </Div_StyledCounterApp>
+      </HelmetProvider>
     )
   }
 }

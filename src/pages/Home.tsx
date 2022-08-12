@@ -1,4 +1,3 @@
-import { Div_ImagesContainer } from '../components/Container'
 import { H1_HomeHeading, H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Img_Image } from '../components/Image'

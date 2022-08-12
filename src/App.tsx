@@ -1,5 +1,6 @@
 import { CounterApp } from './pages/CounterApp'
 import { HackerTyper } from './hackertyper/Hackertyper'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Home } from './pages/Home'
 import { JsWeb } from './pages/JsWeb'
 import { Route, Routes } from 'react-router-dom'
@@ -12,16 +13,25 @@ import styled from 'styled-components'
 
 export function App() {
   return (
-    <Div_StyledApp>
-      <Routes>
-        <Route path={urls.homeUrl} element={<Home />} />
-        <Route path={`${urls.jsWebUrl}${urls.urlAll}`} element={<JsWeb />} />
-        <Route path={urls.counterAppUrl} element={<CounterApp />} />
-        <Route path={urls.todoListUrl} element={<TodoList />} />
-        <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
-      </Routes>
-      <GlobalStyle />
-    </Div_StyledApp>
+    <HelmetProvider>
+      <Div_StyledApp>
+        <Helmet>
+          <title>Radim Popp/Portfolio</title>
+          <meta
+            name='Description'
+            content='Interactive CV of a React frontend developer Radim Popp'
+          />
+        </Helmet>
+        <Routes>
+          <Route path={urls.homeUrl} element={<Home />} />
+          <Route path={`${urls.jsWebUrl}${urls.urlAll}`} element={<JsWeb />} />
+          <Route path={urls.counterAppUrl} element={<CounterApp />} />
+          <Route path={urls.todoListUrl} element={<TodoList />} />
+          <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
+        </Routes>
+        <GlobalStyle />
+      </Div_StyledApp>
+    </HelmetProvider>
   )
 }
 
