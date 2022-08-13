@@ -1,25 +1,22 @@
 import { Input_Checkbox } from '../components/input'
+import { TaskProps } from '../todolist/TodoList'
 import { TodoListStateContext } from '../todolist/TodoList'
 import { buttonStyles } from '../components/Button'
 import { theme } from '../helpers/themes'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
-type TaskProps = {
-  id: string
-  name: string
-  completed: boolean
-}
-
 export const Task = (props: TaskProps) => {
   const data = useContext(TodoListStateContext)
 
-  const handleChecked = (id: string) =>
+  const handleChecked = () =>
     data.setTasks(
-      data.tasks.map(task => (id === task.id ? { ...task, completed: !task.completed } : task))
+      data.tasks.map(task =>
+        props.task.id === task.id ? { ...task, completed: !task.completed } : task
+      )
     )
 
-  const handleDelete = () => data.setTasks(data.tasks.filter(task => props.id !== task.id))
+  const handleDelete = () => data.setTasks(data.tasks.filter(task => props.task.id !== task.id))
 
   return (
     <Div_TaskContainer>
@@ -28,10 +25,10 @@ export const Task = (props: TaskProps) => {
       </Button_DeleteButton>
       <Input_Checkbox
         type='checkbox'
-        checked={props.completed}
-        onChange={() => handleChecked(props.id)}
+        checked={props.task.completed}
+        onChange={() => handleChecked()}
       />
-      <P_TodoBodyText aria-checked={props.completed}>{props.name}</P_TodoBodyText>
+      <P_TodoBodyText aria-checked={props.task.completed}>{props.task.name}</P_TodoBodyText>
     </Div_TaskContainer>
   )
 }

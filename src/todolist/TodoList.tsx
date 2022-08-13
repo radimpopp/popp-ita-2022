@@ -20,6 +20,10 @@ type Task = {
   completed: boolean
 }
 
+export type TaskProps = {
+  task: Task
+}
+
 const filterMap = {
   all: () => true,
   active: (task: Task) => !task.completed,
@@ -151,7 +155,7 @@ const TodoList = () => {
           </Button_FilterButton>
         </Div_FilterButtonContainer>
         {data.tasks.filter(filterMap[data.filter]).map(task => (
-          <Task key={task.id} {...task} />
+          <Task key={task.id} task={task} />
         ))}
         <Div_FilterButtonContainer>
           <Button_FilterButton onClick={() => data.checkedAll()}>Check All</Button_FilterButton>
