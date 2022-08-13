@@ -4,9 +4,10 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
 import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { Task } from './Task'
+import { Task } from '../todolist/Task'
 import { buttonStyles } from '../components/Button'
 import { createId } from '../helpers/utils'
+import { genericHookContextBuilder } from '../helpers/utils'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../helpers/hooks'
@@ -18,53 +19,18 @@ type Task = {
   name: string
   completed: boolean
 }
-type Props = {
-  children: React.ReactNode
-}
-
-export const genericHookContextBuilder = <T, P>(hook: () => T) => {
-  const Context = React.createContext<T>(undefined as never)
-
-  return {
-    Context,
-    ContextProvider: (props: Props & P) => {
-      const value = hook()
-
-      return <Context.Provider value={value}>{props.children}</Context.Provider>
-    },
-  }
-}
 
 const useLogicState = () => {
   const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
-
-  return {
-    tasks,
-    setTasks,
-  }
-}
-
-export const { ContextProvider: TodoListContextProvider, Context: TodoListStateContext } =
-  genericHookContextBuilder(useLogicState)
-
-export const TodoListApp = () => {
-  return (
-    <TodoListContextProvider>
-      <TodoList />
-    </TodoListContextProvider>
-  )
-}
-
-const filterMap = {
-  all: () => true,
-  active: (task: Task) => !task.completed,
-  done: (task: Task) => task.completed,
-}
-const TodoList = () => {
-  const { tasks, setTasks } = useContext(TodoListStateContext)
   const [name, setName] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
   const [emptyInputErr, setEmptyInputErr] = useState(false)
+
+  const filterMap = {
+    all: () => true,
+    active: (task: Task) => !task.completed,
+    done: (task: Task) => task.completed,
+  }
 
   const tasksLeftCounter = tasks.filter(task => !task.completed).length
 
@@ -80,6 +46,37 @@ const TodoList = () => {
 
   const deleteAllChecked = () => setTasks(tasks.filter(task => task.completed === false))
 
+  return {
+    tasks,
+    setTasks,
+    name,
+    setName,
+    filter,
+    setFilter,
+    emptyInputErr,
+    setEmptyInputErr,
+    filterMap,
+    tasksLeftCounter,
+    checkedAll,
+    uncheckedAll,
+    deleteAllChecked,
+  }
+}
+
+export const { ContextProvider: TodoListContextProvider, Context: TodoListStateContext } =
+  genericHookContextBuilder(useLogicState)
+
+export const TodoListApp = () => {
+  return (
+    <TodoListContextProvider>
+      <TodoList />
+    </TodoListContextProvider>
+  )
+}
+
+const TodoList = () => {
+  const todoData = useContext(TodoListStateContext)
+
   return (
     <HelmetProvider>
       <Div_TodoContainer>
@@ -91,20 +88,20 @@ const TodoList = () => {
         <form
           onSubmit={e => {
             e.preventDefault()
-            if (name.length === 0) {
-              setEmptyInputErr(true)
+            if (todoData.name.length === 0) {
+              todoData.setEmptyInputErr(true)
               return
             }
-            setTasks([
+            todoData.setTasks([
               {
                 id: createId(),
-                name,
+                name: todoData.name,
                 completed: false,
               },
-              ...tasks,
+              ...todoData.tasks,
             ])
-            setName('')
-            setEmptyInputErr(false)
+            todoData.setName('')
+            todoData.setEmptyInputErr(false)
           }}
         >
           <Div_InputContainer>
@@ -112,47 +109,59 @@ const TodoList = () => {
             <Input_Input
               placeholder='What are you going to postpone as long as possible?'
               type='text'
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={todoData.name}
+              onChange={e => todoData.setName(e.target.value)}
+              autoFocus={true}
+              autoComplete='off'
             />
             <Button_TodoButton type='submit'>Add task</Button_TodoButton>
           </Div_InputContainer>
         </form>
-        {emptyInputErr ? (
+        {todoData.emptyInputErr ? (
           <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
         ) : (
           ''
         )}
         <Div_FilterButtonContainer>
-          {tasksLeftCounter >= 1 ? (
+          {todoData.tasksLeftCounter >= 1 ? (
             <H2_ItemsLeftHeading>
-              {tasksLeftCounter === 1
-                ? `${tasksLeftCounter} item left`
-                : `${tasksLeftCounter} items left`}
+              {todoData.tasksLeftCounter === 1
+                ? `${todoData.tasksLeftCounter} item left`
+                : `${todoData.tasksLeftCounter} items left`}
             </H2_ItemsLeftHeading>
           ) : (
             ''
           )}
-          <Button_FilterButton onClick={() => setFilter('all')} aria-pressed={filter === 'all'}>
+          <Button_FilterButton
+            onClick={() => todoData.setFilter('all')}
+            aria-pressed={todoData.filter === 'all'}
+          >
             All
           </Button_FilterButton>
           <Button_FilterButton
-            onClick={() => setFilter('active')}
-            aria-pressed={filter === 'active'}
+            onClick={() => todoData.setFilter('active')}
+            aria-pressed={todoData.filter === 'active'}
           >
             Active
           </Button_FilterButton>
-          <Button_FilterButton onClick={() => setFilter('done')} aria-pressed={filter === 'done'}>
+          <Button_FilterButton
+            onClick={() => todoData.setFilter('done')}
+            aria-pressed={todoData.filter === 'done'}
+          >
             Done
           </Button_FilterButton>
         </Div_FilterButtonContainer>
-        {tasks.filter(filterMap[filter]).map(task => (
+        {todoData.tasks.filter(todoData.filterMap[todoData.filter]).map(task => (
           <Task key={task.id} id={task.id} name={task.name} completed={task.completed} />
         ))}
         <Div_FilterButtonContainer>
-          <Button_FilterButton onClick={() => checkedAll()}>Check All</Button_FilterButton>
-          <Button_FilterButton onClick={() => uncheckedAll()}>Uncheck All</Button_FilterButton>
-          <Button_FilterButton onClick={() => deleteAllChecked()}>Clear Done</Button_FilterButton>
+          <Button_FilterButton onClick={() => todoData.checkedAll()}>Check All</Button_FilterButton>
+          <Button_FilterButton onClick={() => todoData.uncheckedAll()}>
+            Uncheck All
+          </Button_FilterButton>
+          <Button_FilterButton onClick={() => todoData.deleteAllChecked()}>
+            Clear Done
+          </Button_FilterButton>
         </Div_FilterButtonContainer>
         <RouterLink to={urls.homeUrl}>
           <P_BodyText>Return home</P_BodyText>
@@ -211,7 +220,7 @@ const H2_ErrorHeading = styled(H2_FormHeading)`
     white-space: unset;
   }
 `
-export const Button_TodoButton = styled.button`
+const Button_TodoButton = styled.button`
   ${buttonStyles}
   width: 200px;
   height: 40px;
@@ -229,34 +238,5 @@ const Button_FilterButton = styled.button`
   border-radius: 10px;
   &[aria-pressed='true'] {
     background-color: ${theme.color.yellowBright};
-  }
-`
-
-export const Button_DeleteButton = styled.button`
-  ${buttonStyles}
-  position: absolute;
-  width: ${theme.spacing.medium};
-  height: ${theme.spacing.medium};
-  top: 0;
-  right: 0;
-  opacity: 0;
-`
-
-export const Div_TaskContainer = styled.div`
-  background-color: ${theme.color.yellowBright};
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 1000px;
-  border: ${theme.spacing.borderSmall} solid ${theme.color.blackBoxShadow};
-  border-radius: 10px;
-  margin: ${theme.spacing.small};
-  &:hover ${Button_DeleteButton} {
-    opacity: 1;
-  }
-  ${theme.mediaQueries.tablet} {
-    width: 100%;
   }
 `
