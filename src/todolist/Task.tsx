@@ -6,26 +6,24 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 type TaskProps = {
-  key: string
   id: string
   name: string
   completed: boolean
 }
 
 export const Task = (props: TaskProps) => {
-  const todoData = useContext(TodoListStateContext)
+  const data = useContext(TodoListStateContext)
 
   const handleChecked = (id: string) =>
-    todoData.setTasks(
-      todoData.tasks.map(task => (id === task.id ? { ...task, completed: !task.completed } : task))
+    data.setTasks(
+      data.tasks.map(task => (id === task.id ? { ...task, completed: !task.completed } : task))
     )
 
-  const handleDelete = (id: string) =>
-    todoData.setTasks(todoData.tasks.filter(task => id !== task.id))
+  const handleDelete = () => data.setTasks(data.tasks.filter(task => props.id !== task.id))
 
   return (
-    <Div_TaskContainer key={props.id}>
-      <Button_DeleteButton onClick={() => handleDelete(props.id)}>
+    <Div_TaskContainer>
+      <Button_DeleteButton onClick={() => handleDelete()}>
         <P_TodoBodyText>X</P_TodoBodyText>
       </Button_DeleteButton>
       <Input_Checkbox

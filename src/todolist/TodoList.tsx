@@ -20,17 +20,17 @@ type Task = {
   completed: boolean
 }
 
+const filterMap = {
+  all: () => true,
+  active: (task: Task) => !task.completed,
+  done: (task: Task) => task.completed,
+}
+
 const useLogicState = () => {
   const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
   const [name, setName] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
   const [emptyInputErr, setEmptyInputErr] = useState(false)
-
-  const filterMap = {
-    all: () => true,
-    active: (task: Task) => !task.completed,
-    done: (task: Task) => task.completed,
-  }
 
   const tasksLeftCounter = tasks.filter(task => !task.completed).length
 
@@ -55,7 +55,6 @@ const useLogicState = () => {
     setFilter,
     emptyInputErr,
     setEmptyInputErr,
-    filterMap,
     tasksLeftCounter,
     checkedAll,
     uncheckedAll,
@@ -75,7 +74,7 @@ export const TodoListApp = () => {
 }
 
 const TodoList = () => {
-  const todoData = useContext(TodoListStateContext)
+  const data = useContext(TodoListStateContext)
 
   return (
     <HelmetProvider>
@@ -88,20 +87,20 @@ const TodoList = () => {
         <form
           onSubmit={e => {
             e.preventDefault()
-            if (todoData.name.length === 0) {
-              todoData.setEmptyInputErr(true)
+            if (data.name.length === 0) {
+              data.setEmptyInputErr(true)
               return
             }
-            todoData.setTasks([
+            data.setTasks([
               {
                 id: createId(),
-                name: todoData.name,
+                name: data.name,
                 completed: false,
               },
-              ...todoData.tasks,
+              ...data.tasks,
             ])
-            todoData.setName('')
-            todoData.setEmptyInputErr(false)
+            data.setName('')
+            data.setEmptyInputErr(false)
           }}
         >
           <Div_InputContainer>
@@ -109,57 +108,55 @@ const TodoList = () => {
             <Input_Input
               placeholder='What are you going to postpone as long as possible?'
               type='text'
-              value={todoData.name}
-              onChange={e => todoData.setName(e.target.value)}
+              value={data.name}
+              onChange={e => data.setName(e.target.value)}
               autoFocus={true}
               autoComplete='off'
             />
             <Button_TodoButton type='submit'>Add task</Button_TodoButton>
           </Div_InputContainer>
         </form>
-        {todoData.emptyInputErr ? (
+        {data.emptyInputErr ? (
           <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
         ) : (
           ''
         )}
         <Div_FilterButtonContainer>
-          {todoData.tasksLeftCounter >= 1 ? (
+          {data.tasksLeftCounter >= 1 ? (
             <H2_ItemsLeftHeading>
-              {todoData.tasksLeftCounter === 1
-                ? `${todoData.tasksLeftCounter} item left`
-                : `${todoData.tasksLeftCounter} items left`}
+              {data.tasksLeftCounter === 1
+                ? `${data.tasksLeftCounter} item left`
+                : `${data.tasksLeftCounter} items left`}
             </H2_ItemsLeftHeading>
           ) : (
             ''
           )}
           <Button_FilterButton
-            onClick={() => todoData.setFilter('all')}
-            aria-pressed={todoData.filter === 'all'}
+            onClick={() => data.setFilter('all')}
+            aria-pressed={data.filter === 'all'}
           >
             All
           </Button_FilterButton>
           <Button_FilterButton
-            onClick={() => todoData.setFilter('active')}
-            aria-pressed={todoData.filter === 'active'}
+            onClick={() => data.setFilter('active')}
+            aria-pressed={data.filter === 'active'}
           >
             Active
           </Button_FilterButton>
           <Button_FilterButton
-            onClick={() => todoData.setFilter('done')}
-            aria-pressed={todoData.filter === 'done'}
+            onClick={() => data.setFilter('done')}
+            aria-pressed={data.filter === 'done'}
           >
             Done
           </Button_FilterButton>
         </Div_FilterButtonContainer>
-        {todoData.tasks.filter(todoData.filterMap[todoData.filter]).map(task => (
-          <Task key={task.id} id={task.id} name={task.name} completed={task.completed} />
+        {data.tasks.filter(filterMap[data.filter]).map(task => (
+          <Task key={task.id} {...task} />
         ))}
         <Div_FilterButtonContainer>
-          <Button_FilterButton onClick={() => todoData.checkedAll()}>Check All</Button_FilterButton>
-          <Button_FilterButton onClick={() => todoData.uncheckedAll()}>
-            Uncheck All
-          </Button_FilterButton>
-          <Button_FilterButton onClick={() => todoData.deleteAllChecked()}>
+          <Button_FilterButton onClick={() => data.checkedAll()}>Check All</Button_FilterButton>
+          <Button_FilterButton onClick={() => data.uncheckedAll()}>Uncheck All</Button_FilterButton>
+          <Button_FilterButton onClick={() => data.deleteAllChecked()}>
             Clear Done
           </Button_FilterButton>
         </Div_FilterButtonContainer>
