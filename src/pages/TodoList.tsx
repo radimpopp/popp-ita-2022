@@ -1,15 +1,16 @@
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { Input_Checkbox, Input_Input } from '../components/input'
-import { P_BodyText, P_TodoBodyText } from '../components/BodyText'
+import { Input_Input } from '../components/input'
+import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { Task } from './Task'
 import { buttonStyles } from '../components/Button'
 import { createId } from '../helpers/utils'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../helpers/hooks'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 type Task = {
@@ -17,23 +18,53 @@ type Task = {
   name: string
   completed: boolean
 }
+type Props = {
+  children: React.ReactNode
+}
+
+export const genericHookContextBuilder = <T, P>(hook: () => T) => {
+  const Context = React.createContext<T>(undefined as never)
+
+  return {
+    Context,
+    ContextProvider: (props: Props & P) => {
+      const value = hook()
+
+      return <Context.Provider value={value}>{props.children}</Context.Provider>
+    },
+  }
+}
+
+const useLogicState = () => {
+  const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
+
+  return {
+    tasks,
+    setTasks,
+  }
+}
+
+export const { ContextProvider: TodoListContextProvider, Context: TodoListStateContext } =
+  genericHookContextBuilder(useLogicState)
+
+export const TodoListApp = () => {
+  return (
+    <TodoListContextProvider>
+      <TodoList />
+    </TodoListContextProvider>
+  )
+}
 
 const filterMap = {
   all: () => true,
   active: (task: Task) => !task.completed,
   done: (task: Task) => task.completed,
 }
-
-export const TodoList = () => {
-  const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
+const TodoList = () => {
+  const { tasks, setTasks } = useContext(TodoListStateContext)
   const [name, setName] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
   const [emptyInputErr, setEmptyInputErr] = useState(false)
-
-  const handleChecked = (id: string) =>
-    setTasks(tasks.map(task => (id === task.id ? { ...task, completed: !task.completed } : task)))
-
-  const handleDelete = (id: string) => setTasks(tasks.filter(task => id !== task.id))
 
   const tasksLeftCounter = tasks.filter(task => !task.completed).length
 
@@ -116,19 +147,8 @@ export const TodoList = () => {
           </Button_FilterButton>
         </Div_FilterButtonContainer>
         {tasks.filter(filterMap[filter]).map(task => (
-          <Div_TaskContainer key={task.id}>
-            <Button_DeleteButton onClick={() => handleDelete(task.id)}>
-              <P_TodoBodyText>X</P_TodoBodyText>
-            </Button_DeleteButton>
-            <Input_Checkbox
-              type='checkbox'
-              checked={task.completed}
-              onChange={() => handleChecked(task.id)}
-            />
-            <P_TodoBodyText aria-checked={task.completed}>{task.name}</P_TodoBodyText>
-          </Div_TaskContainer>
+          <Task key={task.id} id={task.id} name={task.name} completed={task.completed} />
         ))}
-
         <Div_FilterButtonContainer>
           <Button_FilterButton onClick={() => checkedAll()}>Check All</Button_FilterButton>
           <Button_FilterButton onClick={() => uncheckedAll()}>Uncheck All</Button_FilterButton>
@@ -212,7 +232,7 @@ const Button_FilterButton = styled.button`
   }
 `
 
-const Button_DeleteButton = styled.button`
+export const Button_DeleteButton = styled.button`
   ${buttonStyles}
   position: absolute;
   width: ${theme.spacing.medium};
@@ -222,7 +242,7 @@ const Button_DeleteButton = styled.button`
   opacity: 0;
 `
 
-const Div_TaskContainer = styled.div`
+export const Div_TaskContainer = styled.div`
   background-color: ${theme.color.yellowBright};
   position: relative;
   display: flex;
