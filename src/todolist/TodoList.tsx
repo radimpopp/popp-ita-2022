@@ -1,18 +1,20 @@
 import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { Input_Checkbox, Input_Input } from '../components/input'
-import { P_BodyText, P_TodoBodyText } from '../components/BodyText'
+import { Input_Input } from '../components/input'
+import { Item } from '../todolist/Task'
+import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { buttonStyles } from '../components/Button'
 import { createId } from '../helpers/utils'
+import { genericHookContextBuilder } from '../helpers/utils'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../helpers/hooks'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
-type Task = {
+export type Task = {
   id: string
   name: string
   completed: boolean
@@ -24,16 +26,11 @@ const filterMap = {
   done: (task: Task) => task.completed,
 }
 
-export const TodoList = () => {
+const setTodoState = () => {
   const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
   const [name, setName] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
   const [emptyInputErr, setEmptyInputErr] = useState(false)
-
-  const handleChecked = (id: string) =>
-    setTasks(tasks.map(task => (id === task.id ? { ...task, completed: !task.completed } : task)))
-
-  const handleDelete = (id: string) => setTasks(tasks.filter(task => id !== task.id))
 
   const tasksLeftCounter = tasks.filter(task => !task.completed).length
 
@@ -49,6 +46,36 @@ export const TodoList = () => {
 
   const deleteAllChecked = () => setTasks(tasks.filter(task => task.completed === false))
 
+  return {
+    tasks,
+    setTasks,
+    name,
+    setName,
+    filter,
+    setFilter,
+    emptyInputErr,
+    setEmptyInputErr,
+    tasksLeftCounter,
+    checkedAll,
+    uncheckedAll,
+    deleteAllChecked,
+  }
+}
+
+export const { ContextProvider: TodoListContextProvider, Context: TodoListStateContext } =
+  genericHookContextBuilder(setTodoState)
+
+export const TodoListApp = () => {
+  return (
+    <TodoListContextProvider>
+      <TodoList />
+    </TodoListContextProvider>
+  )
+}
+
+const TodoList = () => {
+  const data = useContext(TodoListStateContext)
+
   return (
     <HelmetProvider>
       <Div_TodoContainer>
@@ -60,20 +87,20 @@ export const TodoList = () => {
         <form
           onSubmit={e => {
             e.preventDefault()
-            if (name.length === 0) {
-              setEmptyInputErr(true)
+            if (data.name.length === 0) {
+              data.setEmptyInputErr(true)
               return
             }
-            setTasks([
+            data.setTasks([
               {
                 id: createId(),
-                name,
+                name: data.name,
                 completed: false,
               },
-              ...tasks,
+              ...data.tasks,
             ])
-            setName('')
-            setEmptyInputErr(false)
+            data.setName('')
+            data.setEmptyInputErr(false)
           }}
         >
           <Div_InputContainer>
@@ -81,58 +108,57 @@ export const TodoList = () => {
             <Input_Input
               placeholder='What are you going to postpone as long as possible?'
               type='text'
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={data.name}
+              onChange={e => data.setName(e.target.value)}
+              autoFocus={true}
+              autoComplete='off'
             />
             <Button_TodoButton type='submit'>Add task</Button_TodoButton>
           </Div_InputContainer>
         </form>
-        {emptyInputErr ? (
+        {data.emptyInputErr ? (
           <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
         ) : (
           ''
         )}
         <Div_FilterButtonContainer>
-          {tasksLeftCounter >= 1 ? (
+          {data.tasksLeftCounter >= 1 ? (
             <H2_ItemsLeftHeading>
-              {tasksLeftCounter === 1
-                ? `${tasksLeftCounter} item left`
-                : `${tasksLeftCounter} items left`}
+              {data.tasksLeftCounter === 1
+                ? `${data.tasksLeftCounter} item left`
+                : `${data.tasksLeftCounter} items left`}
             </H2_ItemsLeftHeading>
           ) : (
             ''
           )}
-          <Button_FilterButton onClick={() => setFilter('all')} aria-pressed={filter === 'all'}>
+          <Button_FilterButton
+            onClick={() => data.setFilter('all')}
+            aria-pressed={data.filter === 'all'}
+          >
             All
           </Button_FilterButton>
           <Button_FilterButton
-            onClick={() => setFilter('active')}
-            aria-pressed={filter === 'active'}
+            onClick={() => data.setFilter('active')}
+            aria-pressed={data.filter === 'active'}
           >
             Active
           </Button_FilterButton>
-          <Button_FilterButton onClick={() => setFilter('done')} aria-pressed={filter === 'done'}>
+          <Button_FilterButton
+            onClick={() => data.setFilter('done')}
+            aria-pressed={data.filter === 'done'}
+          >
             Done
           </Button_FilterButton>
         </Div_FilterButtonContainer>
-        {tasks.filter(filterMap[filter]).map(task => (
-          <Div_TaskContainer key={task.id}>
-            <Button_DeleteButton onClick={() => handleDelete(task.id)}>
-              <P_TodoBodyText>X</P_TodoBodyText>
-            </Button_DeleteButton>
-            <Input_Checkbox
-              type='checkbox'
-              checked={task.completed}
-              onChange={() => handleChecked(task.id)}
-            />
-            <P_TodoBodyText aria-checked={task.completed}>{task.name}</P_TodoBodyText>
-          </Div_TaskContainer>
+        {data.tasks.filter(filterMap[data.filter]).map(task => (
+          <Item key={task.id} task={task} />
         ))}
-
         <Div_FilterButtonContainer>
-          <Button_FilterButton onClick={() => checkedAll()}>Check All</Button_FilterButton>
-          <Button_FilterButton onClick={() => uncheckedAll()}>Uncheck All</Button_FilterButton>
-          <Button_FilterButton onClick={() => deleteAllChecked()}>Clear Done</Button_FilterButton>
+          <Button_FilterButton onClick={() => data.checkedAll()}>Check All</Button_FilterButton>
+          <Button_FilterButton onClick={() => data.uncheckedAll()}>Uncheck All</Button_FilterButton>
+          <Button_FilterButton onClick={() => data.deleteAllChecked()}>
+            Clear Done
+          </Button_FilterButton>
         </Div_FilterButtonContainer>
         <RouterLink to={urls.homeUrl}>
           <P_BodyText>Return home</P_BodyText>
@@ -191,7 +217,7 @@ const H2_ErrorHeading = styled(H2_FormHeading)`
     white-space: unset;
   }
 `
-export const Button_TodoButton = styled.button`
+const Button_TodoButton = styled.button`
   ${buttonStyles}
   width: 200px;
   height: 40px;
@@ -209,34 +235,5 @@ const Button_FilterButton = styled.button`
   border-radius: 10px;
   &[aria-pressed='true'] {
     background-color: ${theme.color.yellowBright};
-  }
-`
-
-const Button_DeleteButton = styled.button`
-  ${buttonStyles}
-  position: absolute;
-  width: ${theme.spacing.medium};
-  height: ${theme.spacing.medium};
-  top: 0;
-  right: 0;
-  opacity: 0;
-`
-
-const Div_TaskContainer = styled.div`
-  background-color: ${theme.color.yellowBright};
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 1000px;
-  border: ${theme.spacing.borderSmall} solid ${theme.color.blackBoxShadow};
-  border-radius: 10px;
-  margin: ${theme.spacing.small};
-  &:hover ${Button_DeleteButton} {
-    opacity: 1;
-  }
-  ${theme.mediaQueries.tablet} {
-    width: 100%;
   }
 `
