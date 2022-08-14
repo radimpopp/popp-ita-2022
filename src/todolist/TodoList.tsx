@@ -2,9 +2,9 @@ import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
+import { Item } from '../todolist/Task'
 import { P_BodyText } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { Task } from '../todolist/Task'
 import { buttonStyles } from '../components/Button'
 import { createId } from '../helpers/utils'
 import { genericHookContextBuilder } from '../helpers/utils'
@@ -14,14 +14,10 @@ import { useLocalStorage } from '../helpers/hooks'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
-type Task = {
+export type Task = {
   id: string
   name: string
   completed: boolean
-}
-
-export type TaskProps = {
-  task: Task
 }
 
 const filterMap = {
@@ -30,7 +26,7 @@ const filterMap = {
   done: (task: Task) => task.completed,
 }
 
-const useLogicState = () => {
+const setTodoState = () => {
   const [tasks, setTasks] = useLocalStorage('localStorageTasks', [] as Task[])
   const [name, setName] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'done'>('all')
@@ -67,7 +63,7 @@ const useLogicState = () => {
 }
 
 export const { ContextProvider: TodoListContextProvider, Context: TodoListStateContext } =
-  genericHookContextBuilder(useLogicState)
+  genericHookContextBuilder(setTodoState)
 
 export const TodoListApp = () => {
   return (
@@ -155,7 +151,7 @@ const TodoList = () => {
           </Button_FilterButton>
         </Div_FilterButtonContainer>
         {data.tasks.filter(filterMap[data.filter]).map(task => (
-          <Task key={task.id} task={task} />
+          <Item key={task.id} task={task} />
         ))}
         <Div_FilterButtonContainer>
           <Button_FilterButton onClick={() => data.checkedAll()}>Check All</Button_FilterButton>

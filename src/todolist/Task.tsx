@@ -1,12 +1,16 @@
 import { Input_Checkbox } from '../components/input'
-import { TaskProps } from '../todolist/TodoList'
+import { Task } from '../todolist/TodoList'
 import { TodoListStateContext } from '../todolist/TodoList'
 import { buttonStyles } from '../components/Button'
 import { theme } from '../helpers/themes'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
-export const Task = (props: TaskProps) => {
+type Props = {
+  task: Task
+}
+
+export const Item = (props: Props) => {
   const data = useContext(TodoListStateContext)
 
   const handleChecked = () =>
@@ -20,14 +24,10 @@ export const Task = (props: TaskProps) => {
 
   return (
     <Div_TaskContainer>
-      <Button_DeleteButton onClick={() => handleDelete()}>
+      <Button_DeleteButton onClick={handleDelete}>
         <P_TodoBodyText>X</P_TodoBodyText>
       </Button_DeleteButton>
-      <Input_Checkbox
-        type='checkbox'
-        checked={props.task.completed}
-        onChange={() => handleChecked()}
-      />
+      <Input_Checkbox type='checkbox' checked={props.task.completed} onChange={handleChecked} />
       <P_TodoBodyText aria-checked={props.task.completed}>{props.task.name}</P_TodoBodyText>
     </Div_TaskContainer>
   )
