@@ -18,3 +18,7 @@ export const genericHookContextBuilder = <T, P>(hook: () => T) => {
     },
   }
 }
+
+export const shuffleArray = <T,>(arr: T[]) => {
+  return arr.sort(() => Math.random() - 0.5)
+}
