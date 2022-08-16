@@ -147,11 +147,6 @@ const Div_Grid = styled.div`
 
 const Div_Emoji = styled.div`
   font-size: 8rem;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   ${theme.mediaQueries.phone} {
     font-size: 4.7rem;
