@@ -1,5 +1,5 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText } from '../components/BodyText'
+import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { hackerCode } from './hackercode'
 import { theme } from '../helpers/themes'
@@ -131,9 +131,4 @@ const Div_AccessGranted = styled.div`
       opacity: 0;
     }
   }
-`
-
-const P_BodyTextWhiteEdition = styled(P_BodyText)`
-  margin-top: ${theme.spacing.medium};
-  color: white;
 `

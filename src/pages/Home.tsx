@@ -28,6 +28,9 @@ export const Home = () => {
       <RouterLink to={urls.hackerTyperUrl}>
         <H1_HomeHeading>HackerTyper</H1_HomeHeading>
       </RouterLink>
+      <RouterLink to={urls.memoryGameUrl}>
+        <H1_HomeHeading>Memory game</H1_HomeHeading>
+      </RouterLink>
     </Div_StyledHome>
   )
 }

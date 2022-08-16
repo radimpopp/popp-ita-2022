@@ -1,3 +1,4 @@
+import { idText } from 'typescript'
 import React from 'react'
 
 export const createId = () => Math.random().toString()
@@ -17,4 +18,8 @@ export const genericHookContextBuilder = <T, P>(hook: () => T) => {
       return <Context.Provider value={value}>{props.children}</Context.Provider>
     },
   }
+}
+
+export const shuffleArray = <T,>(arr: T[]) => {
+  return arr.sort(() => Math.random() - 0.5)
 }

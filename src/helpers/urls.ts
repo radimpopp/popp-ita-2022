@@ -9,4 +9,5 @@ export const urls = {
   counterAppUrl: '/counter-app',
   todoListUrl: '/todo-list',
   hackerTyperUrl: '/hackertyper',
+  memoryGameUrl: '/memory-game',
 }
