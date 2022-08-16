@@ -1,4 +1,3 @@
-import { idText } from 'typescript'
 import React from 'react'
 
 export const createId = () => Math.random().toString()
