@@ -1,4 +1,4 @@
-import { Button_CustomButton } from '../components/Button'
+import { Button_Button } from '../components/Button'
 import { H1_MainHeading } from '../components/MainHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyText } from '../components/BodyText'
@@ -31,7 +31,7 @@ export class CounterApp extends React.Component<Props, State> {
             />
           </Helmet>
           <H1_MainHeading>{this.state.counter}</H1_MainHeading>
-          <Button_CustomButton
+          <Button_Button
             onClick={() => {
               this.setState({
                 counter: this.state.counter - 1,
@@ -39,8 +39,8 @@ export class CounterApp extends React.Component<Props, State> {
             }}
           >
             -
-          </Button_CustomButton>
-          <Button_CustomButton
+          </Button_Button>
+          <Button_Button
             onClick={() => {
               this.setState({
                 counter: this.state.counter + 1,
@@ -48,7 +48,7 @@ export class CounterApp extends React.Component<Props, State> {
             }}
           >
             +
-          </Button_CustomButton>
+          </Button_Button>
           <RouterLink to={urls.homeUrl}>
             <P_BodyText>Return home</P_BodyText>
           </RouterLink>

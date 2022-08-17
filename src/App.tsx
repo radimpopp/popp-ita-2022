@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Home } from './pages/Home'
 import { JsWeb } from './pages/JsWeb'
 import { MemoryGame } from './pages/MemoryGame'
+import { MortgageCalculator } from './pages/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
 import { TodoListApp } from './todolist/TodoList'
 import { createGlobalStyle } from 'styled-components'
@@ -30,6 +31,7 @@ export function App() {
           <Route path={urls.todoListUrl} element={<TodoListApp />} />
           <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
           <Route path={urls.memoryGameUrl} element={<MemoryGame />} />
+          <Route path={urls.mortgageCalculatorUrl} element={<MortgageCalculator />} />
         </Routes>
         <GlobalStyle />
       </Div_StyledApp>

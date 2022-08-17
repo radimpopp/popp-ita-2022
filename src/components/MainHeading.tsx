@@ -23,3 +23,11 @@ export const H1_HomeHeading = styled.h1`
     width: 60vw;
   }
 `
+
+export const H1_MainHeadingYellow = styled.h1`
+  ${H1_MainHeading};
+  color: ${theme.color.yellowBright};
+  font-size: ${theme.fontSize.large};
+  padding-top: ${theme.spacing.large};
+  text-align: center;
+`

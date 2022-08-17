@@ -10,4 +10,5 @@ export const urls = {
   todoListUrl: '/todo-list',
   hackerTyperUrl: '/hackertyper',
   memoryGameUrl: '/memory-game',
+  mortgageCalculatorUrl: '/mortgage-calculator',
 }

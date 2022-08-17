@@ -1,5 +1,5 @@
 import { Button_CustomButton } from '../components/Button'
-import { H1_MainHeading } from '../components/MainHeading'
+import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
@@ -118,7 +118,7 @@ export const MemoryGame = () => {
           {turns} turns | {pairs} pairs
         </H2_SubheadingYellow>
         <Div_ButtonContainer>
-          <Button_FilterButton onClick={handleReset}>Reset</Button_FilterButton>
+          <Button_CustomButton onClick={handleReset}>Reset</Button_CustomButton>
         </Div_ButtonContainer>
         <Div_MemoryGameContainer>
           <div></div>
@@ -178,13 +178,6 @@ const Div_MemoryAppContainer = styled.div`
   background-color: ${theme.color.black};
 `
 
-const H1_MainHeadingYellow = styled.h1`
-  ${H1_MainHeading};
-  color: ${theme.color.yellowBright};
-  font-size: ${theme.fontSize.large};
-  padding-top: ${theme.spacing.large};
-`
-
 const Div_ButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -197,12 +190,6 @@ const Div_ButtonContainer = styled.div`
   }
 `
 
-const Button_FilterButton = styled(Button_CustomButton)`
-  width: 200px;
-  height: 40px;
-  padding: ${theme.spacing.small};
-  border-radius: 10px;
-`
 const H2_SubheadingYellow = styled(H2_SubHeading)`
   color: ${theme.color.yellowBright};
   padding-top: ${theme.spacing.small};
