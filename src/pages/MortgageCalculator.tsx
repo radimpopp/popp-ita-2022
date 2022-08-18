@@ -9,24 +9,30 @@ import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+// https://stackoverflow.com/questions/16637051/adding-space-between-numbers
+const spaceBetweenThreeNumbers = (amount: number) =>
+  amount
+    .toFixed(2)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
 const mortgageFormula = (loan: number, rate: number, months: number) => {
   const rateMonthlyPercentage = rate / 100 / 12
-  if (loan > 0 && rate > 0 && months > 0)
-    return (
-      (loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, months)) /
-      (Math.pow(1 + rateMonthlyPercentage, months) - 1)
-    )
-      .toFixed(2)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-  else return null
+  return (
+    (loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, months)) /
+    (Math.pow(1 + rateMonthlyPercentage, months) - 1)
+  )
 }
 
 export const MortgageCalculator = () => {
-  const [totalLoanAmount, setTotalLoanAmount] = useState(0)
-  const [interestRate, setInterestRate] = useState(0)
-  const [loanTerm, setLoanTerm] = useState(0)
+  const [totalLoanAmount, setTotalLoanAmount] = useState(100000)
+  const [interestRate, setInterestRate] = useState(5)
+  const [loanTerm, setLoanTerm] = useState(48)
   const totalMonthlyPayment = mortgageFormula(totalLoanAmount, interestRate, loanTerm)
+
+  const amount = !totalMonthlyPayment || !isFinite(totalMonthlyPayment) ? 0 : totalMonthlyPayment
+
+  const formattedAmount = spaceBetweenThreeNumbers(amount)
 
   const handleReset = () => {
     setTotalLoanAmount(0)
@@ -46,32 +52,34 @@ export const MortgageCalculator = () => {
             <P_BodyTextYellow>Total loan amount (CZK):</P_BodyTextYellow>
             <Input_MortgageInput
               type='number'
-              value={totalLoanAmount}
-              onChange={e => setTotalLoanAmount(parseInt(e.target.value))}
-              autoFocus={true}
+              defaultValue={totalLoanAmount}
+              onChange={e => setTotalLoanAmount(Number(e.target.value))}
               autoComplete='off'
+              min='0'
             />
             <P_BodyTextYellow>Interest rate (%):</P_BodyTextYellow>
             <Input_MortgageInput
               type='number'
-              value={interestRate}
-              onChange={e => setInterestRate(parseInt(e.target.value))}
-              autoFocus={false}
+              defaultValue={interestRate}
+              onChange={e => setInterestRate(Number(e.target.value))}
               autoComplete='off'
+              min='0'
             />
             <P_BodyTextYellow>Loan term (months):</P_BodyTextYellow>
             <Input_MortgageInput
               type='number'
-              value={loanTerm}
-              onChange={e => setLoanTerm(parseInt(e.target.value))}
-              autoFocus={false}
+              defaultValue={loanTerm}
+              onChange={e => setLoanTerm(Number(e.target.value))}
               autoComplete='off'
+              min='0'
             />
           </Div_InputContainer>
         </form>
         <Div_ButtonContainer>
+          {/* <Div_LineBreak> */}
           <P_BodyTextWhiteEdition>
-            The estimated monthly payment is: {totalMonthlyPayment} CZK.
+            The estimated monthly payment is: <br />
+            {formattedAmount} CZK.
           </P_BodyTextWhiteEdition>
           <Button_CustomButton onClick={handleReset}>Reset</Button_CustomButton>
         </Div_ButtonContainer>
@@ -95,14 +103,14 @@ const Div_MortgageAppContainer = styled.div`
 
 const Div_InputContainer = styled.div`
   width: 100%;
-  height: 80%;
+  height: 75%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: ${theme.spacing.large} 0 ${theme.spacing.superSize} 0;
+  padding: ${theme.spacing.large} 0 ${theme.spacing.extraLarge} 0;
   ${theme.mediaQueries.tablet} {
     text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 `
 
@@ -112,7 +120,7 @@ const Div_ButtonContainer = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
-  white-space: unset;
+  white-space: nowrap;
   width: 80%;
 `
 const P_BodyTextYellow = styled(P_BodyText)`
