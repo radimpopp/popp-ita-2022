@@ -10,6 +10,14 @@ export const Input_Input = styled.input`
   border: 3px solid ${theme.color.blackBoxShadow};
   border-radius: 5px;
   background-color: ${theme.color.yellowBright};
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   ${theme.mediaQueries.tablet} {
     width: 80%;
     ::-webkit-input-placeholder {

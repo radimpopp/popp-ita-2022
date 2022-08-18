@@ -14,8 +14,15 @@ export const buttonStyles = css`
   border: 1px solid ${theme.color.black};
 `
 
-export const Button_CustomButton = styled.button`
+export const Button_Button = styled.button`
   ${buttonStyles}
   width: ${theme.spacing.superSize};
   height: ${theme.spacing.large};
+`
+
+export const Button_CustomButton = styled(Button_Button)`
+  width: 200px;
+  height: 40px;
+  padding: ${theme.spacing.small};
+  border-radius: 10px;
 `
