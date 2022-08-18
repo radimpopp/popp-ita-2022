@@ -76,7 +76,6 @@ export const MortgageCalculator = () => {
           </Div_InputContainer>
         </form>
         <Div_ButtonContainer>
-          {/* <Div_LineBreak> */}
           <P_BodyTextWhiteEdition>
             The estimated monthly payment is: <br />
             {formattedAmount} CZK.
