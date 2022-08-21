@@ -1,3 +1,4 @@
+import { simplifiedInput } from './helpers/utils'
 import cors from 'cors'
 import express, { response } from 'express'
 import fs from 'fs'
@@ -18,18 +19,16 @@ app.get('/:value', (req, res) => {
   try {
     const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
     const data = JSON.parse(dataString).users
-    const filters = req.params.value.toLowerCase()
 
     const filteredUsers = data.filter((user: User) =>
       Object.values(user)
         .map(value => value.toString())
-        .some(value => value.toLowerCase().includes(filters))
+        .some(value => simplifiedInput(value).includes(simplifiedInput(req.params.value)))
     )
 
     res.send(filteredUsers)
   } catch (err) {
-    res.status(500)
-    res.json(err)
+    res.status(500).json(err)
   }
 })
 

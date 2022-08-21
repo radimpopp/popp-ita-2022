@@ -2,6 +2,7 @@ import { H1_HomeHeading, H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Img_Image } from '../components/Image'
 import { RouterLink } from '../components/RouterLink'
+import { serviceLayers } from '../helpers/serviceLayers'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
@@ -34,7 +35,7 @@ export const Home = () => {
       <RouterLink to={urls.mortgageCalculatorUrl}>
         <H1_HomeHeading>Mortgage calculator</H1_HomeHeading>
       </RouterLink>
-      <RouterLink to={urls.backendUrl}>
+      <RouterLink to={serviceLayers.backendUrl}>
         <H1_HomeHeading>HTTP filter</H1_HomeHeading>
       </RouterLink>
     </Div_StyledHome>

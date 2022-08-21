@@ -1,8 +1,8 @@
 import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Input_Input } from '../components/input'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
+import { serviceLayers } from '../helpers/serviceLayers'
 import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -13,7 +13,6 @@ export const GetUserData = () => {
   const [err, setErr] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(false)
-  const isData = userData.length >= 0
 
   return (
     <Div_BackendContainer>
@@ -24,15 +23,15 @@ export const GetUserData = () => {
           if (searchTerm.length === 0) return
           try {
             setLoading(true)
-            const response = await fetch(urls.apiUrl + searchTerm)
+            const response = await fetch(serviceLayers.apiUrl + searchTerm)
             if (!response.ok) {
               throw err
             }
             setUserData(await response.json())
             setErr(false)
-            setLoading(false)
           } catch (err) {
             setErr(true)
+          } finally {
             setLoading(false)
           }
         }}
@@ -48,7 +47,7 @@ export const GetUserData = () => {
       </Form_Styled>
       {loading && <P_BodyTextWhite>Loading...</P_BodyTextWhite>}
       {err && <P_BodyTextWhite>Data unavailable</P_BodyTextWhite>}
-      {isData ? (
+      {userData.length >= 0 ? (
         <div>
           <Div_GridTitles>
             <P_BodyTextWhite>User ID</P_BodyTextWhite>

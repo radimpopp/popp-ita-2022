@@ -11,6 +11,4 @@ export const urls = {
   hackerTyperUrl: '/hackertyper',
   memoryGameUrl: '/memory-game',
   mortgageCalculatorUrl: '/mortgage-calculator',
-  backendUrl: '/http-filter',
-  apiUrl: process.env.REACT_APP_USERS_API_URL,
 }
