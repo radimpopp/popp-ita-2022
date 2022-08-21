@@ -15,7 +15,7 @@ type User = {
   gender: string
 }
 
-app.get('/:value', (req, res) => {
+app.get('/users/:search', (req, res) => {
   try {
     const dataString = fs.readFileSync(`${__dirname}/../data.json`, 'utf-8')
     const data = JSON.parse(dataString).users
@@ -23,7 +23,7 @@ app.get('/:value', (req, res) => {
     const filteredUsers = data.filter((user: User) =>
       Object.values(user)
         .map(value => value.toString())
-        .some(value => simplifiedInput(value).includes(simplifiedInput(req.params.value)))
+        .some(value => simplifiedInput(value).includes(simplifiedInput(req.params.search)))
     )
 
     res.send(filteredUsers)
