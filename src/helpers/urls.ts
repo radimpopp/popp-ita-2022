@@ -11,4 +11,5 @@ export const urls = {
   hackerTyperUrl: '/hackertyper',
   memoryGameUrl: '/memory-game',
   mortgageCalculatorUrl: '/mortgage-calculator',
+  backendUrl: '/http-filter',
 }

@@ -1,4 +1,5 @@
 import { CounterApp } from './pages/CounterApp'
+import { GetUserData } from './pages/GetUserData'
 import { HackerTyper } from './hackertyper/Hackertyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Home } from './pages/Home'
@@ -32,6 +33,7 @@ export function App() {
           <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
           <Route path={urls.memoryGameUrl} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculatorUrl} element={<MortgageCalculator />} />
+          <Route path={urls.backendUrl} element={<GetUserData />} />
         </Routes>
         <GlobalStyle />
       </Div_StyledApp>
