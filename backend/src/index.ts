@@ -1,5 +1,5 @@
 import cors from 'cors'
-import express from 'express'
+import express, { response } from 'express'
 import fs from 'fs'
 
 const app = express()
@@ -26,10 +26,10 @@ app.get('/:value', (req, res) => {
         .some(value => value.toLowerCase().includes(filters))
     )
 
-    res.status(200).send(filteredUsers)
+    res.send(filteredUsers)
   } catch (err) {
     res.status(500)
-    throw err
+    res.json(err)
   }
 })
 

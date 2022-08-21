@@ -2,6 +2,7 @@ import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Input_Input } from '../components/input'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { theme } from '../helpers/themes'
+import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -11,7 +12,8 @@ export const GetUserData = () => {
   )
   const [err, setErr] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-  const [isData, setIsData] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const isData = userData.length >= 0
 
   return (
     <Div_BackendContainer>
@@ -19,18 +21,19 @@ export const GetUserData = () => {
       <Form_Styled
         onSubmit={async e => {
           e.preventDefault()
-          if (searchTerm.length === 0) {
-            return
-          } else {
-            try {
-              const response = await fetch('http://localhost:3500/' + searchTerm)
-              setUserData(await response.json())
-              setErr(false)
-              setIsData(true)
-            } catch (err) {
-              setErr(true)
-              setIsData(false)
+          if (searchTerm.length === 0) return
+          try {
+            setLoading(true)
+            const response = await fetch(urls.apiUrl + searchTerm)
+            if (!response.ok) {
+              throw err
             }
+            setUserData(await response.json())
+            setErr(false)
+            setLoading(false)
+          } catch (err) {
+            setErr(true)
+            setLoading(false)
           }
         }}
       >
@@ -40,9 +43,11 @@ export const GetUserData = () => {
           onChange={e => setSearchTerm(e.target.value)}
           autoFocus={true}
           autoComplete='off'
+          spellCheck={false}
         />
       </Form_Styled>
-      {err && <P_BodyTextWhiteEdition>Data unavailable</P_BodyTextWhiteEdition>}
+      {loading && <P_BodyTextWhite>Loading...</P_BodyTextWhite>}
+      {err && <P_BodyTextWhite>Data unavailable</P_BodyTextWhite>}
       {isData ? (
         <div>
           <Div_GridTitles>
