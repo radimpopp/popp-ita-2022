@@ -1,4 +1,5 @@
 import { CounterApp } from './pages/CounterApp'
+import { GetUserData } from './pages/GetUserData'
 import { HackerTyper } from './hackertyper/Hackertyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Home } from './pages/Home'
@@ -8,6 +9,7 @@ import { MortgageCalculator } from './pages/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
 import { TodoListApp } from './todolist/TodoList'
 import { createGlobalStyle } from 'styled-components'
+import { serviceLayers } from './helpers/serviceLayers'
 import { theme } from './helpers/themes'
 import { urls } from './helpers/urls'
 import React from 'react'
@@ -32,6 +34,7 @@ export function App() {
           <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
           <Route path={urls.memoryGameUrl} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculatorUrl} element={<MortgageCalculator />} />
+          <Route path={serviceLayers.backendUrl} element={<GetUserData />} />
         </Routes>
         <GlobalStyle />
       </Div_StyledApp>

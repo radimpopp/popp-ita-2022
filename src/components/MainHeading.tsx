@@ -29,5 +29,4 @@ export const H1_MainHeadingYellow = styled.h1`
   color: ${theme.color.yellowBright};
   font-size: ${theme.fontSize.large};
   padding-top: ${theme.spacing.large};
-  text-align: center;
 `

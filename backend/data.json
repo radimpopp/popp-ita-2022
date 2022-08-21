@@ -1,0 +1,184 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Valentine Varren",
+      "email": "vvarren0@cam.ac.uk",
+      "gender": "Female"
+    },
+    {
+      "id": 2,
+      "name": "Eberto Mossop",
+      "email": "emossop1@linkedin.com",
+      "gender": "Bigender"
+    },
+    {
+      "id": 3,
+      "name": "Travers Powers",
+      "email": "tpowers2@odnoklassniki.ru",
+      "gender": "Male"
+    },
+    {
+      "id": 4,
+      "name": "Ericha Stoile",
+      "email": "estoile3@ucsd.edu",
+      "gender": "Female"
+    },
+    {
+      "id": 5,
+      "name": "Osbert Hakewell",
+      "email": "ohakewell4@comsenz.com",
+      "gender": "Male"
+    },
+    {
+      "id": 6,
+      "name": "Kinny Dudleston",
+      "email": "kdudleston5@msn.com",
+      "gender": "Male"
+    },
+    {
+      "id": 7,
+      "name": "Cy Laskey",
+      "email": "claskey6@aol.com",
+      "gender": "Genderqueer"
+    },
+    {
+      "id": 8,
+      "name": "Lethia Clamo",
+      "email": "lclamo7@pagesperso-orange.fr",
+      "gender": "Female"
+    },
+    {
+      "id": 9,
+      "name": "Tricia Robb",
+      "email": "trobb8@storify.com",
+      "gender": "Female"
+    },
+    {
+      "id": 10,
+      "name": "Fanechka Wiggett",
+      "email": "fwiggett9@ft.com",
+      "gender": "Female"
+    },
+    {
+      "id": 11,
+      "name": "Lin Vedyasov",
+      "email": "lvedyasova@prweb.com",
+      "gender": "Female"
+    },
+    {
+      "id": 12,
+      "name": "Sorcha Juza",
+      "email": "sjuzab@apple.com",
+      "gender": "Female"
+    },
+    {
+      "id": 13,
+      "name": "Ryann Fulkes",
+      "email": "rfulkesc@ow.ly",
+      "gender": "Female"
+    },
+    {
+      "id": 14,
+      "name": "Byrle Goodridge",
+      "email": "bgoodridged@blog.com",
+      "gender": "Male"
+    },
+    {
+      "id": 15,
+      "name": "Temple Hatchman",
+      "email": "thatchmane@marketwatch.com",
+      "gender": "Male"
+    },
+    {
+      "id": 16,
+      "name": "Darda McIlhatton",
+      "email": "dmcilhattonf@amazonaws.com",
+      "gender": "Female"
+    },
+    {
+      "id": 17,
+      "name": "Claudio Gorden",
+      "email": "cgordeng@samsung.com",
+      "gender": "Male"
+    },
+    {
+      "id": 18,
+      "name": "Shepperd Dungee",
+      "email": "sdungeeh@flavors.me",
+      "gender": "Male"
+    },
+    {
+      "id": 19,
+      "name": "Armand Brick",
+      "email": "abricki@icio.us",
+      "gender": "Male"
+    },
+    {
+      "id": 20,
+      "name": "Vonnie Picheford",
+      "email": "vpichefordj@dion.ne.jp",
+      "gender": "Female"
+    },
+    {
+      "id": 21,
+      "name": "Gaspard Bowart",
+      "email": "gbowartk@stanford.edu",
+      "gender": "Male"
+    },
+    {
+      "id": 22,
+      "name": "Nap Dymock",
+      "email": "ndymockl@paginegialle.it",
+      "gender": "Male"
+    },
+    {
+      "id": 23,
+      "name": "Mildred Crossfeld",
+      "email": "mcrossfeldm@who.int",
+      "gender": "Non-binary"
+    },
+    {
+      "id": 24,
+      "name": "Felicia Squibb",
+      "email": "fsquibbn@blog.com",
+      "gender": "Female"
+    },
+    {
+      "id": 25,
+      "name": "Roxie Rudkin",
+      "email": "rrudkino@so-net.ne.jp",
+      "gender": "Female"
+    },
+    {
+      "id": 26,
+      "name": "Nadia O'Doghesty",
+      "email": "nodoghestyp@walmart.com",
+      "gender": "Female"
+    },
+    {
+      "id": 27,
+      "name": "Lombard Burgen",
+      "email": "lburgenq@wordpress.com",
+      "gender": "Male"
+    },
+    {
+      "id": 28,
+      "name": "Ashlin Richardes",
+      "email": "arichardesr@list-manage.com",
+      "gender": "Male"
+    },
+    {
+      "id": 29,
+      "name": "Ebeneser Bradnick",
+      "email": "ebradnicks@ebay.com",
+      "gender": "Male"
+    },
+    {
+      "id": 30,
+      "name": "Pauly Bartalot",
+      "email": "pbartalott@jigsy.com",
+      "gender": "Female"
+    }
+  ]
+}
