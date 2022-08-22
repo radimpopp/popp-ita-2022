@@ -29,4 +29,6 @@ export const H1_MainHeadingYellow = styled.h1`
   color: ${theme.color.yellowBright};
   font-size: ${theme.fontSize.large};
   padding-top: ${theme.spacing.large};
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
 `

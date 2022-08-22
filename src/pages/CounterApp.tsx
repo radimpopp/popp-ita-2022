@@ -1,8 +1,9 @@
 import { Button_Button } from '../components/Button'
-import { H1_MainHeading } from '../components/MainHeading'
+import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyText } from '../components/BodyText'
+import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
+import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
 import styled from 'styled-components'
@@ -30,7 +31,8 @@ export class CounterApp extends React.Component<Props, State> {
               content='CounterApp - a good helper for anyone who cannot count to one!'
             />
           </Helmet>
-          <H1_MainHeading>{this.state.counter}</H1_MainHeading>
+          <H1_MainHeadingYellow>Counter App</H1_MainHeadingYellow>
+          <H1_MainHeadingYellowCounter>{this.state.counter}</H1_MainHeadingYellowCounter>
           <Button_Button
             onClick={() => {
               this.setState({
@@ -50,7 +52,7 @@ export class CounterApp extends React.Component<Props, State> {
             +
           </Button_Button>
           <RouterLink to={urls.homeUrl}>
-            <P_BodyText>Return home</P_BodyText>
+            <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
           </RouterLink>
         </Div_StyledCounterApp>
       </HelmetProvider>
@@ -65,4 +67,11 @@ const Div_StyledCounterApp = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: ${theme.color.black};
+`
+
+const H1_MainHeadingYellowCounter = styled(H1_MainHeadingYellow)`
+  font-family: 'Roboto', sans-serif;
+  font-size: 4rem;
+  padding-bottom: ${theme.spacing.large};
 `

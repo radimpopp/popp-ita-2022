@@ -1,4 +1,3 @@
-import { Button_CustomButton } from '../components/Button'
 import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
@@ -11,34 +10,47 @@ import styled from 'styled-components'
 
 // https://stackoverflow.com/questions/16637051/adding-space-between-numbers
 const spaceBetweenThreeNumbers = (amount: number) =>
-  amount
+  Math.abs(amount)
     .toFixed(2)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
-const mortgageFormula = (loan: number, rate: number, months: number) => {
+const calculatePayment = (loan: number, rate: number, months: number) => {
   const rateMonthlyPercentage = rate / 100 / 12
-  return (
+  const monthlyPaymentFormula =
     (loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, months)) /
     (Math.pow(1 + rateMonthlyPercentage, months) - 1)
-  )
+
+  const calculateMortgage = [
+    {
+      monthlyPaidAmount: monthlyPaymentFormula,
+      monthlyPaidPrincipal: monthlyPaymentFormula - loan * rateMonthlyPercentage,
+      monthlyPaidInterest: loan * rateMonthlyPercentage,
+      remain: loan - (monthlyPaymentFormula - loan * rateMonthlyPercentage),
+    },
+  ]
+
+  for (let i = 1; i < months; i++) {
+    calculateMortgage.push({
+      monthlyPaidAmount: monthlyPaymentFormula,
+      monthlyPaidPrincipal:
+        monthlyPaymentFormula - calculateMortgage[i - 1].remain * rateMonthlyPercentage,
+      monthlyPaidInterest: calculateMortgage[i - 1].remain * rateMonthlyPercentage,
+      remain:
+        calculateMortgage[i - 1].remain -
+        (monthlyPaymentFormula - calculateMortgage[i - 1].remain * rateMonthlyPercentage),
+    })
+  }
+
+  return calculateMortgage
 }
 
 export const MortgageCalculator = () => {
   const [totalLoanAmount, setTotalLoanAmount] = useState(100000)
   const [interestRate, setInterestRate] = useState(5)
   const [loanTerm, setLoanTerm] = useState(48)
-  const totalMonthlyPayment = mortgageFormula(totalLoanAmount, interestRate, loanTerm)
 
-  const amount = !totalMonthlyPayment || !isFinite(totalMonthlyPayment) ? 0 : totalMonthlyPayment
-
-  const formattedAmount = spaceBetweenThreeNumbers(amount)
-
-  const handleReset = () => {
-    setTotalLoanAmount(0)
-    setInterestRate(0)
-    setLoanTerm(0)
-  }
+  const mortgageData = calculatePayment(totalLoanAmount, interestRate, loanTerm)
 
   return (
     <HelmetProvider>
@@ -75,13 +87,58 @@ export const MortgageCalculator = () => {
             />
           </Div_InputContainer>
         </form>
-        <Div_ButtonContainer>
-          <P_BodyTextWhiteEdition>
-            The estimated monthly payment is: <br />
-            {formattedAmount} CZK.
-          </P_BodyTextWhiteEdition>
-          <Button_CustomButton onClick={handleReset}>Reset</Button_CustomButton>
-        </Div_ButtonContainer>
+        <Div_Table>
+          <Table_Styled>
+            <thead>
+              <tr>
+                <th>
+                  <P_BodyTextWhiteEdition>Month</P_BodyTextWhiteEdition>
+                </th>
+                <th>
+                  <P_BodyTextWhiteEdition>Monthly Payment</P_BodyTextWhiteEdition>
+                </th>
+                <th>
+                  <P_BodyTextWhiteEdition>Interest Paid</P_BodyTextWhiteEdition>
+                </th>
+                <th>
+                  <P_BodyTextWhiteEdition>Principal Paid</P_BodyTextWhiteEdition>
+                </th>
+                <th>
+                  <P_BodyTextWhiteEdition>Remain</P_BodyTextWhiteEdition>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {mortgageData.map((data, i) => (
+                <tr key={i}>
+                  <td>
+                    <P_BodyTextWhiteEdition>{i + 1}.</P_BodyTextWhiteEdition>
+                  </td>
+                  <td>
+                    <P_BodyTextWhiteEdition>
+                      {spaceBetweenThreeNumbers(data.monthlyPaidAmount)}
+                    </P_BodyTextWhiteEdition>
+                  </td>
+                  <td>
+                    <P_BodyTextWhiteEdition>
+                      {spaceBetweenThreeNumbers(data.monthlyPaidInterest)}
+                    </P_BodyTextWhiteEdition>
+                  </td>
+                  <td>
+                    <P_BodyTextWhiteEdition>
+                      {spaceBetweenThreeNumbers(data.monthlyPaidPrincipal)}
+                    </P_BodyTextWhiteEdition>
+                  </td>
+                  <td>
+                    <P_BodyTextWhiteEdition>
+                      {spaceBetweenThreeNumbers(data.remain)}
+                    </P_BodyTextWhiteEdition>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table_Styled>
+        </Div_Table>
         <RouterLink to={urls.homeUrl}>
           <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
         </RouterLink>
@@ -91,8 +148,8 @@ export const MortgageCalculator = () => {
 }
 
 const Div_MortgageAppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  max-width: 100vw;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,15 +170,6 @@ const Div_InputContainer = styled.div`
   }
 `
 
-const Div_ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  white-space: nowrap;
-  width: 80%;
-`
 const P_BodyTextYellow = styled(P_BodyText)`
   margin-top: ${theme.spacing.medium};
   padding-bottom: ${theme.spacing.medium};
@@ -130,4 +178,17 @@ const P_BodyTextYellow = styled(P_BodyText)`
 
 const Input_MortgageInput = styled(Input_Input)`
   margin: unset;
+  ${theme.mediaQueries.tablet} {
+    width: 60vw;
+  }
+`
+
+const Div_Table = styled.div`
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+`
+
+const Table_Styled = styled.table`
+  text-align: center;
+  width: 85vw;
 `
