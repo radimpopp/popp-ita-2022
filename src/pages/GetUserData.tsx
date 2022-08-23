@@ -80,6 +80,7 @@ const Div_BackendContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: ${theme.color.black};
   overflow: scroll;
   -ms-overflow-style: none;

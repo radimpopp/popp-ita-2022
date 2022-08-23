@@ -3,55 +3,60 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
 import { P_BodyText, P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
-import { theme } from '../helpers/themes'
+import { breakpointsMediaQueries, theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-// https://stackoverflow.com/questions/16637051/adding-space-between-numbers
-const spaceBetweenThreeNumbers = (amount: number) =>
-  Math.abs(amount)
-    .toFixed(2)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+const formatter = (amount: number) =>
+  new Intl.NumberFormat('cs-CZ', {
+    style: 'currency',
+    currency: 'CZK',
+  })
+    .format(amount)
+    .replace(/-/g, '')
 
-const calculatePayment = (loan: number, rate: number, months: number) => {
-  const rateMonthlyPercentage = rate / 100 / 12
+const calculatePayment = (arg: { loan: number; rate: number; months: number }) => {
+  const rateMonthlyPercentage = arg.rate / 100 / 12
   const monthlyPaymentFormula =
-    (loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, months)) /
-    (Math.pow(1 + rateMonthlyPercentage, months) - 1)
+    (arg.loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, arg.months)) /
+    (Math.pow(1 + rateMonthlyPercentage, arg.months) - 1)
 
   const calculateMortgage = [
     {
       monthlyPaidAmount: monthlyPaymentFormula,
-      monthlyPaidPrincipal: monthlyPaymentFormula - loan * rateMonthlyPercentage,
-      monthlyPaidInterest: loan * rateMonthlyPercentage,
-      remain: loan - (monthlyPaymentFormula - loan * rateMonthlyPercentage),
+      monthlyPaidPrincipal: monthlyPaymentFormula - arg.loan * rateMonthlyPercentage,
+      monthlyPaidInterest: arg.loan * rateMonthlyPercentage,
+      remain: arg.loan - (monthlyPaymentFormula - arg.loan * rateMonthlyPercentage),
     },
   ]
 
-  for (let i = 1; i < months; i++) {
+  Array.from({ length: arg.months - 1 }).forEach((x, i) => {
+    const monthlyPaidAmount = monthlyPaymentFormula
+    const monthlyPaidPrincipal =
+      monthlyPaymentFormula - calculateMortgage[i].remain * rateMonthlyPercentage
+    const monthlyPaidInterest = calculateMortgage[i].remain * rateMonthlyPercentage
+    const remain =
+      calculateMortgage[i].remain -
+      (monthlyPaymentFormula - calculateMortgage[i].remain * rateMonthlyPercentage)
     calculateMortgage.push({
-      monthlyPaidAmount: monthlyPaymentFormula,
-      monthlyPaidPrincipal:
-        monthlyPaymentFormula - calculateMortgage[i - 1].remain * rateMonthlyPercentage,
-      monthlyPaidInterest: calculateMortgage[i - 1].remain * rateMonthlyPercentage,
-      remain:
-        calculateMortgage[i - 1].remain -
-        (monthlyPaymentFormula - calculateMortgage[i - 1].remain * rateMonthlyPercentage),
+      monthlyPaidAmount: monthlyPaidAmount,
+      monthlyPaidPrincipal: monthlyPaidPrincipal,
+      monthlyPaidInterest: monthlyPaidInterest,
+      remain: remain,
     })
-  }
+  })
 
   return calculateMortgage
 }
 
 export const MortgageCalculator = () => {
-  const [totalLoanAmount, setTotalLoanAmount] = useState(100000)
-  const [interestRate, setInterestRate] = useState(5)
-  const [loanTerm, setLoanTerm] = useState(48)
+  const [loan, setLoan] = useState(100000)
+  const [rate, setRate] = useState(5)
+  const [months, setMonths] = useState(48)
   const [windowWidth, setWindowWidth] = useState(0)
 
-  const mortgageData = calculatePayment(totalLoanAmount, interestRate, loanTerm)
+  const mortgageData = calculatePayment({ loan, rate, months })
   useEffect(() => {
     const resizeHandler = () => setWindowWidth(window.innerWidth)
     resizeHandler()
@@ -73,30 +78,30 @@ export const MortgageCalculator = () => {
             <P_BodyTextYellow>Total loan amount (CZK):</P_BodyTextYellow>
             <Input_MortgageInput
               type='number'
-              defaultValue={totalLoanAmount}
-              onChange={e => setTotalLoanAmount(Number(e.target.value))}
+              defaultValue={loan}
+              onChange={e => setLoan(Number(e.target.value))}
               autoComplete='off'
               min='0'
             />
             <P_BodyTextYellow>Interest rate (%):</P_BodyTextYellow>
             <Input_MortgageInput
               type='number'
-              defaultValue={interestRate}
-              onChange={e => setInterestRate(Number(e.target.value))}
+              defaultValue={rate}
+              onChange={e => setRate(Number(e.target.value))}
               autoComplete='off'
               min='0'
             />
             <P_BodyTextYellow>Loan term (months):</P_BodyTextYellow>
             <Input_MortgageInput
               type='number'
-              defaultValue={loanTerm}
-              onChange={e => setLoanTerm(Number(e.target.value))}
+              defaultValue={months}
+              onChange={e => setMonths(Number(e.target.value))}
               autoComplete='off'
               min='0'
             />
           </Div_InputContainer>
         </form>
-        {windowWidth > 700 ? (
+        {windowWidth > breakpointsMediaQueries.table ? (
           <Div_Table>
             <Table_Styled>
               <thead>
@@ -126,23 +131,21 @@ export const MortgageCalculator = () => {
                     </td>
                     <td>
                       <P_BodyTextWhiteEdition>
-                        {spaceBetweenThreeNumbers(data.monthlyPaidAmount)} CZK
+                        {formatter(data.monthlyPaidAmount)}
                       </P_BodyTextWhiteEdition>
                     </td>
                     <td>
                       <P_BodyTextWhiteEdition>
-                        {spaceBetweenThreeNumbers(data.monthlyPaidInterest)} CZK
+                        {formatter(data.monthlyPaidInterest)}
                       </P_BodyTextWhiteEdition>
                     </td>
                     <td>
                       <P_BodyTextWhiteEdition>
-                        {spaceBetweenThreeNumbers(data.monthlyPaidPrincipal)} CZK
+                        {formatter(data.monthlyPaidPrincipal)}
                       </P_BodyTextWhiteEdition>
                     </td>
                     <td>
-                      <P_BodyTextWhiteEdition>
-                        {spaceBetweenThreeNumbers(data.remain)} CZK
-                      </P_BodyTextWhiteEdition>
+                      <P_BodyTextWhiteEdition>{formatter(data.remain)}</P_BodyTextWhiteEdition>
                     </td>
                   </tr>
                 ))}
@@ -155,17 +158,15 @@ export const MortgageCalculator = () => {
               <Div_MobileTable key={i}>
                 <P_BodyTextWhiteTable>Month: {i + 1}.</P_BodyTextWhiteTable>
                 <P_BodyTextWhiteTable>
-                  Monthly Payment: {spaceBetweenThreeNumbers(data.monthlyPaidAmount)} CZK
+                  Monthly Payment: {formatter(data.monthlyPaidAmount)}
                 </P_BodyTextWhiteTable>
                 <P_BodyTextWhiteTable>
-                  Interest Paid: {spaceBetweenThreeNumbers(data.monthlyPaidInterest)} CZK
+                  Interest Paid: {formatter(data.monthlyPaidInterest)}
                 </P_BodyTextWhiteTable>
                 <P_BodyTextWhiteTable>
-                  Principal Paid: {spaceBetweenThreeNumbers(data.monthlyPaidPrincipal)} CZK
+                  Principal Paid: {formatter(data.monthlyPaidPrincipal)}
                 </P_BodyTextWhiteTable>
-                <P_BodyTextWhiteTable>
-                  Remain: {spaceBetweenThreeNumbers(data.remain)} CZK
-                </P_BodyTextWhiteTable>
+                <P_BodyTextWhiteTable>Remain: {formatter(data.remain)}</P_BodyTextWhiteTable>
               </Div_MobileTable>
             ))}
           </>
