@@ -24,6 +24,7 @@ export const theme = {
   mediaQueries: {
     phone: '@media (max-width: 600px)',
     tablet: '@media (max-width: 1200px)',
+    galaxyFold: '@media (max-width: 330px)',
   },
 
   fontSize: {
