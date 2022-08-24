@@ -1,8 +1,10 @@
 import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Input_Input } from '../components/input'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
+import { RouterLink } from '../components/RouterLink'
 import { serviceLayers } from '../helpers/serviceLayers'
 import { theme } from '../helpers/themes'
+import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -47,7 +49,7 @@ export const GetUserData = () => {
       </Form_Styled>
       {loading && <P_BodyTextWhite>Loading...</P_BodyTextWhite>}
       {err && <P_BodyTextWhite>Data unavailable</P_BodyTextWhite>}
-      {userData.length >= 0 ? (
+      {userData.length > 0 && (
         <div>
           <Div_GridTitles>
             <P_BodyTextWhite>User ID</P_BodyTextWhite>
@@ -64,9 +66,10 @@ export const GetUserData = () => {
             </Div_Grid>
           ))}
         </div>
-      ) : (
-        ''
       )}
+      <RouterLink to={urls.homeUrl}>
+        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+      </RouterLink>
     </Div_BackendContainer>
   )
 }
@@ -77,6 +80,7 @@ const Div_BackendContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: ${theme.color.black};
   overflow: scroll;
   -ms-overflow-style: none;

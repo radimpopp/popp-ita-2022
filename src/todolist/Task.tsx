@@ -48,9 +48,7 @@ const Div_TaskContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 1000px;
+  width: 900px;
   border: ${theme.spacing.borderSmall} solid ${theme.color.blackBoxShadow};
   border-radius: 10px;
   margin: ${theme.spacing.small};
@@ -58,7 +56,10 @@ const Div_TaskContainer = styled.div`
     opacity: 1;
   }
   ${theme.mediaQueries.tablet} {
-    width: 100%;
+    width: 78vw;
+  }
+  ${theme.mediaQueries.phone} {
+    width: 240px;
   }
 `
 

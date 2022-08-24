@@ -1,3 +1,10 @@
+export const breakpointsMediaQueries = {
+  galaxyFold: 330,
+  phone: 600,
+  table: 700,
+  tablet: 1200,
+} as const
+
 export const theme = {
   color: {
     greyBright: '#c1c1c1',
@@ -22,8 +29,10 @@ export const theme = {
   },
 
   mediaQueries: {
-    phone: '@media (max-width: 600px)',
-    tablet: '@media (max-width: 1200px)',
+    phone: `@media (max-width: ${breakpointsMediaQueries.phone}px)`,
+    tablet: `@media (max-width: ${breakpointsMediaQueries.tablet}px)`,
+    galaxyFold: `@media (max-width: ${breakpointsMediaQueries.galaxyFold}px)`,
+    table: `@media (max-width: ${breakpointsMediaQueries.table}px)`,
   },
 
   fontSize: {

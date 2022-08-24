@@ -19,12 +19,13 @@ export const Input_Input = styled.input`
     margin: 0;
   }
   ${theme.mediaQueries.tablet} {
-    width: 80%;
+    width: 45vw;
     ::-webkit-input-placeholder {
       color: transparent;
     }
   }
   ${theme.mediaQueries.phone} {
+    width: 220px;
     margin: unset;
     margin: ${theme.spacing.small} 0 ${theme.spacing.medium} 0;
   }

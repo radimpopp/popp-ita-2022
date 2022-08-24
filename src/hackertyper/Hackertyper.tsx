@@ -1,3 +1,4 @@
+import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -40,6 +41,7 @@ export const HackerTyper = () => {
             content='Do you want to become a hacker? This app is a good start!'
           />
         </Helmet>
+        <H1_MainHeadingYellow>HackerTyper</H1_MainHeadingYellow>
         {accessAlertMessage ? (
           <div>
             {accessAlertMessage === 'ACCESS DENIED!!!' ? (
@@ -82,7 +84,8 @@ const Div_HackerContainer = styled.div`
 
 const Textarea_HackerArea = styled.textarea`
   width: 90%;
-  height: 65%;
+  height: 68%;
+  margin-top: ${theme.spacing.large};
   padding: ${theme.spacing.large};
   background: ${theme.color.black};
   color: #03a062;
