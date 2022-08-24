@@ -1,3 +1,13 @@
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
@@ -8,13 +18,15 @@ import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const formatter = (amount: number) =>
+const formatMoney = (amount: number) =>
   new Intl.NumberFormat('cs-CZ', {
     style: 'currency',
     currency: 'CZK',
   })
     .format(amount)
     .replace(/-/g, '')
+
+const decimals = (amount: number) => Math.round(amount * 1e2) / 1e2
 
 const calculatePayment = (arg: { loan: number; rate: number; months: number }) => {
   const rateMonthlyPercentage = arg.rate / 100 / 12
@@ -50,10 +62,12 @@ const calculatePayment = (arg: { loan: number; rate: number; months: number }) =
   return calculateMortgage
 }
 
+type DataCalculatePayment = ReturnType<typeof calculatePayment>
+
 export const MortgageCalculator = () => {
-  const [loan, setLoan] = useState(100000)
+  const [loan, setLoan] = useState(5_000_000)
   const [rate, setRate] = useState(5)
-  const [months, setMonths] = useState(48)
+  const [months, setMonths] = useState(240)
   const [windowWidth, setWindowWidth] = useState(0)
 
   const mortgageData = calculatePayment({ loan, rate, months })
@@ -101,6 +115,7 @@ export const MortgageCalculator = () => {
             />
           </Div_InputContainer>
         </form>
+        <Charts calculatePayment={mortgageData} />
         {windowWidth > breakpointsMediaQueries.table ? (
           <Div_Table>
             <Table_Styled>
@@ -131,21 +146,21 @@ export const MortgageCalculator = () => {
                     </td>
                     <td>
                       <P_BodyTextWhiteEdition>
-                        {formatter(data.monthlyPaidAmount)}
+                        {formatMoney(data.monthlyPaidAmount)}
                       </P_BodyTextWhiteEdition>
                     </td>
                     <td>
                       <P_BodyTextWhiteEdition>
-                        {formatter(data.monthlyPaidInterest)}
+                        {formatMoney(data.monthlyPaidInterest)}
                       </P_BodyTextWhiteEdition>
                     </td>
                     <td>
                       <P_BodyTextWhiteEdition>
-                        {formatter(data.monthlyPaidPrincipal)}
+                        {formatMoney(data.monthlyPaidPrincipal)}
                       </P_BodyTextWhiteEdition>
                     </td>
                     <td>
-                      <P_BodyTextWhiteEdition>{formatter(data.remain)}</P_BodyTextWhiteEdition>
+                      <P_BodyTextWhiteEdition>{formatMoney(data.remain)}</P_BodyTextWhiteEdition>
                     </td>
                   </tr>
                 ))}
@@ -158,15 +173,15 @@ export const MortgageCalculator = () => {
               <Div_MobileTable key={i}>
                 <P_BodyTextWhiteTable>Month: {i + 1}.</P_BodyTextWhiteTable>
                 <P_BodyTextWhiteTable>
-                  Monthly Payment: {formatter(data.monthlyPaidAmount)}
+                  Monthly Payment: {formatMoney(data.monthlyPaidAmount)}
                 </P_BodyTextWhiteTable>
                 <P_BodyTextWhiteTable>
-                  Interest Paid: {formatter(data.monthlyPaidInterest)}
+                  Interest Paid: {formatMoney(data.monthlyPaidInterest)}
                 </P_BodyTextWhiteTable>
                 <P_BodyTextWhiteTable>
-                  Principal Paid: {formatter(data.monthlyPaidPrincipal)}
+                  Principal Paid: {formatMoney(data.monthlyPaidPrincipal)}
                 </P_BodyTextWhiteTable>
-                <P_BodyTextWhiteTable>Remain: {formatter(data.remain)}</P_BodyTextWhiteTable>
+                <P_BodyTextWhiteTable>Remain: {formatMoney(data.remain)}</P_BodyTextWhiteTable>
               </Div_MobileTable>
             ))}
           </>
@@ -176,6 +191,61 @@ export const MortgageCalculator = () => {
         </RouterLink>
       </Div_MortgageAppContainer>
     </HelmetProvider>
+  )
+}
+
+const Charts = (props: { calculatePayment: DataCalculatePayment }) => {
+  const chartData = props.calculatePayment.map((data, i) => ({
+    months: i + 1,
+    interestPaid: decimals(data.monthlyPaidInterest),
+    principalPaid: decimals(data.monthlyPaidPrincipal),
+    remain: decimals(data.remain),
+  }))
+
+  return (
+    <Div_Charts>
+      <ResponsiveContainer width='80%' height={400}>
+        <LineChart
+          width={450}
+          height={400}
+          data={chartData}
+          margin={{
+            top: 20,
+            right: 40,
+            left: 5,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid stroke='#FFFFFF' strokeDasharray='1 1' />
+          <XAxis dataKey='months' />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type='monotone' dataKey='remain' stroke={theme.color.orangeBright} />
+        </LineChart>
+      </ResponsiveContainer>
+      <ResponsiveContainer width='80%' height={400}>
+        <LineChart
+          width={450}
+          height={400}
+          data={chartData}
+          margin={{
+            top: 20,
+            right: 40,
+            left: 5,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid stroke='#FFFFFF' strokeDasharray='1 1' />
+          <XAxis dataKey='months' />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type='monotone' dataKey='interestPaid' stroke={theme.color.orangeBright} />
+          <Line type='monotone' dataKey='principalPaid' stroke={theme.color.yellowBright} />
+        </LineChart>
+      </ResponsiveContainer>
+    </Div_Charts>
   )
 }
 
@@ -246,5 +316,18 @@ const P_BodyTextWhiteTable = styled(P_BodyTextWhiteEdition)`
   margin: ${theme.spacing.small};
   &:not(:last-child) {
     padding-bottom: unset;
+  }
+`
+
+const Div_Charts = styled.div`
+  width: 90vw;
+  min-height: 100%;
+  margin: ${theme.spacing.small} 0 ${theme.spacing.extraLarge} 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  ${theme.mediaQueries.tablet} {
+    flex-direction: column;
+    align-items: center;
   }
 `
