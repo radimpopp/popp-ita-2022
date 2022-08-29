@@ -63,6 +63,7 @@ const Div_ArticleDetailContainer = styled.div`
 
 const Div_Article = styled.div`
   width: 80vw;
+  margin-top: ${theme.spacing.superSize};
   padding: ${theme.spacing.medium};
   border: 2px solid ${theme.color.orangeBright};
   border-radius: 10px;
