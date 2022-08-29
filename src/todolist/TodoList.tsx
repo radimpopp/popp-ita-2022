@@ -1,5 +1,5 @@
 import { H1_MainHeadingYellow } from '../components/MainHeading'
-import { H2_SubHeading } from '../components/SubHeading'
+import { H2_FormHeading } from '../components/SubHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
 import { Item } from '../todolist/Task'
@@ -209,12 +209,6 @@ const Div_FilterButtonContainer = styled.div`
   ${theme.mediaQueries.phone} {
     flex-direction: column;
   }
-`
-
-const H2_FormHeading = styled(H2_SubHeading)`
-  white-space: nowrap;
-  padding-bottom: unset;
-  color: ${theme.color.yellowBright};
 `
 
 const H2_ItemsLeftHeading = styled(H2_FormHeading)`

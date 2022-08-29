@@ -11,4 +11,8 @@ export const urls = {
   hackerTyperUrl: '/hackertyper',
   memoryGameUrl: '/memory-game',
   mortgageCalculatorUrl: '/mortgage-calculator',
-}
+  blogUrl: '/blog',
+  blogArticlesUrl: '/articles',
+  blogCreateUrl: '/create-new-article',
+  blogArticleDetailUrl: '/article-detail/',
+} as const

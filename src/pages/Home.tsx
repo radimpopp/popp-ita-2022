@@ -35,8 +35,11 @@ export const Home = () => {
       <RouterLink to={urls.mortgageCalculatorUrl}>
         <H1_HomeHeadingYellow>Mortgage calculator</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={serviceLayers.backendUrl}>
+      {/* <RouterLink to={serviceLayers.backendUrl}>
         <H1_HomeHeadingYellow>HTTP filter</H1_HomeHeadingYellow>
+      </RouterLink> */}
+      <RouterLink to={`${urls.blogUrl}${urls.blogArticlesUrl}`}>
+        <H1_HomeHeadingYellow>Blog</H1_HomeHeadingYellow>
       </RouterLink>
     </Div_StyledHome>
   )

@@ -80,7 +80,7 @@ const Nav_StyledNavbar = styled.nav`
   z-index: 2;
 `
 
-const Ul_NavList = styled.ul`
+export const Ul_NavList = styled.ul`
   display: flex;
   list-style: none;
   justify-content: space-evenly;

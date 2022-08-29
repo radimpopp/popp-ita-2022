@@ -1,3 +1,4 @@
+import { Blog } from './blog/Blog'
 import { CounterApp } from './pages/CounterApp'
 import { GetUserData } from './pages/GetUserData'
 import { HackerTyper } from './hackertyper/Hackertyper'
@@ -35,6 +36,7 @@ export function App() {
           <Route path={urls.memoryGameUrl} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculatorUrl} element={<MortgageCalculator />} />
           <Route path={serviceLayers.backendUrl} element={<GetUserData />} />
+          <Route path={`${urls.blogUrl}${urls.urlAll}`} element={<Blog />} />
         </Routes>
         <GlobalStyle />
       </Div_StyledApp>
