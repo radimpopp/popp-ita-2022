@@ -1,14 +1,14 @@
-import { BlogStateContext } from './Blog'
+import { ArticlesStateContext } from './ArticlesContext'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { P_BodyTextWhiteEdition } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
-import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
+import { P_BodyTextWhiteEdition } from '../../components/BodyText'
+import { RouterLink } from '../../components/RouterLink'
+import { getArticleDetail, urls } from '../../helpers/urls'
+import { theme } from '../../helpers/themes'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 export const Articles = () => {
-  const blogLogic = useContext(BlogStateContext)
+  const blogLogic = useContext(ArticlesStateContext)
   return (
     <HelmetProvider>
       <Helmet>
@@ -17,10 +17,7 @@ export const Articles = () => {
       <Div_PageContainer>
         <Div_ArticleContainer>
           {blogLogic?.articles.map(article => (
-            <RouterLink
-              to={`${urls.blogUrl}${urls.blogArticleDetailUrl}${article.slug}`}
-              key={article.id}
-            >
+            <RouterLink to={getArticleDetail(article.slug)} key={article.id}>
               <Div_ArticleInfo>
                 <P_BodyTextWhiteUnderlined>{article.title}</P_BodyTextWhiteUnderlined>
                 <P_BodyTextBlogWhite>by {article.author}</P_BodyTextBlogWhite>

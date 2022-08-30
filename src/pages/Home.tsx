@@ -2,7 +2,6 @@ import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Img_Image } from '../components/Image'
 import { RouterLink } from '../components/RouterLink'
-import { serviceLayers } from '../helpers/serviceLayers'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
@@ -35,10 +34,7 @@ export const Home = () => {
       <RouterLink to={urls.mortgageCalculatorUrl}>
         <H1_HomeHeadingYellow>Mortgage calculator</H1_HomeHeadingYellow>
       </RouterLink>
-      {/* <RouterLink to={serviceLayers.backendUrl}>
-        <H1_HomeHeadingYellow>HTTP filter</H1_HomeHeadingYellow>
-      </RouterLink> */}
-      <RouterLink to={`${urls.blogUrl}${urls.blogArticlesUrl}`}>
+      <RouterLink to={urls.allArticlesPathUrl}>
         <H1_HomeHeadingYellow>Blog</H1_HomeHeadingYellow>
       </RouterLink>
     </Div_StyledHome>

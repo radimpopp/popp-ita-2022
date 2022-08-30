@@ -1,17 +1,17 @@
-import { BlogStateContext } from './Blog'
-import { Button_CustomButton } from '../components/Button'
-import { H2_FormHeading } from '../components/SubHeading'
+import { Button_CustomButton } from '../../components/Button'
+import { CreateStateContext } from './CreateArticleContext'
+import { H2_FormHeading } from '../../components/SubHeading'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { Input_Input } from '../components/input'
-import { P_BodyText, P_BodyTextWhiteEdition } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
-import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
+import { Input_Input } from '../../components/input'
+import { P_BodyText, P_BodyTextWhiteEdition } from '../../components/BodyText'
+import { RouterLink } from '../../components/RouterLink'
+import { theme } from '../../helpers/themes'
+import { urls } from '../../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 export const CreateArticle = () => {
-  const blogLogic = useContext(BlogStateContext)
+  const blogLogic = useContext(CreateStateContext)
 
   return (
     <HelmetProvider>
