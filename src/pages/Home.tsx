@@ -2,7 +2,6 @@ import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Img_Image } from '../components/Image'
 import { RouterLink } from '../components/RouterLink'
-import { serviceLayers } from '../helpers/serviceLayers'
 import { theme } from '../helpers/themes'
 import { urls } from '../helpers/urls'
 import React from 'react'
@@ -17,26 +16,26 @@ export const Home = () => {
       <Div_HomeImage>
         <Img_Image src={underConstruction} alt='Under Construction' />
       </Div_HomeImage>
-      <RouterLink to={urls.jsWebUrl}>
+      <RouterLink to={urls.jsweb.jsWeb}>
         <H1_HomeHeadingYellow>JS web</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={urls.counterAppUrl}>
+      <RouterLink to={urls.counterApp}>
         <H1_HomeHeadingYellow>Counter app</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={urls.todoListUrl}>
+      <RouterLink to={urls.todoList}>
         <H1_HomeHeadingYellow>Todo list</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={urls.hackerTyperUrl}>
+      <RouterLink to={urls.hackerTyper}>
         <H1_HomeHeadingYellow>HackerTyper</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={urls.memoryGameUrl}>
+      <RouterLink to={urls.memoryGame}>
         <H1_HomeHeadingYellow>Memory game</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={urls.mortgageCalculatorUrl}>
+      <RouterLink to={urls.mortgageCalculator}>
         <H1_HomeHeadingYellow>Mortgage calculator</H1_HomeHeadingYellow>
       </RouterLink>
-      <RouterLink to={serviceLayers.backendUrl}>
-        <H1_HomeHeadingYellow>HTTP filter</H1_HomeHeadingYellow>
+      <RouterLink to={urls.blog.allArticlesPath}>
+        <H1_HomeHeadingYellow>Blog</H1_HomeHeadingYellow>
       </RouterLink>
     </Div_StyledHome>
   )

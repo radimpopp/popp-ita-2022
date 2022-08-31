@@ -1,7 +1,7 @@
 import { Button_CustomButton } from '../components/Button'
 import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { createId, shuffleArray } from '../helpers/utils'
@@ -104,37 +104,35 @@ export const MemoryGame = () => {
   }
 
   return (
-    <HelmetProvider>
-      <Div_MemoryAppContainer>
-        <Helmet>
-          <title>Radim Popp/Memory Game</title>
-          <meta
-            name='Description'
-            content='Practice your memory. Can you beat the game in 8 turns? '
-          />
-        </Helmet>
-        <H1_MainHeadingYellow>Memory Game</H1_MainHeadingYellow>
-        <H2_SubheadingYellow>
-          {turns} turns | {pairs} pairs
-        </H2_SubheadingYellow>
-        <Div_ButtonContainer>
-          <Button_CustomButton onClick={handleReset}>Reset</Button_CustomButton>
-        </Div_ButtonContainer>
-        <Div_MemoryGameContainer>
-          <div></div>
-          <Div_Grid>
-            {cards.map(card => (
-              <Div_Emoji key={card.id} onClick={() => handleClick(card)}>
-                <div>{card.flipped ? card.value : cardBackEmoji}</div>
-              </Div_Emoji>
-            ))}
-          </Div_Grid>
-        </Div_MemoryGameContainer>
-        <RouterLink to={urls.homeUrl}>
-          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-        </RouterLink>
-      </Div_MemoryAppContainer>
-    </HelmetProvider>
+    <Div_MemoryAppContainer>
+      <Helmet>
+        <title>Radim Popp/Memory Game</title>
+        <meta
+          name='Description'
+          content='Practice your memory. Can you beat the game in 8 turns? '
+        />
+      </Helmet>
+      <H1_MainHeadingYellow>Memory Game</H1_MainHeadingYellow>
+      <H2_SubheadingYellow>
+        {turns} turns | {pairs} pairs
+      </H2_SubheadingYellow>
+      <Div_ButtonContainer>
+        <Button_CustomButton onClick={handleReset}>Reset</Button_CustomButton>
+      </Div_ButtonContainer>
+      <Div_MemoryGameContainer>
+        <div></div>
+        <Div_Grid>
+          {cards.map(card => (
+            <Div_Emoji key={card.id} onClick={() => handleClick(card)}>
+              <div>{card.flipped ? card.value : cardBackEmoji}</div>
+            </Div_Emoji>
+          ))}
+        </Div_Grid>
+      </Div_MemoryGameContainer>
+      <RouterLink to={urls.home}>
+        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+      </RouterLink>
+    </Div_MemoryAppContainer>
   )
 }
 

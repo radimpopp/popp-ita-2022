@@ -1,5 +1,5 @@
 import { H1_MainHeadingYellow } from '../components/MainHeading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { hackerCode } from './hackercode'
@@ -32,37 +32,35 @@ export const HackerTyper = () => {
   }
 
   return (
-    <HelmetProvider>
-      <Div_HackerContainer>
-        <Helmet>
-          <title>Radim Popp/HackerTyper</title>
-          <meta
-            name='Description'
-            content='Do you want to become a hacker? This app is a good start!'
-          />
-        </Helmet>
-        <H1_MainHeadingYellow>HackerTyper</H1_MainHeadingYellow>
-        {accessAlertMessage ? (
-          <div>
-            {accessAlertMessage === 'ACCESS DENIED!!!' ? (
-              <Div_AccessDenied>{accessAlertMessage}</Div_AccessDenied>
-            ) : (
-              <Div_AccessGranted>{accessAlertMessage}</Div_AccessGranted>
-            )}
-          </div>
-        ) : null}
-        <Textarea_HackerArea
-          onKeyDown={handleKeyDown}
-          value={hackerCode.substring(0, codeDelimiterIndex)}
-          onChange={startHacking}
-          spellCheck={'false'}
-          autoFocus={true}
+    <Div_HackerContainer>
+      <Helmet>
+        <title>Radim Popp/HackerTyper</title>
+        <meta
+          name='Description'
+          content='Do you want to become a hacker? This app is a good start!'
         />
-        <RouterLink to={urls.homeUrl}>
-          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-        </RouterLink>
-      </Div_HackerContainer>
-    </HelmetProvider>
+      </Helmet>
+      <H1_MainHeadingYellow>HackerTyper</H1_MainHeadingYellow>
+      {accessAlertMessage ? (
+        <div>
+          {accessAlertMessage === 'ACCESS DENIED!!!' ? (
+            <Div_AccessDenied>{accessAlertMessage}</Div_AccessDenied>
+          ) : (
+            <Div_AccessGranted>{accessAlertMessage}</Div_AccessGranted>
+          )}
+        </div>
+      ) : null}
+      <Textarea_HackerArea
+        onKeyDown={handleKeyDown}
+        value={hackerCode.substring(0, codeDelimiterIndex)}
+        onChange={startHacking}
+        spellCheck={'false'}
+        autoFocus={true}
+      />
+      <RouterLink to={urls.home}>
+        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+      </RouterLink>
+    </Div_HackerContainer>
   )
 }
 

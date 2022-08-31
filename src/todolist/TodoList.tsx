@@ -1,6 +1,6 @@
 import { H1_MainHeadingYellow } from '../components/MainHeading'
-import { H2_SubHeading } from '../components/SubHeading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { H2_FormHeading } from '../components/SubHeading'
+import { Helmet } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
 import { Item } from '../todolist/Task'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
@@ -77,103 +77,101 @@ const TodoList = () => {
   const data = useContext(TodoListStateContext)
 
   return (
-    <HelmetProvider>
-      <Div_TodoContainer>
-        <Helmet>
-          <title>Radim Popp/Todo List</title>
-          <meta name='Description' content='Todo List app' />
-        </Helmet>
-        <H1_MainHeadingYellow>Todo List</H1_MainHeadingYellow>
-        <form
-          onSubmit={e => {
-            e.preventDefault()
-            if (data.name.length === 0) {
-              data.setEmptyInputErr(true)
-              return
-            }
-            data.setTasks([
-              {
-                id: createId(),
-                name: data.name,
-                completed: false,
-              },
-              ...data.tasks,
-            ])
-            data.setName('')
-            data.setEmptyInputErr(false)
-          }}
-        >
-          <Div_InputContainer>
-            <H2_FormHeading>New task:</H2_FormHeading>
-            <Input_Input
-              placeholder='What are you going to postpone as long as possible?'
-              type='text'
-              value={data.name}
-              onChange={e => data.setName(e.target.value)}
-              autoFocus={true}
-              autoComplete='off'
-            />
-            <Button_TodoButton type='submit'>Add task</Button_TodoButton>
-          </Div_InputContainer>
-        </form>
-        {data.emptyInputErr ? (
-          <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
-        ) : (
-          ''
-        )}
-        {data.tasks.length > 0 && (
-          <div>
-            <Div_FilterButtonContainer>
-              {data.tasksLeftCounter >= 1 ? (
-                <H2_ItemsLeftHeading>
-                  {data.tasksLeftCounter === 1
-                    ? `${data.tasksLeftCounter} item left`
-                    : `${data.tasksLeftCounter} items left`}
-                </H2_ItemsLeftHeading>
-              ) : (
-                ''
-              )}
+    <Div_TodoContainer>
+      <Helmet>
+        <title>Radim Popp/Todo List</title>
+        <meta name='Description' content='Todo List app' />
+      </Helmet>
+      <H1_MainHeadingYellow>Todo List</H1_MainHeadingYellow>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          if (data.name.length === 0) {
+            data.setEmptyInputErr(true)
+            return
+          }
+          data.setTasks([
+            {
+              id: createId(),
+              name: data.name,
+              completed: false,
+            },
+            ...data.tasks,
+          ])
+          data.setName('')
+          data.setEmptyInputErr(false)
+        }}
+      >
+        <Div_InputContainer>
+          <H2_FormHeading>New task:</H2_FormHeading>
+          <Input_Input
+            placeholder='What are you going to postpone as long as possible?'
+            type='text'
+            value={data.name}
+            onChange={e => data.setName(e.target.value)}
+            autoFocus={true}
+            autoComplete='off'
+          />
+          <Button_TodoButton type='submit'>Add task</Button_TodoButton>
+        </Div_InputContainer>
+      </form>
+      {data.emptyInputErr ? (
+        <H2_ErrorHeading>Do you really need to write that down?</H2_ErrorHeading>
+      ) : (
+        ''
+      )}
+      {data.tasks.length > 0 && (
+        <div>
+          <Div_FilterButtonContainer>
+            {data.tasksLeftCounter >= 1 ? (
+              <H2_ItemsLeftHeading>
+                {data.tasksLeftCounter === 1
+                  ? `${data.tasksLeftCounter} item left`
+                  : `${data.tasksLeftCounter} items left`}
+              </H2_ItemsLeftHeading>
+            ) : (
+              ''
+            )}
 
-              <Button_FilterButton
-                onClick={() => data.setFilter('all')}
-                aria-pressed={data.filter === 'all'}
-              >
-                All
-              </Button_FilterButton>
-              <Button_FilterButton
-                onClick={() => data.setFilter('active')}
-                aria-pressed={data.filter === 'active'}
-              >
-                Active
-              </Button_FilterButton>
-              <Button_FilterButton
-                onClick={() => data.setFilter('done')}
-                aria-pressed={data.filter === 'done'}
-              >
-                Done
-              </Button_FilterButton>
-            </Div_FilterButtonContainer>
-            <Div_ItemContainer>
-              {data.tasks.filter(filterMap[data.filter]).map(task => (
-                <Item key={task.id} task={task} />
-              ))}
-            </Div_ItemContainer>
-            <Div_FilterButtonContainer>
-              <Button_FilterButton onClick={() => data.checkedAll()}>Check All</Button_FilterButton>
-              <Button_FilterButton onClick={() => data.uncheckedAll()}>
-                Uncheck All
-              </Button_FilterButton>
-              <Button_FilterButton onClick={() => data.deleteAllChecked()}>
-                Clear Done
-              </Button_FilterButton>
-            </Div_FilterButtonContainer>
-          </div>
-        )}
-        <RouterLink to={urls.homeUrl}>
-          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-        </RouterLink>
-      </Div_TodoContainer>
-    </HelmetProvider>
+            <Button_FilterButton
+              onClick={() => data.setFilter('all')}
+              aria-pressed={data.filter === 'all'}
+            >
+              All
+            </Button_FilterButton>
+            <Button_FilterButton
+              onClick={() => data.setFilter('active')}
+              aria-pressed={data.filter === 'active'}
+            >
+              Active
+            </Button_FilterButton>
+            <Button_FilterButton
+              onClick={() => data.setFilter('done')}
+              aria-pressed={data.filter === 'done'}
+            >
+              Done
+            </Button_FilterButton>
+          </Div_FilterButtonContainer>
+          <Div_ItemContainer>
+            {data.tasks.filter(filterMap[data.filter]).map(task => (
+              <Item key={task.id} task={task} />
+            ))}
+          </Div_ItemContainer>
+          <Div_FilterButtonContainer>
+            <Button_FilterButton onClick={() => data.checkedAll()}>Check All</Button_FilterButton>
+            <Button_FilterButton onClick={() => data.uncheckedAll()}>
+              Uncheck All
+            </Button_FilterButton>
+            <Button_FilterButton onClick={() => data.deleteAllChecked()}>
+              Clear Done
+            </Button_FilterButton>
+          </Div_FilterButtonContainer>
+        </div>
+      )}
+      <RouterLink to={urls.home}>
+        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+      </RouterLink>
+    </Div_TodoContainer>
   )
 }
 
@@ -209,12 +207,6 @@ const Div_FilterButtonContainer = styled.div`
   ${theme.mediaQueries.phone} {
     flex-direction: column;
   }
-`
-
-const H2_FormHeading = styled(H2_SubHeading)`
-  white-space: nowrap;
-  padding-bottom: unset;
-  color: ${theme.color.yellowBright};
 `
 
 const H2_ItemsLeftHeading = styled(H2_FormHeading)`

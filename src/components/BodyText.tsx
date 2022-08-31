@@ -14,5 +14,5 @@ export const P_BodyText = styled.p`
 export const P_BodyTextWhiteEdition = styled(P_BodyText)`
   margin-top: ${theme.spacing.medium};
   padding-bottom: ${theme.spacing.medium};
-  color: white;
+  color: ${theme.color.white};
 `

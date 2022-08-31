@@ -7,3 +7,9 @@ export const H2_SubHeading = styled.h2`
   font-size: ${theme.fontSize.medium};
   padding-bottom: ${theme.spacing.medium};
 `
+
+export const H2_FormHeading = styled(H2_SubHeading)`
+  white-space: nowrap;
+  padding-bottom: unset;
+  color: ${theme.color.yellowBright};
+`

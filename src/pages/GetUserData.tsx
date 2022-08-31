@@ -67,7 +67,7 @@ export const GetUserData = () => {
           ))}
         </div>
       )}
-      <RouterLink to={urls.homeUrl}>
+      <RouterLink to={urls.home}>
         <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
       </RouterLink>
     </Div_BackendContainer>
