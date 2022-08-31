@@ -27,14 +27,14 @@ export function App() {
           />
         </Helmet>
         <Routes>
-          <Route path={urls.homeUrl} element={<Home />} />
-          <Route path={urls.jsWebPathUrl} element={<JsWeb />} />
-          <Route path={urls.counterAppUrl} element={<CounterApp />} />
-          <Route path={urls.todoListUrl} element={<TodoListApp />} />
-          <Route path={urls.hackerTyperUrl} element={<HackerTyper />} />
-          <Route path={urls.memoryGameUrl} element={<MemoryGame />} />
-          <Route path={urls.mortgageCalculatorUrl} element={<MortgageCalculator />} />
-          <Route path={urls.blogPathUrl} element={<Blog />} />
+          <Route path={urls.home} element={<Home />} />
+          <Route path={urls.jsweb.jsWebPath} element={<JsWeb />} />
+          <Route path={urls.counterApp} element={<CounterApp />} />
+          <Route path={urls.todoList} element={<TodoListApp />} />
+          <Route path={urls.hackerTyper} element={<HackerTyper />} />
+          <Route path={urls.memoryGame} element={<MemoryGame />} />
+          <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
+          <Route path={urls.blog.blogPath} element={<Blog />} />
         </Routes>
         <GlobalStyle />
       </Div_StyledApp>

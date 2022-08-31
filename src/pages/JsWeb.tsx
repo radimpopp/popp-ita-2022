@@ -14,11 +14,11 @@ export const JsWeb = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path={urls.homeUrl} element={<JavaScript />} />
-        <Route path={urls.historyUrl} element={<History />} />
-        <Route path={urls.ecmaUrl} element={<ECMAScript />} />
-        <Route path={urls.jstUrl} element={<JavaScriptToday />} />
-        <Route path={urls.jsxjUrl} element={<JavaScriptJava />} />
+        <Route path={urls.home} element={<JavaScript />} />
+        <Route path={urls.jsweb.history} element={<History />} />
+        <Route path={urls.jsweb.ecma} element={<ECMAScript />} />
+        <Route path={urls.jsweb.jst} element={<JavaScriptToday />} />
+        <Route path={urls.jsweb.jsxj} element={<JavaScriptJava />} />
       </Routes>
       <Footer />
     </>

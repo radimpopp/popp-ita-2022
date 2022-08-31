@@ -1,6 +1,6 @@
 import { Button_Button } from '../components/Button'
 import { H1_MainHeadingYellow } from '../components/MainHeading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
 import { theme } from '../helpers/themes'
@@ -22,40 +22,38 @@ export class CounterApp extends React.Component<Props, State> {
   }
   render() {
     return (
-      <HelmetProvider>
-        <Div_StyledCounterApp>
-          <Helmet>
-            <title>Radim Popp/CounterApp</title>
-            <meta
-              name='Description'
-              content='CounterApp - a good helper for anyone who cannot count to one!'
-            />
-          </Helmet>
-          <H1_MainHeadingYellow>Counter App</H1_MainHeadingYellow>
-          <H1_MainHeadingYellowCounter>{this.state.counter}</H1_MainHeadingYellowCounter>
-          <Button_Button
-            onClick={() => {
-              this.setState({
-                counter: this.state.counter - 1,
-              })
-            }}
-          >
-            -
-          </Button_Button>
-          <Button_Button
-            onClick={() => {
-              this.setState({
-                counter: this.state.counter + 1,
-              })
-            }}
-          >
-            +
-          </Button_Button>
-          <RouterLink to={urls.homeUrl}>
-            <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-          </RouterLink>
-        </Div_StyledCounterApp>
-      </HelmetProvider>
+      <Div_StyledCounterApp>
+        <Helmet>
+          <title>Radim Popp/CounterApp</title>
+          <meta
+            name='Description'
+            content='CounterApp - a good helper for anyone who cannot count to one!'
+          />
+        </Helmet>
+        <H1_MainHeadingYellow>Counter App</H1_MainHeadingYellow>
+        <H1_MainHeadingYellowCounter>{this.state.counter}</H1_MainHeadingYellowCounter>
+        <Button_Button
+          onClick={() => {
+            this.setState({
+              counter: this.state.counter - 1,
+            })
+          }}
+        >
+          -
+        </Button_Button>
+        <Button_Button
+          onClick={() => {
+            this.setState({
+              counter: this.state.counter + 1,
+            })
+          }}
+        >
+          +
+        </Button_Button>
+        <RouterLink to={urls.home}>
+          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+        </RouterLink>
+      </Div_StyledCounterApp>
     )
   }
 }

@@ -1,5 +1,5 @@
 import { DetailStateContext } from './ArticleDetailContext'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { Markdown } from '../../components/Markdown'
 import { P_BodyTextWhiteEdition } from '../../components/BodyText'
 import { P_BodyTextWhiteUnderlined } from '../allArticles/Articles'
@@ -16,28 +16,26 @@ export const ArticlesDetail = () => {
 
   const article = blogLogic.articles.find(article => article.slug === slug)
   return (
-    <HelmetProvider>
+    <Div_ArticleDetailContainer>
       <Helmet>
         <title>`Radim Popp / Blog / ${article ? article.title : 'Article not found'}`</title>
       </Helmet>
-      <Div_ArticleDetailContainer>
-        {article ? (
-          <>
-            <Div_Article>
-              <P_BodyTextWhiteUnderlined>{article.title}</P_BodyTextWhiteUnderlined>
-              <P_BodyTextWhiteEdition>{article.author}</P_BodyTextWhiteEdition>
-              <Markdown>{article.content}</Markdown>
-              <P_BodyTextWhiteEdition>{article.date}</P_BodyTextWhiteEdition>
-            </Div_Article>
-          </>
-        ) : (
-          <P_BodyTextWhiteEdition>Article not found</P_BodyTextWhiteEdition>
-        )}
-        <RouterLink to={urls.allArticlesPathUrl}>
-          <P_BodyTextWhiteEdition>Back to all articles</P_BodyTextWhiteEdition>
-        </RouterLink>
-      </Div_ArticleDetailContainer>
-    </HelmetProvider>
+      {article ? (
+        <>
+          <Div_Article>
+            <P_BodyTextWhiteUnderlined>{article.title}</P_BodyTextWhiteUnderlined>
+            <P_BodyTextWhiteEdition>{article.author}</P_BodyTextWhiteEdition>
+            <Markdown>{article.content}</Markdown>
+            <P_BodyTextWhiteEdition>{article.date}</P_BodyTextWhiteEdition>
+          </Div_Article>
+        </>
+      ) : (
+        <P_BodyTextWhiteEdition>Article not found</P_BodyTextWhiteEdition>
+      )}
+      <RouterLink to={urls.blog.allArticlesPath}>
+        <P_BodyTextWhiteEdition>Back to all articles</P_BodyTextWhiteEdition>
+      </RouterLink>
+    </Div_ArticleDetailContainer>
   )
 }
 

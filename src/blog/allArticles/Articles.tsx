@@ -1,5 +1,5 @@
 import { ArticlesStateContext } from './ArticlesContext'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
 import { getArticleDetail, urls } from '../../helpers/urls'
@@ -10,28 +10,26 @@ import styled from 'styled-components'
 export const Articles = () => {
   const blogLogic = useContext(ArticlesStateContext)
   return (
-    <HelmetProvider>
+    <Div_PageContainer>
       <Helmet>
         <title>Radim Popp / Blog / Articles</title>
       </Helmet>
-      <Div_PageContainer>
-        <Div_ArticleContainer>
-          {blogLogic?.articles.map(article => (
-            <RouterLink to={getArticleDetail(article.slug)} key={article.id}>
-              <Div_ArticleInfo>
-                <P_BodyTextWhiteUnderlined>{article.title}</P_BodyTextWhiteUnderlined>
-                <P_BodyTextBlogWhite>by {article.author}</P_BodyTextBlogWhite>
-                <P_BodyTextBlogWhite>{article.date}</P_BodyTextBlogWhite>
-                <P_BodyTextBlogWhite>Read more...</P_BodyTextBlogWhite>
-              </Div_ArticleInfo>
-            </RouterLink>
-          ))}
-        </Div_ArticleContainer>
-        <RouterLink to={urls.homeUrl}>
-          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-        </RouterLink>
-      </Div_PageContainer>
-    </HelmetProvider>
+      <Div_ArticleContainer>
+        {blogLogic?.articles.map(article => (
+          <RouterLink to={getArticleDetail(article.slug)} key={article.id}>
+            <Div_ArticleInfo>
+              <P_BodyTextWhiteUnderlined>{article.title}</P_BodyTextWhiteUnderlined>
+              <P_BodyTextBlogWhite>by {article.author}</P_BodyTextBlogWhite>
+              <P_BodyTextBlogWhite>{article.date}</P_BodyTextBlogWhite>
+              <P_BodyTextBlogWhite>Read more...</P_BodyTextBlogWhite>
+            </Div_ArticleInfo>
+          </RouterLink>
+        ))}
+      </Div_ArticleContainer>
+      <RouterLink to={urls.home}>
+        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+      </RouterLink>
+    </Div_PageContainer>
   )
 }
 

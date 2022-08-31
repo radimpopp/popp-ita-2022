@@ -2,8 +2,8 @@ import { ArticleDetailContext } from './articleDetail/ArticleDetailContext'
 import { ArticlesContext } from './allArticles/ArticlesContext'
 import { CreateArticleContext } from './newArticle/CreateArticleContext'
 import { H1_MainHeadingYellow } from '../components/MainHeading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import { NavLink } from 'react-router-dom'
 import { Route, Routes } from 'react-router-dom'
 import { Ul_NavList } from '../components/Navbar'
 import { theme } from '../helpers/themes'
@@ -21,47 +21,29 @@ export type Article = {
 }
 
 export const Blog = () => {
-  const location = useLocation()
-
   return (
-    <HelmetProvider>
-      <Nav_Blog>
-        <Ul_Nav>
-          <Link_NavLink
-            to={urls.allArticlesPathUrl}
-            style={{
-              borderBottom:
-                location.pathname === `${urls.allArticlesPathUrl}`
-                  ? `2px solid ${theme.color.orangeBright}`
-                  : 'none',
-            }}
-          >
-            <H1_NavHeading>All Articles</H1_NavHeading>
-          </Link_NavLink>
-          <H1_NavHeading>Blog</H1_NavHeading>
-          <Link_NavLink
-            to={urls.createNewPathUrl}
-            style={{
-              borderBottom:
-                location.pathname === `${urls.createNewPathUrl}`
-                  ? `2px solid ${theme.color.orangeBright}`
-                  : 'none',
-            }}
-          >
-            <H1_NavHeading>Create New</H1_NavHeading>
-          </Link_NavLink>
-        </Ul_Nav>
-      </Nav_Blog>
+    <>
       <Helmet>
         <title>Radim Popp / Blog</title>
         <meta name='Description' content='Blog app' />
       </Helmet>
+      <Nav_Blog>
+        <Ul_Nav>
+          <Link_NavLink to={urls.blog.allArticlesPath}>
+            <H1_NavHeading>All Articles</H1_NavHeading>
+          </Link_NavLink>
+          <H1_NavHeading>Blog</H1_NavHeading>
+          <Link_NavLink to={urls.blog.createNewPath}>
+            <H1_NavHeading>Create New</H1_NavHeading>
+          </Link_NavLink>
+        </Ul_Nav>
+      </Nav_Blog>
       <Routes>
-        <Route path={urls.articleDetailPathUrl} element={<ArticleDetailContext />} />
-        <Route path={urls.blogArticlesUrl} element={<ArticlesContext />} />
-        <Route path={urls.blogCreateUrl} element={<CreateArticleContext />} />
+        <Route path={urls.blog.articleDetailPath} element={<ArticleDetailContext />} />
+        <Route path={urls.blog.articles} element={<ArticlesContext />} />
+        <Route path={urls.blog.new} element={<CreateArticleContext />} />
       </Routes>
-    </HelmetProvider>
+    </>
   )
 }
 
@@ -87,6 +69,9 @@ const Link_NavLink = styled(NavLink)`
   white-space: nowrap;
   &:hover {
     transform: scale(1.1);
+  }
+  &:focus {
+    border-bottom: 2px solid ${theme.color.orangeBright};
   }
   ${theme.mediaQueries.phone} {
     &:nth-child(1) {

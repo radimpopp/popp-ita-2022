@@ -1,10 +1,11 @@
 import { Button_CustomButton } from '../../components/Button'
 import { CreateStateContext } from './CreateArticleContext'
 import { H2_FormHeading } from '../../components/SubHeading'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { Input_Input } from '../../components/input'
 import { P_BodyText, P_BodyTextWhiteEdition } from '../../components/BodyText'
 import { RouterLink } from '../../components/RouterLink'
+import { createSlug } from '../../helpers/utils'
 import { theme } from '../../helpers/themes'
 import { urls } from '../../helpers/urls'
 import React, { useContext } from 'react'
@@ -14,63 +15,70 @@ export const CreateArticle = () => {
   const blogLogic = useContext(CreateStateContext)
 
   return (
-    <HelmetProvider>
+    <Div_CreateContainer>
       <Helmet>
         <title>Radim Popp / Blog / Create Article</title>
       </Helmet>
-      <Div_CreateContainer>
-        <Form_Styled
-          onSubmit={e => {
-            e.preventDefault()
-            blogLogic.newArticle()
+      <Form_Styled
+        onSubmit={e => {
+          e.preventDefault()
+          const isValid = blogLogic.validateInputs()
+          if (!isValid) return
+          blogLogic.newArticle()
+        }}
+      >
+        <Div_InputsContainer>
+          <Div_InputContainer>
+            <H2_BlogInputLabel>Title:</H2_BlogInputLabel>
+            <Input_Styled
+              type='text'
+              value={blogLogic.title}
+              onChange={e => {
+                blogLogic.setTitleErr(null)
+                blogLogic.setTitle(e.target.value)
+              }}
+              autoComplete='off'
+              spellCheck={'false'}
+            />
+          </Div_InputContainer>
+          <Div_InputContainer>
+            <H2_BlogInputLabel>Author:</H2_BlogInputLabel>
+            <Input_Styled
+              type='text'
+              value={blogLogic.author}
+              onChange={e => {
+                blogLogic.setAuthorErr(null)
+                blogLogic.setAuthor(e.target.value)
+              }}
+              autoComplete='off'
+              spellCheck={'false'}
+            />
+          </Div_InputContainer>
+        </Div_InputsContainer>
+        <Div_ErrContainer>
+          <P_BodyTextWhiteBlog>{blogLogic.titleErr}</P_BodyTextWhiteBlog>
+          <P_BodyTextWhiteBlog>{blogLogic.authorErr}</P_BodyTextWhiteBlog>
+          <P_BodyTextWhiteBlog>{blogLogic.contentErr}</P_BodyTextWhiteBlog>
+        </Div_ErrContainer>
+        <H2_FormHeading>Content:</H2_FormHeading>
+        <Textarea_Styled
+          value={blogLogic.content}
+          onChange={e => {
+            blogLogic.setContentErr(null)
+            blogLogic.setContent(e.target.value)
           }}
-        >
-          <Div_InputsContainer>
-            <Div_InputContainer>
-              <H2_BlogInputLabel>Title:</H2_BlogInputLabel>
-              <Input_Styled
-                type='text'
-                value={blogLogic.title}
-                onChange={e => blogLogic.setTitle(e.target.value)}
-                autoComplete='off'
-                spellCheck={'false'}
-              />
-            </Div_InputContainer>
-            <Div_InputContainer>
-              <H2_BlogInputLabel>Author:</H2_BlogInputLabel>
-              <Input_Styled
-                type='text'
-                value={blogLogic.author}
-                onChange={e => blogLogic.setAuthor(e.target.value)}
-                autoComplete='off'
-                spellCheck={'false'}
-              />
-            </Div_InputContainer>
-          </Div_InputsContainer>
-          <Div_ErrContainer>
-            <P_BodyTextWhiteBlog>
-              {blogLogic.titleErr}
-              {blogLogic.authorErr}
-              {blogLogic.contentErr}
-            </P_BodyTextWhiteBlog>
-          </Div_ErrContainer>
-          <H2_FormHeading>Content:</H2_FormHeading>
-          <Textarea_Styled
-            value={blogLogic.content}
-            onChange={e => blogLogic.setContent(e.target.value)}
-            spellCheck={'false'}
-          />
-          <Div_ButtonContainer>
-            <Button_BlogSubmit type='submit'>
-              <P_BodyText>submit</P_BodyText>
-            </Button_BlogSubmit>
-          </Div_ButtonContainer>
-        </Form_Styled>
-        <RouterLink to={urls.homeUrl}>
-          <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-        </RouterLink>
-      </Div_CreateContainer>
-    </HelmetProvider>
+          spellCheck={'false'}
+        />
+        <Div_ButtonContainer>
+          <Button_BlogSubmit type='submit'>
+            <P_BodyText>submit</P_BodyText>
+          </Button_BlogSubmit>
+        </Div_ButtonContainer>
+      </Form_Styled>
+      <RouterLink to={urls.home}>
+        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
+      </RouterLink>
+    </Div_CreateContainer>
   )
 }
 
@@ -97,7 +105,7 @@ const Textarea_Styled = styled.textarea`
   border: 2px solid ${theme.color.orangeBright};
   border-radius: 10px;
   background-color: ${theme.color.black};
-  color: #ffffff;
+  color: ${theme.color.white};
   resize: none;
   font-size: ${theme.fontSize.medium};
   word-break: break-all;
@@ -172,7 +180,8 @@ const Div_ButtonContainer = styled.div`
 
 const Div_ErrContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: ${theme.spacing.medium};
 `
 

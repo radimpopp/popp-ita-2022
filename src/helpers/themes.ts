@@ -16,6 +16,7 @@ export const theme = {
     orangeVisitedLink: '#f26005a3',
     blackBoxShadow: 'rgba(0, 0, 0, 0.8)',
     black: '#000000',
+    white: '#ffffff',
   },
 
   spacing: {

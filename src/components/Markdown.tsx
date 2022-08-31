@@ -41,7 +41,7 @@ const MarkdownStyled = styled.div`
   }
   & > p {
     font-size: ${theme.fontSize.small};
-    color: #ffffff;
+    color: ${theme.color.white};
   }
   & > ul {
     font-size: ${theme.fontSize.medium};
@@ -54,7 +54,7 @@ const MarkdownStyled = styled.div`
   & > table {
     width: 100%;
     font-size: ${theme.fontSize.medium};
-    color: #ffffff;
+    color: ${theme.color.white};
     text-align: center;
     padding: ${theme.spacing.small};
     border-collapse: collapse;
@@ -62,7 +62,7 @@ const MarkdownStyled = styled.div`
   & > tr,
   td,
   th {
-    border: 1px solid #ffffff;
+    border: 1px solid ${theme.color.white};
     padding: ${theme.spacing.extraSmall};
   }
   img {

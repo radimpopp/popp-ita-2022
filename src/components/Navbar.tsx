@@ -15,9 +15,9 @@ export const Navbar = () => {
       <Ul_NavList>
         <Li_NavListItem>
           <Link_NavLink
-            to={`${urls.jsWebUrl}${urls.historyUrl}`}
+            to={urls.jsweb.historyPath}
             style={
-              location.pathname === `${urls.jsWebUrl}${urls.historyUrl}`
+              location.pathname === urls.jsweb.historyPath
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }
@@ -27,9 +27,9 @@ export const Navbar = () => {
         </Li_NavListItem>
         <Li_NavListItem>
           <Link_NavLink
-            to={`${urls.jsWebUrl}${urls.jsxjUrl}`}
+            to={urls.jsweb.jsxjPath}
             style={
-              location.pathname === `${urls.jsWebUrl}${urls.jsxjUrl}`
+              location.pathname === urls.jsweb.jsxjPath
                 ? { border: '2px solid black', margin: '-2px', maxWidth: '500px' }
                 : { border: 'none' }
             }
@@ -38,15 +38,15 @@ export const Navbar = () => {
           </Link_NavLink>
         </Li_NavListItem>
         <Li_NavListItem>
-          <RouterLink to={urls.jsWebUrl}>
+          <RouterLink to={urls.jsweb.jsWeb}>
             <Img_ImageLogo src={jsLogo} alt='JavaScript logo' />
           </RouterLink>
         </Li_NavListItem>
         <Li_NavListItem>
           <Link_NavLink
-            to={`${urls.jsWebUrl}${urls.ecmaUrl}`}
+            to={urls.jsweb.ecmaPath}
             style={
-              location.pathname === `${urls.jsWebUrl}${urls.ecmaUrl}`
+              location.pathname === urls.jsweb.ecmaPath
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }
@@ -56,9 +56,9 @@ export const Navbar = () => {
         </Li_NavListItem>
         <Li_NavListItem>
           <Link_NavLink
-            to={`${urls.jsWebUrl}${urls.jstUrl}`}
+            to={urls.jsweb.jstPath}
             style={
-              location.pathname === `${urls.jsWebUrl}${urls.jstUrl}`
+              location.pathname === urls.jsweb.jstPath
                 ? { border: '2px solid black', margin: '-2px' }
                 : { border: 'none' }
             }

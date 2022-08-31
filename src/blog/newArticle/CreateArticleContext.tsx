@@ -13,33 +13,39 @@ const useCreateArticleLogicState = () => {
   const [author, setAuthor] = useState('')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [authorErr, setAuthorErr] = useState<string | null>(null)
-  const [titleErr, setTitleErr] = useState<string | null>(null)
-  const [contentErr, setContentErr] = useState<string | null>(null)
+  const [authorErr, setAuthorErr] = useState(null as string | null)
+  const [titleErr, setTitleErr] = useState(null as string | null)
+  const [contentErr, setContentErr] = useState(null as string | null)
 
   const navigate = useNavigate()
 
-  const newArticle = () => {
+  const validateInputs = () => {
     setAuthorErr(null)
     setTitleErr(null)
     setContentErr(null)
 
-    if (author === '') {
+    let isValid = true
+
+    if (author.trim().length === 0) {
       setAuthorErr('Error: Author required!')
-      return
+      isValid = false
     }
-    if (title === '') {
+    if (title.trim().length === 0) {
       setTitleErr('Error: Title required!')
-      return
+      isValid = false
     } else if (articles.some(article => article.slug === createSlug(title))) {
       setTitleErr('Error: The title already exists!')
-      return
+      isValid = false
+    }
+    if (content.trim().length === 0) {
+      setContentErr('Error: Content required!')
+      isValid = false
     }
 
-    if (content === '') {
-      setContentErr('Error: Content required!')
-      return
-    }
+    return isValid
+  }
+
+  const newArticle = () => {
     setArticles([
       {
         id: createId(),
@@ -54,7 +60,7 @@ const useCreateArticleLogicState = () => {
     setTitle('')
     setAuthor('')
     setContent('')
-    navigate(`${urls.allArticlesPathUrl}`)
+    navigate(urls.blog.allArticlesPath)
   }
 
   return {
@@ -73,6 +79,7 @@ const useCreateArticleLogicState = () => {
     contentErr,
     setContentErr,
     newArticle,
+    validateInputs,
   }
 }
 
