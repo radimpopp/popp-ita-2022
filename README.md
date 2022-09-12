@@ -28,7 +28,7 @@ npm run start
 
 A static web about JavaScript origin.
 
-(/src/images/jsweb-screenshot.png)
+![JavaScript History Web](/src/images/jsweb-screenshot.png)
 
 ### HackerTyper
 
@@ -36,7 +36,7 @@ A static web about JavaScript origin.
 
 A clone of [HackerTyper](hackertyper.com).
 
-(/src/images/hackertyper-screenshot.png)
+![Hackertyper](/src/images/hackertyper-screenshot.png)
 
 ### Todo List
 
@@ -44,7 +44,7 @@ A handy app to organize your task using local storage.
 
 [link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/todolist)
 
-(/src/images/todo-screenshot.png)
+![Todo List](/src/images/todo-screenshot.png)
 
 ### Memory Game
 
@@ -52,7 +52,7 @@ A classic memory game of pairs to improve your memory.
 
 [link](https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MemoryGame.tsx)
 
-(/src/images/memorygame-screenshot.png)
+![Memory Game](/src/images/memorygame-screenshot.png)
 
 ### Mortgage Calculator
 
@@ -60,7 +60,7 @@ An app with four inputs (loan, years, rate and inflation) that renders output in
 
 [link](https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MortgageCalculator.tsx)
 
-(/src/images/mortgage-calculator-screenshot.png)
+![Mortgage Calculator](/src/images/mortgage-calculator-screenshot.png)
 
 ### Blog
 
@@ -68,4 +68,4 @@ A local storage based blog, where you can create an article, display all article
 
 [link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/blog)
 
-(/src/images/blog-screenshot.png)
+![Blog](/src/images/blog-screenshot.png)
