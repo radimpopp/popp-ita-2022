@@ -1,15 +1,12 @@
-import { H1_MainHeadingYellow } from '../components/MainHeading'
+import { H1_MainHeading } from '../components/MainHeading'
 import { H2_FormHeading } from '../components/SubHeading'
 import { Helmet } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
 import { Item } from '../todolist/Task'
-import { P_BodyTextWhiteEdition } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
 import { buttonStyles } from '../components/Button'
 import { createId } from '../helpers/utils'
 import { genericHookContextBuilder } from '../helpers/utils'
 import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
 import { useLocalStorage } from '../helpers/hooks'
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
@@ -82,7 +79,7 @@ const TodoList = () => {
         <title>Radim Popp/Todo List</title>
         <meta name='Description' content='Todo List app' />
       </Helmet>
-      <H1_MainHeadingYellow>Todo List</H1_MainHeadingYellow>
+      <H1_MainHeading>Todo List</H1_MainHeading>
       <form
         onSubmit={e => {
           e.preventDefault()
@@ -168,16 +165,13 @@ const TodoList = () => {
           </Div_FilterButtonContainer>
         </div>
       )}
-      <RouterLink to={urls.home}>
-        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-      </RouterLink>
     </Div_TodoContainer>
   )
 }
 
 const Div_TodoContainer = styled.div`
   max-width: 100vw;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -229,8 +223,15 @@ const Button_TodoButton = styled.button`
   ${buttonStyles}
   width: 240px;
   height: 40px;
-  border-radius: 10px;
   margin-left: ${theme.spacing.medium};
+  border-radius: 10px;
+  background: ${theme.color.white};
+  color: ${theme.color.black};
+  &:hover {
+    background: ${theme.color.salmon};
+    color: ${theme.color.white};
+    transition: 0.3s;
+  }
   ${theme.mediaQueries.tablet} {
     width: 20vw;
   }
@@ -245,8 +246,16 @@ const Button_FilterButton = styled.button`
   width: 240px;
   height: 40px;
   border-radius: 10px;
+  background: ${theme.color.white};
+  color: ${theme.color.black};
+  &:hover {
+    background: ${theme.color.salmon};
+    color: ${theme.color.white};
+    transition: 0.3s;
+  }
   &[aria-pressed='true'] {
-    background-color: ${theme.color.yellowBright};
+    background-color: ${theme.color.salmon};
+    color: ${theme.color.white};
   }
 `
 

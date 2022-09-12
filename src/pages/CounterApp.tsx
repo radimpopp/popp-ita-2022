@@ -1,5 +1,5 @@
 import { Button_Button } from '../components/Button'
-import { H1_MainHeadingYellow } from '../components/MainHeading'
+import { H1_MainHeading } from '../components/MainHeading'
 import { Helmet } from 'react-helmet-async'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -30,8 +30,8 @@ export class CounterApp extends React.Component<Props, State> {
             content='CounterApp - a good helper for anyone who cannot count to one!'
           />
         </Helmet>
-        <H1_MainHeadingYellow>Counter App</H1_MainHeadingYellow>
-        <H1_MainHeadingYellowCounter>{this.state.counter}</H1_MainHeadingYellowCounter>
+        <H1_MainHeading>Counter App</H1_MainHeading>
+        <H1_MainHeadingCounter>{this.state.counter}</H1_MainHeadingCounter>
         <Button_Button
           onClick={() => {
             this.setState({
@@ -68,7 +68,7 @@ const Div_StyledCounterApp = styled.div`
   background-color: ${theme.color.black};
 `
 
-const H1_MainHeadingYellowCounter = styled(H1_MainHeadingYellow)`
+const H1_MainHeadingCounter = styled(H1_MainHeading)`
   font-family: 'Roboto', sans-serif;
   font-size: 4rem;
   padding-bottom: ${theme.spacing.large};

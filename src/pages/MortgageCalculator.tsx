@@ -8,15 +8,13 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { H1_MainHeadingYellow } from '../components/MainHeading'
+import { H1_MainHeading } from '../components/MainHeading'
 import { Helmet } from 'react-helmet-async'
 import { Input_Input } from '../components/input'
 import { P_BodyText, P_BodyTextWhiteEdition } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
 import { breakpointsMediaQueries, theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const formatMoney = (amount: number) =>
   new Intl.NumberFormat('cs-CZ', {
@@ -27,12 +25,19 @@ const formatMoney = (amount: number) =>
     .replace(/-/g, '')
 
 const decimals = (amount: number) => Math.round(amount * 1e2) / 1e2
-
-const calculatePayment = (arg: { loan: number; rate: number; months: number }) => {
+const calculatePayment = (arg: {
+  loan: number
+  rate: number
+  years: number
+  inflation: number
+}) => {
+  const months = arg.years * 12
   const rateMonthlyPercentage = arg.rate / 100 / 12
   const monthlyPaymentFormula =
-    (arg.loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, arg.months)) /
-    (Math.pow(1 + rateMonthlyPercentage, arg.months) - 1)
+    (arg.loan * rateMonthlyPercentage * Math.pow(1 + rateMonthlyPercentage, months)) /
+    (Math.pow(1 + rateMonthlyPercentage, months) - 1)
+  const loanInflation = (i: number) => Math.pow(1 + -arg.inflation / 100, i / 12)
+  const propertyValueMonthlyIncrease = (i: number) => Math.pow(1 + arg.inflation / 100, i / 12)
 
   const calculateMortgage = [
     {
@@ -40,11 +45,16 @@ const calculatePayment = (arg: { loan: number; rate: number; months: number }) =
       monthlyPaidPrincipal: monthlyPaymentFormula - arg.loan * rateMonthlyPercentage,
       monthlyPaidInterest: arg.loan * rateMonthlyPercentage,
       remain: arg.loan - (monthlyPaymentFormula - arg.loan * rateMonthlyPercentage),
+      remainInflation: arg.loan - (monthlyPaymentFormula - arg.loan * rateMonthlyPercentage),
+      monthlyPaidPrincipalInflation: monthlyPaymentFormula - arg.loan * rateMonthlyPercentage,
+      monthlyPaidInterestInflation: arg.loan * rateMonthlyPercentage,
+      propertyValue: arg.loan * propertyValueMonthlyIncrease(1),
     },
   ]
 
-  Array.from({ length: arg.months - 1 }).forEach((x, i) => {
+  Array.from({ length: months - 1 }).forEach((x, i) => {
     const monthlyPaidAmount = monthlyPaymentFormula
+    const propertyValue = arg.loan * propertyValueMonthlyIncrease(2)
     const monthlyPaidPrincipal =
       monthlyPaymentFormula - calculateMortgage[i].remain * rateMonthlyPercentage
     const monthlyPaidInterest = calculateMortgage[i].remain * rateMonthlyPercentage
@@ -56,6 +66,10 @@ const calculatePayment = (arg: { loan: number; rate: number; months: number }) =
       monthlyPaidPrincipal: monthlyPaidPrincipal,
       monthlyPaidInterest: monthlyPaidInterest,
       remain: remain,
+      remainInflation: remain * loanInflation(i),
+      monthlyPaidPrincipalInflation: monthlyPaidPrincipal * loanInflation(i),
+      monthlyPaidInterestInflation: monthlyPaidInterest * loanInflation(i),
+      propertyValue: propertyValue * propertyValueMonthlyIncrease(i),
     })
   })
 
@@ -67,10 +81,12 @@ type DataCalculatePayment = ReturnType<typeof calculatePayment>
 export const MortgageCalculator = () => {
   const [loan, setLoan] = useState(5_000_000)
   const [rate, setRate] = useState(5)
-  const [months, setMonths] = useState(240)
+  const [years, setYears] = useState(15)
   const [windowWidth, setWindowWidth] = useState(0)
+  const [inflation, setInflation] = useState(4)
 
-  const mortgageData = calculatePayment({ loan, rate, months })
+  const mortgageData = calculatePayment({ loan, rate, years, inflation })
+
   useEffect(() => {
     const resizeHandler = () => setWindowWidth(window.innerWidth)
     resizeHandler()
@@ -80,15 +96,17 @@ export const MortgageCalculator = () => {
     }
   }, [])
 
+  const isData = loan > 0 && rate > 0 && years > 0
+
   return (
     <Div_MortgageAppContainer>
       <Helmet>
         <title>Radim Popp / Mortgage Calculator</title>
       </Helmet>
-      <H1_MainHeadingYellow>Mortgage Calculator</H1_MainHeadingYellow>
+      <H1_MainHeading>Mortgage Calculator</H1_MainHeading>
       <form>
         <Div_InputContainer>
-          <P_BodyTextYellow>Total loan amount (CZK):</P_BodyTextYellow>
+          <P_BodyTextGrey>Total loan amount (CZK):</P_BodyTextGrey>
           <Input_MortgageInput
             type='number'
             defaultValue={loan}
@@ -96,7 +114,7 @@ export const MortgageCalculator = () => {
             autoComplete='off'
             min='0'
           />
-          <P_BodyTextYellow>Interest rate (%):</P_BodyTextYellow>
+          <P_BodyTextGrey>Interest rate (%):</P_BodyTextGrey>
           <Input_MortgageInput
             type='number'
             defaultValue={rate}
@@ -104,90 +122,103 @@ export const MortgageCalculator = () => {
             autoComplete='off'
             min='0'
           />
-          <P_BodyTextYellow>Loan term (months):</P_BodyTextYellow>
+          <P_BodyTextGrey>Loan term (years):</P_BodyTextGrey>
           <Input_MortgageInput
             type='number'
-            defaultValue={months}
-            onChange={e => setMonths(Number(e.target.value))}
+            defaultValue={years}
+            onChange={e => setYears(Number(e.target.value))}
             autoComplete='off'
             min='0'
           />
+          <P_BodyTextGrey>Inflation (%):</P_BodyTextGrey>
+          <Input_MortgageInput
+            type='number'
+            defaultValue={inflation}
+            onChange={e => setInflation(Number(e.target.value))}
+            autoComplete='off'
+          />
         </Div_InputContainer>
       </form>
-      <Charts calculatePayment={mortgageData} />
-      {windowWidth > breakpointsMediaQueries.table ? (
-        <Div_Table>
-          <Table_Styled>
-            <thead>
-              <tr>
-                <th>
-                  <P_BodyTextWhiteEdition>Month</P_BodyTextWhiteEdition>
-                </th>
-                <th>
-                  <P_BodyTextWhiteEdition>Monthly Payment</P_BodyTextWhiteEdition>
-                </th>
-                <th>
-                  <P_BodyTextWhiteEdition>Interest Paid</P_BodyTextWhiteEdition>
-                </th>
-                <th>
-                  <P_BodyTextWhiteEdition>Principal Paid</P_BodyTextWhiteEdition>
-                </th>
-                <th>
-                  <P_BodyTextWhiteEdition>Remain</P_BodyTextWhiteEdition>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {mortgageData.map((data, i) => (
-                <tr key={i}>
-                  <td>
-                    <P_BodyTextWhiteEdition>{i + 1}.</P_BodyTextWhiteEdition>
-                  </td>
-                  <td>
-                    <P_BodyTextWhiteEdition>
-                      {formatMoney(data.monthlyPaidAmount)}
-                    </P_BodyTextWhiteEdition>
-                  </td>
-                  <td>
-                    <P_BodyTextWhiteEdition>
-                      {formatMoney(data.monthlyPaidInterest)}
-                    </P_BodyTextWhiteEdition>
-                  </td>
-                  <td>
-                    <P_BodyTextWhiteEdition>
-                      {formatMoney(data.monthlyPaidPrincipal)}
-                    </P_BodyTextWhiteEdition>
-                  </td>
-                  <td>
-                    <P_BodyTextWhiteEdition>{formatMoney(data.remain)}</P_BodyTextWhiteEdition>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table_Styled>
-        </Div_Table>
-      ) : (
+      {isData && <Charts calculatePayment={mortgageData} />}
+      {isData && (
         <>
-          {mortgageData.map((data, i) => (
-            <Div_MobileTable key={i}>
-              <P_BodyTextWhiteTable>Month: {i + 1}.</P_BodyTextWhiteTable>
-              <P_BodyTextWhiteTable>
-                Monthly Payment: {formatMoney(data.monthlyPaidAmount)}
-              </P_BodyTextWhiteTable>
-              <P_BodyTextWhiteTable>
-                Interest Paid: {formatMoney(data.monthlyPaidInterest)}
-              </P_BodyTextWhiteTable>
-              <P_BodyTextWhiteTable>
-                Principal Paid: {formatMoney(data.monthlyPaidPrincipal)}
-              </P_BodyTextWhiteTable>
-              <P_BodyTextWhiteTable>Remain: {formatMoney(data.remain)}</P_BodyTextWhiteTable>
-            </Div_MobileTable>
-          ))}
+          {windowWidth > breakpointsMediaQueries.bigPhone ? (
+            <Div_Table>
+              <Table_Styled>
+                <thead>
+                  <tr>
+                    <th>
+                      <P_BodyTextWhiteEdition>Month / Year</P_BodyTextWhiteEdition>
+                    </th>
+                    <th>
+                      <P_BodyTextWhiteEdition>Monthly Payment</P_BodyTextWhiteEdition>
+                    </th>
+                    <th>
+                      <P_BodyTextWhiteEdition>Interest Paid</P_BodyTextWhiteEdition>
+                    </th>
+                    <th>
+                      <P_BodyTextWhiteEdition>Principal Paid</P_BodyTextWhiteEdition>
+                    </th>
+                    <th>
+                      <P_BodyTextWhiteEdition>Remain</P_BodyTextWhiteEdition>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mortgageData.map((data, i) => (
+                    <tr key={i}>
+                      <td>
+                        <P_BodyTextWhiteEdition>
+                          {Math.ceil((i + 1) / 12) > 1
+                            ? i + 1 - 12 * (Math.ceil((i + 1) / 12) - 1)
+                            : i + 1}
+                          {''} / {Math.ceil((i + 1) / 12)}
+                        </P_BodyTextWhiteEdition>
+                      </td>
+                      <td>
+                        <P_BodyTextWhiteEdition>
+                          {formatMoney(data.monthlyPaidAmount)}
+                        </P_BodyTextWhiteEdition>
+                      </td>
+                      <td>
+                        <P_BodyTextWhiteEdition>
+                          {formatMoney(data.monthlyPaidInterest)}
+                        </P_BodyTextWhiteEdition>
+                      </td>
+                      <td>
+                        <P_BodyTextWhiteEdition>
+                          {formatMoney(data.monthlyPaidPrincipal)}
+                        </P_BodyTextWhiteEdition>
+                      </td>
+                      <td>
+                        <P_BodyTextWhiteEdition>{formatMoney(data.remain)}</P_BodyTextWhiteEdition>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table_Styled>
+            </Div_Table>
+          ) : (
+            <>
+              {mortgageData.map((data, i) => (
+                <Div_MobileTable key={i}>
+                  <P_BodyTextWhiteTable>Month: {i + 1}.</P_BodyTextWhiteTable>
+                  <P_BodyTextWhiteTable>
+                    Monthly Payment: {formatMoney(data.monthlyPaidAmount)}
+                  </P_BodyTextWhiteTable>
+                  <P_BodyTextWhiteTable>
+                    Interest Paid: {formatMoney(data.monthlyPaidInterest)}
+                  </P_BodyTextWhiteTable>
+                  <P_BodyTextWhiteTable>
+                    Principal Paid: {formatMoney(data.monthlyPaidPrincipal)}
+                  </P_BodyTextWhiteTable>
+                  <P_BodyTextWhiteTable>Remain: {formatMoney(data.remain)}</P_BodyTextWhiteTable>
+                </Div_MobileTable>
+              ))}
+            </>
+          )}
         </>
       )}
-      <RouterLink to={urls.home}>
-        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-      </RouterLink>
     </Div_MortgageAppContainer>
   )
 }
@@ -195,9 +226,13 @@ export const MortgageCalculator = () => {
 const Charts = (props: { calculatePayment: DataCalculatePayment }) => {
   const chartData = props.calculatePayment.map((data, i) => ({
     months: i + 1,
-    interestPaid: decimals(data.monthlyPaidInterest),
-    principalPaid: decimals(data.monthlyPaidPrincipal),
-    remain: decimals(data.remain),
+    'Interest Paid': decimals(data.monthlyPaidInterest),
+    'Interest Paid Inflation': decimals(data.monthlyPaidInterestInflation),
+    'Principal Paid': decimals(data.monthlyPaidPrincipal),
+    'Principal Paid Inflation': decimals(data.monthlyPaidPrincipalInflation),
+    Remain: decimals(data.remain),
+    'Remain Inflation': decimals(data.remainInflation),
+    'Property Value': decimals(data.propertyValue),
   }))
 
   return (
@@ -219,7 +254,9 @@ const Charts = (props: { calculatePayment: DataCalculatePayment }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type='monotone' dataKey='remain' stroke={theme.color.orangeBright} />
+          <Line type='monotone' dataKey='Remain' stroke={theme.color.orangeBright} />
+          <Line type='monotone' dataKey='Remain Inflation' stroke={theme.color.yellowBright} />
+          <Line type='monotone' dataKey='Property Value' stroke={theme.color.salmon} />
         </LineChart>
       </ResponsiveContainer>
       <ResponsiveContainer width='80%' height={400}>
@@ -239,8 +276,10 @@ const Charts = (props: { calculatePayment: DataCalculatePayment }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type='monotone' dataKey='interestPaid' stroke={theme.color.orangeBright} />
-          <Line type='monotone' dataKey='principalPaid' stroke={theme.color.yellowBright} />
+          <Line type='monotone' dataKey='Interest Paid' stroke={theme.color.orangeBright} />
+          <Line type='monotone' dataKey='Interest Paid Inflation' stroke='red' />
+          <Line type='monotone' dataKey='Principal Paid' stroke={theme.color.yellowBright} />
+          <Line type='monotone' dataKey='Principal Paid Inflation' stroke={theme.color.salmon} />
         </LineChart>
       </ResponsiveContainer>
     </Div_Charts>
@@ -270,14 +309,19 @@ const Div_InputContainer = styled.div`
   }
 `
 
-const P_BodyTextYellow = styled(P_BodyText)`
+const P_BodyTextGrey = styled(P_BodyText)`
   margin-top: ${theme.spacing.medium};
   padding-bottom: ${theme.spacing.medium};
-  color: ${theme.color.yellowBright};
+  color: ${theme.color.greyBright};
 `
 
 const Input_MortgageInput = styled(Input_Input)`
   margin: unset;
+  border-radius: 5px;
+  border: 2px solid ${theme.color.greyBright};
+  &:focus {
+    border: 2px solid ${theme.color.salmon};
+  }
   ${theme.mediaQueries.tablet} {
     width: 60vw;
   }

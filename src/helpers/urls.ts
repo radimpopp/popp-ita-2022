@@ -1,17 +1,6 @@
 export const urls = {
   home: '/',
-  jsweb: {
-    jsWeb: '/js-web',
-    history: '/history',
-    historyPath: '/js-web/history',
-    ecma: '/ecma',
-    ecmaPath: '/js-web/ecma',
-    jsxj: '/js-java',
-    jsxjPath: '/js-web/js-java',
-    jst: '/js-today',
-    jstPath: '/js-web/js-today',
-    jsWebPath: '/js-web/*',
-  },
+  jsWeb: '/jsweb',
   counterApp: '/counter-app',
   todoList: '/todo-list',
   hackerTyper: '/hackertyper',
@@ -27,6 +16,7 @@ export const urls = {
     articleDetailPath: '/article-detail/:slug',
     blogPath: '/blog/*',
   },
+  cv: '/cv',
 } as const
 
 export const getArticleDetail = (slug: string) => `${urls.blog.blog}${urls.blog.detail}${slug}`

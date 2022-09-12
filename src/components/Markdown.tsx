@@ -17,15 +17,15 @@ export const Markdown = (props: Markdown) => (
 const MarkdownStyled = styled.div`
   & > h1 {
     font-size: ${theme.fontSize.large};
-    color: ${theme.color.yellowBright};
+    color: ${theme.color.salmon};
   }
   & > h2 {
     font-size: 2.8rem;
-    color: ${theme.color.yellowBright};
+    color: ${theme.color.salmon};
   }
   & > h3 {
     font-size: 2.6rem;
-    color: ${theme.color.yellowBright};
+    color: ${theme.color.salmon};
   }
   & > h4 {
     font-size: 2.4rem;
@@ -45,11 +45,11 @@ const MarkdownStyled = styled.div`
   }
   & > ul {
     font-size: ${theme.fontSize.medium};
-    color: ${theme.color.yellowBright};
+    color: ${theme.color.salmon};
   }
   & > ol {
     font-size: ${theme.fontSize.medium};
-    color: ${theme.color.yellowBright};
+    color: ${theme.color.salmon};
   }
   & > table {
     width: 100%;
@@ -69,6 +69,6 @@ const MarkdownStyled = styled.div`
     width: 100%;
   }
   a {
-    color: ${theme.color.yellowBright};
+    color: ${theme.color.salmon};
   }
 `

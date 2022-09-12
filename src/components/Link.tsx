@@ -15,9 +15,9 @@ export const A_Link = (props: LinkProps) => {
   )
 }
 const StyledLink = styled.a`
-  color: ${theme.color.yellowUnvisitedLink};
+  color: ${theme.color.pink};
   text-decoration: none;
   &:visited {
-    color: ${theme.color.orangeVisitedLink};
+    color: ${theme.color.salmon};
   }
 `

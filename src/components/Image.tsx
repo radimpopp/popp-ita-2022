@@ -5,10 +5,11 @@ import styled from 'styled-components'
 type ImageProps = {
   src: string
   alt?: string
+  onClick?(): void
 }
 
 export const Img_ImageLogo = (props: ImageProps) => {
-  return <StyledImgLogo src={props.src} alt={props.alt} />
+  return <StyledImgLogo src={props.src} alt={props.alt} onClick={props.onClick} />
 }
 
 export const Img_Image = (props: ImageProps) => {
@@ -16,9 +17,10 @@ export const Img_Image = (props: ImageProps) => {
 }
 
 const StyledImgLogo = styled.img`
-  width: 40px;
-  padding: ${theme.spacing.small} 0;
+  width: 50px;
+  border-radius: 5%;
 `
 const StyledImg = styled.img`
-  width: 100%;
+  width: 90%;
+  border-radius: 10px;
 `

@@ -35,6 +35,7 @@ export const Item = (props: Props) => {
 
 const Button_DeleteButton = styled.button`
   ${buttonStyles}
+  background-color: ${theme.color.greyBright};
   position: absolute;
   width: ${theme.spacing.medium};
   height: ${theme.spacing.medium};
@@ -44,12 +45,12 @@ const Button_DeleteButton = styled.button`
 `
 
 const Div_TaskContainer = styled.div`
-  background-color: ${theme.color.yellowBright};
+  background-color: ${theme.color.salmon};
   position: relative;
   display: flex;
   justify-content: center;
   width: 900px;
-  border: ${theme.spacing.borderSmall} solid ${theme.color.blackBoxShadow};
+  border: 2px solid ${theme.color.blackBoxShadow};
   border-radius: 10px;
   margin: ${theme.spacing.small};
   &:hover ${Button_DeleteButton} {
@@ -66,7 +67,6 @@ const Div_TaskContainer = styled.div`
 const P_TodoBodyText = styled.p`
   font-size: ${theme.fontSize.small};
   padding: ${theme.spacing.small};
-  word-break: break-all;
   width: 90%;
   ${theme.mediaQueries.tablet} {
     width: 85%;
