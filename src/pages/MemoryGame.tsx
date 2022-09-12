@@ -1,12 +1,9 @@
 import { Button_CustomButton } from '../components/Button'
-import { H1_MainHeadingYellow } from '../components/MainHeading'
+import { H1_MainHeading } from '../components/MainHeading'
 import { H2_SubHeading } from '../components/SubHeading'
 import { Helmet } from 'react-helmet-async'
-import { P_BodyTextWhiteEdition } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
 import { createId, shuffleArray } from '../helpers/utils'
 import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -112,12 +109,12 @@ export const MemoryGame = () => {
           content='Practice your memory. Can you beat the game in 8 turns? '
         />
       </Helmet>
-      <H1_MainHeadingYellow>Memory Game</H1_MainHeadingYellow>
-      <H2_SubheadingYellow>
+      <H1_MemoryHeading>Memory Game</H1_MemoryHeading>
+      <H2_SubHeadingSalmon>
         {turns} turns | {pairs} pairs
-      </H2_SubheadingYellow>
+      </H2_SubHeadingSalmon>
       <Div_ButtonContainer>
-        <Button_CustomButton onClick={handleReset}>Reset</Button_CustomButton>
+        <Button_Memory onClick={handleReset}>Reset</Button_Memory>
       </Div_ButtonContainer>
       <Div_MemoryGameContainer>
         <div></div>
@@ -129,9 +126,6 @@ export const MemoryGame = () => {
           ))}
         </Div_Grid>
       </Div_MemoryGameContainer>
-      <RouterLink to={urls.home}>
-        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-      </RouterLink>
     </Div_MemoryAppContainer>
   )
 }
@@ -140,12 +134,15 @@ const Div_Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 0.5rem;
-  border: 1px solid ${theme.color.orangeBright};
+  border: 1px solid ${theme.color.salmon};
 `
 
 const Div_Emoji = styled.div`
   font-size: 8rem;
   user-select: none;
+  ${theme.mediaQueries.tablet} {
+    font-size: 8rem;
+  }
   ${theme.mediaQueries.phone} {
     font-size: 4.7rem;
   }
@@ -153,7 +150,7 @@ const Div_Emoji = styled.div`
 
 const Div_MemoryGameContainer = styled.div`
   width: 80vw;
-  height: 80vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,7 +165,7 @@ const Div_MemoryGameContainer = styled.div`
 
 const Div_MemoryAppContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,7 +185,16 @@ const Div_ButtonContainer = styled.div`
   }
 `
 
-const H2_SubheadingYellow = styled(H2_SubHeading)`
-  color: ${theme.color.yellowBright};
+const H2_SubHeadingSalmon = styled(H2_SubHeading)`
+  color: ${theme.color.salmon};
   padding-top: ${theme.spacing.small};
+  padding-bottom: unset;
+`
+
+const H1_MemoryHeading = styled(H1_MainHeading)`
+  padding: unset;
+`
+
+const Button_Memory = styled(Button_CustomButton)`
+  margin-bottom: ${theme.spacing.large};
 `

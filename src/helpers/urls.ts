@@ -1,17 +1,6 @@
 export const urls = {
   home: '/',
-  jsweb: {
-    jsWeb: '/js-web',
-    history: '/history',
-    historyPath: '/js-web/history',
-    ecma: '/ecma',
-    ecmaPath: '/js-web/ecma',
-    jsxj: '/js-java',
-    jsxjPath: '/js-web/js-java',
-    jst: '/js-today',
-    jstPath: '/js-web/js-today',
-    jsWebPath: '/js-web/*',
-  },
+  jsWeb: '/jsweb',
   counterApp: '/counter-app',
   todoList: '/todo-list',
   hackerTyper: '/hackertyper',
@@ -26,6 +15,29 @@ export const urls = {
     createNewPath: '/blog/create-new-article',
     articleDetailPath: '/article-detail/:slug',
     blogPath: '/blog/*',
+  },
+  cv: '/cv',
+  gitJsWeb: 'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/JsWeb.tsx',
+  gitHackertyper: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/hackertyper',
+  gitTodo: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/todolist',
+  gitMemoryGame: 'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MemoryGame.tsx',
+  gitBlog: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/blog',
+  gitMortgage:
+    'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MortgageCalculator.tsx',
+} as const
+
+export const anchors = {
+  jsWeb: {
+    jsWeb: 'jsWeb',
+    history: 'history',
+    jsxj: 'jsxj',
+    ecma: 'ecma',
+    jst: 'jsToday',
+  },
+  landingPage: {
+    cv: 'cv',
+    projects: 'projects',
+    contact: 'contact',
   },
 } as const
 

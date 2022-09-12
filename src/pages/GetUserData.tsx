@@ -1,4 +1,4 @@
-import { H1_MainHeadingYellow } from '../components/MainHeading'
+import { H1_MainHeading } from '../components/MainHeading'
 import { Input_Input } from '../components/input'
 import { P_BodyTextWhiteEdition } from '../components/BodyText'
 import { RouterLink } from '../components/RouterLink'
@@ -18,7 +18,7 @@ export const GetUserData = () => {
 
   return (
     <Div_BackendContainer>
-      <H1_MainHeadingYellow>Get user data</H1_MainHeadingYellow>
+      <H1_MainHeading>Get user data</H1_MainHeading>
       <Form_Styled
         onSubmit={async e => {
           e.preventDefault()
@@ -82,12 +82,6 @@ const Div_BackendContainer = styled.div`
   align-items: center;
   text-align: center;
   background-color: ${theme.color.black};
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `
 
 const P_BodyTextWhite = styled(P_BodyTextWhiteEdition)`

@@ -1,10 +1,6 @@
-import { H1_MainHeadingYellow } from '../components/MainHeading'
 import { Helmet } from 'react-helmet-async'
-import { P_BodyTextWhiteEdition } from '../components/BodyText'
-import { RouterLink } from '../components/RouterLink'
 import { hackerCode } from './hackercode'
 import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
 import { useState } from 'react'
 import React from 'react'
 import styled, { css } from 'styled-components'
@@ -40,7 +36,6 @@ export const HackerTyper = () => {
           content='Do you want to become a hacker? This app is a good start!'
         />
       </Helmet>
-      <H1_MainHeadingYellow>HackerTyper</H1_MainHeadingYellow>
       {accessAlertMessage ? (
         <div>
           {accessAlertMessage === 'ACCESS DENIED!!!' ? (
@@ -57,33 +52,25 @@ export const HackerTyper = () => {
         spellCheck={'false'}
         autoFocus={true}
       />
-      <RouterLink to={urls.home}>
-        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-      </RouterLink>
     </Div_HackerContainer>
   )
 }
 
 const Div_HackerContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 91vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: black;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  background-color: ${theme.color.black};
 `
 
 const Textarea_HackerArea = styled.textarea`
   width: 90%;
-  height: 68%;
-  margin-top: ${theme.spacing.large};
+  height: 78%;
+  margin: ${theme.spacing.small} 0 ${theme.spacing.large} 0;
   padding: ${theme.spacing.large};
   background: ${theme.color.black};
   color: #03a062;
@@ -91,11 +78,8 @@ const Textarea_HackerArea = styled.textarea`
   font-size: ${theme.fontSize.small};
   word-break: break-all;
   hyphens: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  border-radius: 5px;
+  border: 1px solid ${theme.color.greyDark};
   ${theme.mediaQueries.phone} {
     width: 80%;
   }

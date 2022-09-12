@@ -3,7 +3,6 @@ import React, { ComponentProps } from 'react'
 import styled, { css } from 'styled-components'
 
 export const buttonStyles = css`
-  background-color: ${theme.color.orangeBright};
   margin: ${theme.spacing.small};
   font-size: ${theme.fontSize.medium};
   border-radius: 20%;
@@ -25,4 +24,11 @@ export const Button_CustomButton = styled(Button_Button)`
   height: 40px;
   padding: ${theme.spacing.small};
   border-radius: 10px;
+  background: ${theme.color.white};
+  color: ${theme.color.black};
+  &:hover {
+    background: ${theme.color.salmon};
+    color: ${theme.color.white};
+    transition: 0.3s;
+  }
 `

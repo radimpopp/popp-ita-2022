@@ -4,9 +4,7 @@ import { H2_FormHeading } from '../../components/SubHeading'
 import { Helmet } from 'react-helmet-async'
 import { Input_Input } from '../../components/input'
 import { P_BodyText, P_BodyTextWhiteEdition } from '../../components/BodyText'
-import { RouterLink } from '../../components/RouterLink'
 import { theme } from '../../helpers/themes'
-import { urls } from '../../helpers/urls'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
@@ -60,48 +58,47 @@ export const CreateArticle = () => {
           <P_BodyTextWhiteBlog>{blogLogic.contentErr}</P_BodyTextWhiteBlog>
         </Div_ErrContainer>
         <H2_FormHeading>Content:</H2_FormHeading>
-        <Textarea_Styled
-          value={blogLogic.content}
-          onChange={e => {
-            blogLogic.setContentErr(null)
-            blogLogic.setContent(e.target.value)
-          }}
-          spellCheck={'false'}
-        />
+        <Div_Textarea>
+          <Textarea_Styled
+            value={blogLogic.content}
+            onChange={e => {
+              blogLogic.setContentErr(null)
+              blogLogic.setContent(e.target.value)
+            }}
+            spellCheck={'false'}
+          />
+        </Div_Textarea>
         <Div_ButtonContainer>
           <Button_BlogSubmit type='submit'>
             <P_BodyText>submit</P_BodyText>
           </Button_BlogSubmit>
         </Div_ButtonContainer>
       </Form_Styled>
-      <RouterLink to={urls.home}>
-        <P_BodyTextWhiteEdition>Return home</P_BodyTextWhiteEdition>
-      </RouterLink>
     </Div_CreateContainer>
   )
 }
 
 const Div_CreateContainer = styled.div`
   max-width: 100vw;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: ${theme.color.black};
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+`
+
+const Div_Textarea = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 
 const Textarea_Styled = styled.textarea`
   margin: ${theme.spacing.medium} 0 ${theme.spacing.large} 0;
-  width: 80vw;
-  height: 32vh;
-  padding: ${theme.spacing.medium};
-  border: 2px solid ${theme.color.orangeBright};
+  width: 92%;
+  height: 29vh;
+  border: 2px solid ${theme.color.salmon};
   border-radius: 10px;
   background-color: ${theme.color.black};
   color: ${theme.color.white};
@@ -109,11 +106,6 @@ const Textarea_Styled = styled.textarea`
   font-size: ${theme.fontSize.medium};
   word-break: break-all;
   hyphens: none;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `
 
 const Div_InputsContainer = styled.div`
@@ -122,12 +114,12 @@ const Div_InputsContainer = styled.div`
   justify-content: space-evenly;
   ${theme.mediaQueries.tablet} {
     width: 90%;
-    margin-top: ${theme.spacing.large};
+    margin-top: ${theme.spacing.small};
     flex-direction: column;
     align-items: center;
   }
   ${theme.mediaQueries.phone} {
-    margin-top: 100px;
+    margin-top: ${theme.spacing.medium};
   }
 `
 const Div_InputContainer = styled.div`
@@ -147,9 +139,11 @@ const Input_Styled = styled(Input_Input)`
   width: 30vw;
   ${theme.mediaQueries.tablet} {
     width: 70vw;
+    margin-top: ${theme.spacing.medium};
   }
   ${theme.mediaQueries.phone} {
     width: 80vw;
+    margin-top: unset;
   }
 `
 
@@ -158,12 +152,13 @@ const Button_BlogSubmit = styled(Button_CustomButton)`
 `
 
 const Form_Styled = styled.form`
-  width: 80%;
-  margin-top: 130px;
+  width: 90%;
   ${theme.mediaQueries.tablet} {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 `
 
@@ -178,20 +173,36 @@ const Div_ButtonContainer = styled.div`
 `
 
 const Div_ErrContainer = styled.div`
+  height: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: ${theme.spacing.medium};
+  text-align: center;
+  padding-top: ${theme.spacing.medium};
+  padding-bottom: ${theme.spacing.small};
+  ${theme.mediaQueries.tablet} {
+    padding-top: ${theme.spacing.medium};
+  }
+  ${theme.mediaQueries.phone} {
+    padding-top: ${theme.spacing.small};
+  }
 `
 
 const H2_BlogInputLabel = styled(H2_FormHeading)`
   width: 80px;
   text-align: right;
+  ${theme.mediaQueries.tablet} {
+    margin-top: ${theme.spacing.medium};
+  }
   ${theme.mediaQueries.phone} {
     text-align: left;
+    margin-top: unset;
   }
 `
 
 const P_BodyTextWhiteBlog = styled(P_BodyTextWhiteEdition)`
   margin: unset;
+  &:not(:last-child) {
+    padding-bottom: ${theme.spacing.small};
+  }
 `

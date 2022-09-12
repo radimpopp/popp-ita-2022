@@ -1,116 +1,141 @@
+import { H1_MainHeading } from './MainHeading'
 import { Img_ImageLogo } from './Image'
-import { NavLink, useLocation } from 'react-router-dom'
-import { RouterLink } from './RouterLink'
-import { theme } from '../helpers/themes'
-import { urls } from '../helpers/urls'
-import React from 'react'
+import { Link } from 'react-scroll'
+import { breakpointsMediaQueries, theme } from '../helpers/themes'
+import { useResizeHandler } from '../helpers/hooks'
+import Hamburger from 'hamburger-react'
+import React, { useEffect, useState } from 'react'
 import jsLogo from '../images/js_logo.png'
 import styled from 'styled-components'
 
 export const Navbar = () => {
-  const location = useLocation()
+  const [open, setOpen] = useState(false)
+
+  const [width] = useResizeHandler()
+
+  const clickHandler = () => {
+    setOpen(false)
+  }
 
   return (
-    <Nav_StyledNavbar>
-      <Ul_NavList>
-        <Li_NavListItem>
-          <Link_NavLink
-            to={urls.jsweb.historyPath}
-            style={
-              location.pathname === urls.jsweb.historyPath
-                ? { border: '2px solid black', margin: '-2px' }
-                : { border: 'none' }
-            }
-          >
-            History
-          </Link_NavLink>
-        </Li_NavListItem>
-        <Li_NavListItem>
-          <Link_NavLink
-            to={urls.jsweb.jsxjPath}
-            style={
-              location.pathname === urls.jsweb.jsxjPath
-                ? { border: '2px solid black', margin: '-2px', maxWidth: '500px' }
-                : { border: 'none' }
-            }
-          >
-            JavaScript x Java
-          </Link_NavLink>
-        </Li_NavListItem>
-        <Li_NavListItem>
-          <RouterLink to={urls.jsweb.jsWeb}>
-            <Img_ImageLogo src={jsLogo} alt='JavaScript logo' />
-          </RouterLink>
-        </Li_NavListItem>
-        <Li_NavListItem>
-          <Link_NavLink
-            to={urls.jsweb.ecmaPath}
-            style={
-              location.pathname === urls.jsweb.ecmaPath
-                ? { border: '2px solid black', margin: '-2px' }
-                : { border: 'none' }
-            }
-          >
-            ECMAScript
-          </Link_NavLink>
-        </Li_NavListItem>
-        <Li_NavListItem>
-          <Link_NavLink
-            to={urls.jsweb.jstPath}
-            style={
-              location.pathname === urls.jsweb.jstPath
-                ? { border: '2px solid black', margin: '-2px' }
-                : { border: 'none' }
-            }
-          >
-            JavaScript Today
-          </Link_NavLink>
-        </Li_NavListItem>
-      </Ul_NavList>
-    </Nav_StyledNavbar>
+    <Div_NavContainer>
+      <Nav_StyledNavbar>
+        {width > breakpointsMediaQueries.tablet || open === true ? (
+          <>
+            <Ul_NavList>
+              {width <= breakpointsMediaQueries.tablet && (
+                <Li_NavListItem>
+                  <Link_NavLink to='jsWeb' activeClass='active' spy={true} smooth={true}>
+                    <Img_ImageLogo onClick={clickHandler} src={jsLogo} alt='JavaScript logo' />
+                  </Link_NavLink>
+                </Li_NavListItem>
+              )}
+              <Li_NavListItem>
+                <Link_NavLink to='history' activeClass='active' spy={true} smooth={true}>
+                  <H1_NavHeading onClick={clickHandler}>History</H1_NavHeading>
+                </Link_NavLink>
+              </Li_NavListItem>
+              <Li_NavListItem>
+                <Link_NavLink to='jsxj' activeClass='active' spy={true} smooth={true}>
+                  <H1_NavHeading onClick={clickHandler}>JavaScript x Java</H1_NavHeading>
+                </Link_NavLink>
+              </Li_NavListItem>
+            </Ul_NavList>
+            {width > breakpointsMediaQueries.tablet && (
+              <Li_NavListItem>
+                <Link_NavLink to='jsWeb' activeClass='active' spy={true} smooth={true}>
+                  <Img_ImageLogo onClick={clickHandler} src={jsLogo} alt='JavaScript logo' />
+                </Link_NavLink>
+              </Li_NavListItem>
+            )}
+            <Ul_NavList>
+              <Li_NavListItem>
+                <Link_NavLink to='ecma' activeClass='active' spy={true} smooth={true}>
+                  <H1_NavHeading onClick={clickHandler}>ECMA</H1_NavHeading>
+                </Link_NavLink>
+              </Li_NavListItem>
+              <Li_NavListItem>
+                <Link_NavLink to='jsToday' activeClass='active' spy={true} smooth={true}>
+                  <H1_NavHeading onClick={clickHandler}>JavaScript Today</H1_NavHeading>
+                </Link_NavLink>
+              </Li_NavListItem>
+            </Ul_NavList>
+          </>
+        ) : null}
+        {width < breakpointsMediaQueries.tablet && (
+          <Div_Hamburger>
+            <Hamburger toggled={open} toggle={setOpen} color={theme.color.yellowBright} size={30} />
+          </Div_Hamburger>
+        )}
+      </Nav_StyledNavbar>
+    </Div_NavContainer>
   )
 }
 
+const Div_NavContainer = styled.div`
+  max-width: 100vw;
+  display: flex;
+  justify-content: center;
+`
+
 const Nav_StyledNavbar = styled.nav`
-  background-color: ${theme.color.yellowDark};
-  box-shadow: 0 ${theme.spacing.borderSmall} 4px 0 ${theme.color.blackBoxShadow};
+  width: 90vw;
+  background-color: ${theme.color.black};
+  display: flex;
+  justify-content: center;
+  gap: ${theme.spacing.extraLarge};
+  border-bottom: 2px solid ${theme.color.salmon};
+  text-align: center;
   position: fixed;
   top: 0;
-  width: 100%;
   z-index: 2;
+  ${theme.mediaQueries.tablet} {
+    flex-direction: column;
+    padding: unset;
+    align-items: center;
+    justify-content: flex-start;
+    gap: unset;
+  }
 `
 
 export const Ul_NavList = styled.ul`
+  width: 100%;
+  min-height: 4vw;
   display: flex;
-  list-style: none;
   justify-content: space-evenly;
+  list-style: none;
   align-items: center;
-  ${theme.mediaQueries.phone} {
+  ${theme.mediaQueries.tablet} {
     flex-direction: column;
-    gap: ${theme.spacing.small};
-    padding: ${theme.spacing.medium} 0;
   }
 `
 const Li_NavListItem = styled.li`
+  display: flex;
+  text-decoration: none;
+  white-space: nowrap;
+`
+
+const H1_NavHeading = styled(H1_MainHeading)`
+  padding: unset;
+  font-size: ${theme.fontSize.medium};
   &:hover {
     transform: scale(1.1);
-  }
-  ${theme.mediaQueries.phone} {
-    &:nth-child(3) {
-      order: -2;
-    }
+    color: ${theme.color.salmon};
   }
 `
 
-const Link_NavLink = styled(NavLink)`
+const Div_Hamburger = styled.div`
+  margin: ${theme.spacing.extraSmall};
+`
+
+const Link_NavLink = styled(Link)`
+  cursor: pointer;
   font-weight: ${theme.fontWeight.medium};
   text-decoration: none;
   font-size: ${theme.fontSize.smallPlus};
-  color: ${theme.color.black};
   padding: ${theme.spacing.extraSmall};
   white-space: nowrap;
-  &:hover {
-    text-decoration: underline;
-    transform: scale(1.1);
+  &:focus {
+    border-bottom: 2px solid ${theme.color.salmon};
   }
 `

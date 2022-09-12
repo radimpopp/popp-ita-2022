@@ -11,5 +11,5 @@ export const H2_SubHeading = styled.h2`
 export const H2_FormHeading = styled(H2_SubHeading)`
   white-space: nowrap;
   padding-bottom: unset;
-  color: ${theme.color.yellowBright};
+  color: ${theme.color.white};
 `

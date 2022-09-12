@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const useLocalStorage = <T>(key: string, initialValue: T) => {
   const [storedValue, setStoredValue] = useState<T>(() => {
@@ -18,4 +18,19 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
     } catch {}
   }
   return [storedValue, setValue] as const
+}
+
+export const useResizeHandler = () => {
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    const resizeHandler = () => setWidth(window.innerWidth)
+    resizeHandler()
+    window.addEventListener('resize', resizeHandler)
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+    }
+  }, [])
+
+  return [width] as const
 }
