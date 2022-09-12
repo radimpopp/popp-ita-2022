@@ -349,7 +349,7 @@ const Div_MobileTable = styled.div`
     width: 80vw;
   }
   ${theme.mediaQueries.galaxyFold} {
-    width: 94vw;
+    width: 95vw;
   }
 `
 

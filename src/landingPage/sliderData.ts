@@ -11,7 +11,7 @@ export const sliderData = [
   {
     title: 'JavaScript History',
     toApp: `${urls.jsWeb}`,
-    toGit: '#',
+    toGit: `${urls.gitJsWeb}`,
     altPreview: 'JavaScript History Preview',
     altGit: 'JavaScript History Repository',
     srcPreview: `${jsweb}`,
@@ -20,7 +20,7 @@ export const sliderData = [
   {
     title: 'HackerTyper',
     toApp: `${urls.hackerTyper}`,
-    toGit: '#',
+    toGit: `${urls.gitHackertyper}`,
     altPreview: 'HackerTyper Preview',
     altGit: 'HackerTyper Repository',
     srcPreview: `${hackertyper}`,
@@ -29,7 +29,7 @@ export const sliderData = [
   {
     title: 'ToDo List',
     toApp: `${urls.todoList}`,
-    toGit: '#',
+    toGit: `${urls.gitTodo}`,
     altPreview: 'ToDo List Preview',
     altGit: 'ToDo List Repository',
     srcPreview: `${todo}`,
@@ -38,7 +38,7 @@ export const sliderData = [
   {
     title: 'Memory Game',
     toApp: `${urls.memoryGame}`,
-    toGit: '#',
+    toGit: `${urls.gitMemoryGame}`,
     altPreview: 'Memory Game Preview',
     altGit: 'Memory Game Repository',
     srcPreview: `${memoryGame}`,
@@ -47,7 +47,7 @@ export const sliderData = [
   {
     title: 'Mortgage Calculator',
     toApp: `${urls.mortgageCalculator}`,
-    toGit: '#',
+    toGit: `${urls.gitMortgage}`,
     altPreview: 'Mortgage Calculator Preview',
     altGit: 'Mortgage Calculator Repository',
     srcPreview: `${mortgage}`,
@@ -56,7 +56,7 @@ export const sliderData = [
   {
     title: 'Blog',
     toApp: `${urls.blog.allArticlesPath}`,
-    toGit: '#',
+    toGit: `${urls.gitBlog}`,
     altPreview: 'Blog Preview',
     altGit: 'Blog Repository',
     srcPreview: `${blog}`,

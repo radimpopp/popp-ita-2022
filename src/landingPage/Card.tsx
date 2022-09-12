@@ -21,9 +21,9 @@ export const Card = (props: CardProps) => {
         <RouterLink to={props.toApp}>
           <P_CardText>{props.title}</P_CardText>
         </RouterLink>
-        <RouterLink to={props.toGit}>
+        <a href={props.toGit}>
           <Img_Logo src={props.srcGit} alt={props.altGit} />
-        </RouterLink>
+        </a>
       </Div_CardTitle>
       <RouterLink to={props.toApp}>
         <Img_Card src={props.srcPreview} alt={props.altPreview} />
