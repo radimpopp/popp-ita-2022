@@ -17,13 +17,12 @@ export const urls = {
     blogPath: '/blog/*',
   },
   cv: '/cv',
-  gitJsWeb: 'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/JsWeb.tsx',
-  gitHackertyper: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/hackertyper',
-  gitTodo: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/todolist',
-  gitMemoryGame: 'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MemoryGame.tsx',
-  gitBlog: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/blog',
-  gitMortgage:
-    'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MortgageCalculator.tsx',
+  gitJsWeb: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/jsWeb',
+  gitHackertyper: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/hackertyper',
+  gitTodo: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todolist',
+  gitMemoryGame: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/memoryGame',
+  gitBlog: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/blog',
+  gitMortgage: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/mortgageCalculator',
 } as const
 
 export const anchors = {

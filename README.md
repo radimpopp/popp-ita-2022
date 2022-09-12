@@ -24,7 +24,7 @@ npm run start
 
 ### JavaScript History Web
 
-[link](https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/JsWeb.tsx)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/jsWeb)
 
 A static web about JavaScript origin.
 
@@ -32,7 +32,7 @@ A static web about JavaScript origin.
 
 ### HackerTyper
 
-[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/hackertyper)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/hackertyper)
 
 A clone of [HackerTyper](hackertyper.com).
 
@@ -42,7 +42,7 @@ A clone of [HackerTyper](hackertyper.com).
 
 A handy app to organize your task using local storage.
 
-[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/todolist)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todolist)
 
 ![Todo List](/src/images/todo-screenshot.png)
 
@@ -50,7 +50,7 @@ A handy app to organize your task using local storage.
 
 A classic memory game of pairs to improve your memory.
 
-[link](https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MemoryGame.tsx)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/memoryGame)
 
 ![Memory Game](/src/images/memorygame-screenshot.png)
 
@@ -58,7 +58,7 @@ A classic memory game of pairs to improve your memory.
 
 An app with four inputs (loan, years, rate and inflation) that renders output into a table and charts.
 
-[link](https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MortgageCalculator.tsx)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/mortgageCalculator)
 
 ![Mortgage Calculator](/src/images/mortgage-calculator-screenshot.png)
 
@@ -66,6 +66,6 @@ An app with four inputs (loan, years, rate and inflation) that renders output in
 
 A local storage based blog, where you can create an article, display all articles and display an article detail. Markdown is supported.
 
-[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/blog)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/blog)
 
 ![Blog](/src/images/blog-screenshot.png)
