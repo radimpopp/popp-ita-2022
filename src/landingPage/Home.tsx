@@ -1,6 +1,7 @@
 import { Contact } from './Contact'
 import { H1_MainHeading } from '../components/MainHeading'
 import { ImageSlider } from './Carousel'
+import { anchors } from '../helpers/urls'
 import { theme } from '../helpers/themes'
 import React from 'react'
 import bio from '../images/bio.jpeg'
@@ -32,10 +33,10 @@ export const Home = () => {
             <Img_Profile src={bio} />
           </Div_ProfilePic>
         </Div_Bio>
-        <Div_Projects id='projects'>
+        <Div_Projects id={anchors.landingPage.projects}>
           <ImageSlider />
         </Div_Projects>
-        <Div_Contact id='contact'>
+        <Div_Contact id={anchors.landingPage.contact}>
           <Div_ContactText>
             <H1_BioHeading>
               Are <Span_Salmon>you</Span_Salmon> interested in working{' '}

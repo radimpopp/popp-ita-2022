@@ -3,6 +3,7 @@ import { H1_MainHeading } from '../components/MainHeading'
 import { Helmet } from 'react-helmet-async'
 import { Img_Image } from '../components/Image'
 import { Navbar } from '../components/Navbar'
+import { anchors } from '../helpers/urls'
 import { theme } from '../helpers/themes'
 import React from 'react'
 import ecma from '../images/ecma.png'
@@ -24,7 +25,7 @@ export const JsWeb = () => {
           <title>Radim Popp/JavaScript History</title>
           <meta name='Description' content='What is JavaScript and what is it used for?' />
         </Helmet>
-        <Div_DescriptionContainer id='jsWeb'>
+        <Div_DescriptionContainer id={anchors.jsWeb.jsWeb}>
           <Div_TextContainer>
             <H1_JsHeading>JavaScript</H1_JsHeading>
             <P_Js>
@@ -46,7 +47,7 @@ export const JsWeb = () => {
             </P_Js>
           </Div_TextContainer>
         </Div_DescriptionContainer>
-        <Div_Container id='history'>
+        <Div_Container id={anchors.jsWeb.history}>
           <Div_TextContainer>
             <H1_JsHeading>History</H1_JsHeading>
             <P_Js>
@@ -84,7 +85,7 @@ export const JsWeb = () => {
             <Img_Image src={mochaImg} alt='Mocha-LiveScript-JavaScript' />
           </Div_ImagesContainer>
         </Div_Container>
-        <Div_ReverseContainer id='jsxj'>
+        <Div_ReverseContainer id={anchors.jsWeb.jsxj}>
           <Div_TextContainer>
             <H1_JsHeading>JavaScript x Java</H1_JsHeading>
             <P_Js>
@@ -106,7 +107,7 @@ export const JsWeb = () => {
             <Img_Image src={javaScriptXJava2} alt='Java x JavaScript' />
           </Div_ImagesContainer>
         </Div_ReverseContainer>
-        <Div_Container id='ecma'>
+        <Div_Container id={anchors.jsWeb.ecma}>
           <Div_TextContainer>
             <H1_JsHeading>ECMAScript</H1_JsHeading>
             <P_Js>
@@ -140,7 +141,7 @@ export const JsWeb = () => {
             <Img_Image src={evolution} alt='ECMAScript evolution' />
           </Div_ImagesContainer>
         </Div_Container>
-        <Div_ReverseContainer id='jsToday'>
+        <Div_ReverseContainer id={anchors.jsWeb.jst}>
           <Div_TextContainer>
             <H1_JsHeading>JavaScript Today</H1_JsHeading>
             <P_Js>

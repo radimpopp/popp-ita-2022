@@ -16,6 +16,13 @@ import { breakpointsMediaQueries, theme } from '../helpers/themes'
 import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
+type TrProps = {
+  month: number
+  year: number
+  expandedYear: number
+  expanded: boolean
+}
+
 const formatMoney = (amount: number) =>
   new Intl.NumberFormat('cs-CZ', {
     style: 'currency',
@@ -41,18 +48,24 @@ const calculatePayment = (arg: {
 
   const calculateMortgage = [
     {
+      month: 1,
+      year: 1,
       monthlyPaidAmount: monthlyPaymentFormula,
       monthlyPaidPrincipal: monthlyPaymentFormula - arg.loan * rateMonthlyPercentage,
       monthlyPaidInterest: arg.loan * rateMonthlyPercentage,
       remain: arg.loan - (monthlyPaymentFormula - arg.loan * rateMonthlyPercentage),
-      remainInflation: arg.loan - (monthlyPaymentFormula - arg.loan * rateMonthlyPercentage),
-      monthlyPaidPrincipalInflation: monthlyPaymentFormula - arg.loan * rateMonthlyPercentage,
-      monthlyPaidInterestInflation: arg.loan * rateMonthlyPercentage,
       propertyValue: arg.loan * propertyValueMonthlyIncrease(1),
+      inflation: {
+        remain: arg.loan - (monthlyPaymentFormula - arg.loan * rateMonthlyPercentage),
+        monthlyPaidPrincipal: monthlyPaymentFormula - arg.loan * rateMonthlyPercentage,
+        monthlyPaidInterest: arg.loan * rateMonthlyPercentage,
+      },
     },
   ]
 
   Array.from({ length: months - 1 }).forEach((x, i) => {
+    const inflationCoefficient = loanInflation(i)
+    const year = Math.ceil((i + 2) / 12)
     const monthlyPaidAmount = monthlyPaymentFormula
     const propertyValue = arg.loan * propertyValueMonthlyIncrease(2)
     const monthlyPaidPrincipal =
@@ -62,14 +75,18 @@ const calculatePayment = (arg: {
       calculateMortgage[i].remain -
       (monthlyPaymentFormula - calculateMortgage[i].remain * rateMonthlyPercentage)
     calculateMortgage.push({
+      year: year,
+      month: year > 1 ? i + 2 - 12 * (year - 1) : i + 2,
       monthlyPaidAmount: monthlyPaidAmount,
       monthlyPaidPrincipal: monthlyPaidPrincipal,
       monthlyPaidInterest: monthlyPaidInterest,
       remain: remain,
-      remainInflation: remain * loanInflation(i),
-      monthlyPaidPrincipalInflation: monthlyPaidPrincipal * loanInflation(i),
-      monthlyPaidInterestInflation: monthlyPaidInterest * loanInflation(i),
       propertyValue: propertyValue * propertyValueMonthlyIncrease(i),
+      inflation: {
+        remain: remain * inflationCoefficient,
+        monthlyPaidPrincipal: monthlyPaidPrincipal * inflationCoefficient,
+        monthlyPaidInterest: monthlyPaidInterest * inflationCoefficient,
+      },
     })
   })
 
@@ -81,9 +98,10 @@ type DataCalculatePayment = ReturnType<typeof calculatePayment>
 export const MortgageCalculator = () => {
   const [loan, setLoan] = useState(5_000_000)
   const [rate, setRate] = useState(5)
-  const [years, setYears] = useState(15)
+  const [years, setYears] = useState(30)
   const [windowWidth, setWindowWidth] = useState(0)
   const [inflation, setInflation] = useState(4)
+  const [expandedYear, setExpandedYear] = useState(null as null | number)
 
   const mortgageData = calculatePayment({ loan, rate, years, inflation })
 
@@ -96,7 +114,7 @@ export const MortgageCalculator = () => {
     }
   }, [])
 
-  const isData = loan > 0 && rate > 0 && years > 0
+  const validData = loan > 0 && rate > 0 && years > 0
 
   return (
     <Div_MortgageAppContainer>
@@ -139,8 +157,8 @@ export const MortgageCalculator = () => {
           />
         </Div_InputContainer>
       </form>
-      {isData && <Charts calculatePayment={mortgageData} />}
-      {isData && (
+      {validData && <Charts calculatePayment={mortgageData} />}
+      {validData && (
         <>
           {windowWidth > breakpointsMediaQueries.bigPhone ? (
             <Div_Table>
@@ -166,13 +184,21 @@ export const MortgageCalculator = () => {
                 </thead>
                 <tbody>
                   {mortgageData.map((data, i) => (
-                    <tr key={i}>
+                    <Tr_Styled
+                      key={i}
+                      expanded={data.month === 1 || expandedYear === data.year}
+                      expandedYear={expandedYear!}
+                      month={data.month}
+                      year={data.year}
+                      onClick={() => {
+                        data.year === expandedYear
+                          ? setExpandedYear(null)
+                          : setExpandedYear(data.year)
+                      }}
+                    >
                       <td>
                         <P_BodyTextWhiteEdition>
-                          {Math.ceil((i + 1) / 12) > 1
-                            ? i + 1 - 12 * (Math.ceil((i + 1) / 12) - 1)
-                            : i + 1}
-                          {''} / {Math.ceil((i + 1) / 12)}
+                          {data.month} / {data.year}
                         </P_BodyTextWhiteEdition>
                       </td>
                       <td>
@@ -193,7 +219,7 @@ export const MortgageCalculator = () => {
                       <td>
                         <P_BodyTextWhiteEdition>{formatMoney(data.remain)}</P_BodyTextWhiteEdition>
                       </td>
-                    </tr>
+                    </Tr_Styled>
                   ))}
                 </tbody>
               </Table_Styled>
@@ -201,8 +227,19 @@ export const MortgageCalculator = () => {
           ) : (
             <>
               {mortgageData.map((data, i) => (
-                <Div_MobileTable key={i}>
-                  <P_BodyTextWhiteTable>Month: {i + 1}.</P_BodyTextWhiteTable>
+                <Div_MobileTable
+                  key={i}
+                  expanded={data.month === 1 || expandedYear === data.year}
+                  expandedYear={expandedYear!}
+                  month={data.month}
+                  year={data.year}
+                  onClick={() => {
+                    data.year === expandedYear ? setExpandedYear(null) : setExpandedYear(data.year)
+                  }}
+                >
+                  <P_BodyTextWhiteTable>
+                    {data.month} month {data.year} year
+                  </P_BodyTextWhiteTable>
                   <P_BodyTextWhiteTable>
                     Monthly Payment: {formatMoney(data.monthlyPaidAmount)}
                   </P_BodyTextWhiteTable>
@@ -227,11 +264,11 @@ const Charts = (props: { calculatePayment: DataCalculatePayment }) => {
   const chartData = props.calculatePayment.map((data, i) => ({
     months: i + 1,
     'Interest Paid': decimals(data.monthlyPaidInterest),
-    'Interest Paid Inflation': decimals(data.monthlyPaidInterestInflation),
+    'Interest Paid Inflation': decimals(data.inflation.monthlyPaidInterest),
     'Principal Paid': decimals(data.monthlyPaidPrincipal),
-    'Principal Paid Inflation': decimals(data.monthlyPaidPrincipalInflation),
+    'Principal Paid Inflation': decimals(data.inflation.monthlyPaidPrincipal),
     Remain: decimals(data.remain),
-    'Remain Inflation': decimals(data.remainInflation),
+    'Remain Inflation': decimals(data.inflation.remain),
     'Property Value': decimals(data.propertyValue),
   }))
 
@@ -330,6 +367,7 @@ const Input_MortgageInput = styled(Input_Input)`
 const Div_Table = styled.div`
   border: 1px solid ${theme.color.white};
   border-radius: 10px;
+  margin-bottom: ${theme.spacing.extraLarge};
 `
 
 const Table_Styled = styled.table`
@@ -337,7 +375,7 @@ const Table_Styled = styled.table`
   width: 85vw;
 `
 
-const Div_MobileTable = styled.div`
+const Div_MobileTable = styled.div<TrProps>`
   width: 50vw;
   display: flex;
   flex-direction: column;
@@ -345,6 +383,17 @@ const Div_MobileTable = styled.div`
   border-radius: 10px;
   padding-left: ${theme.spacing.extraSmall};
   margin-bottom: ${theme.spacing.medium};
+  cursor: pointer;
+  ${({ expanded }) =>
+    !expanded &&
+    css`
+      display: none;
+    `}
+  ${({ month }) =>
+    month === 1 &&
+    css`
+      background-color: ${theme.color.whiteTransparent};
+    `}
   ${theme.mediaQueries.phone} {
     width: 80vw;
   }
@@ -372,4 +421,18 @@ const Div_Charts = styled.div`
     flex-direction: column;
     align-items: center;
   }
+`
+
+const Tr_Styled = styled.tr<TrProps>`
+  cursor: pointer;
+  ${({ expanded }) =>
+    !expanded &&
+    css`
+      display: none;
+    `}
+  ${({ month }) =>
+    month === 1 &&
+    css`
+      background-color: ${theme.color.whiteTransparent};
+    `}
 `

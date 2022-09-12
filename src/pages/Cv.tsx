@@ -1,11 +1,14 @@
 import { H1_MainHeading } from '../components/MainHeading'
+import { anchors } from '../helpers/urls'
 import { theme } from '../helpers/themes'
 import React from 'react'
 import styled from 'styled-components'
 
+const myMail = 'radimpopp@gmail.com'
+
 export const Cv = () => {
   return (
-    <Div_CvContainer id='cv'>
+    <Div_CvContainer id={anchors.landingPage.cv}>
       <H1_CvHeading>
         Radim<Span_Salmon> Popp</Span_Salmon>
       </H1_CvHeading>
@@ -13,7 +16,7 @@ export const Cv = () => {
         <H2_CvHeading>Contact</H2_CvHeading>
         <P_CvText>Brno, Czechia</P_CvText>
         <P_CvText>+420 774 729 117</P_CvText>
-        <A_Cv href='mailto:radimpopp@gmail.com'>radimpopp@gmail.com</A_Cv>
+        <A_Cv href={`mailto:${myMail}`}>{myMail}</A_Cv>
       </Ul_CvFragment>
       <Ul_CvFragment>
         <H2_CvHeading>Skills</H2_CvHeading>

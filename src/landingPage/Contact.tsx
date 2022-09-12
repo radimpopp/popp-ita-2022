@@ -9,12 +9,15 @@ export const Contact = () => {
   const [inputEmail, setInputEmail] = useState('')
   const [inputMessage, setInputMessage] = useState('')
   const form = useRef(null as HTMLFormElement | null)
+  const serviceId = process.env.REACT_APP_CREDENTIALS_EMAILJS_SERVICE_ID
+  const templateId = process.env.REACT_APP_CREDENTIALS_EMAILJS_TEMPLATE_ID
+  const userId = process.env.REACT_APP_CREDENTIALS_EMAILJS_USER_ID
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const currentForm = form.current
     if (currentForm === null) return
-    emailjs.sendForm('service_7pu1fgj', 'template_uifmyby', currentForm, 'RqtRSlR0xLa53cJ0G').then(
+    emailjs.sendForm(serviceId!, templateId!, currentForm, userId!).then(
       res => {
         alert('The email was sent.')
         setInputEmail('')

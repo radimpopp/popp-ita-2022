@@ -2,6 +2,7 @@ import { H1_MainHeading } from './MainHeading'
 import { Img_ImageLogo } from './Image'
 import { Link } from 'react-scroll'
 import { breakpointsMediaQueries, theme } from '../helpers/themes'
+import { useResizeHandler } from '../helpers/hooks'
 import Hamburger from 'hamburger-react'
 import React, { useEffect, useState } from 'react'
 import jsLogo from '../images/js_logo.png'
@@ -9,16 +10,8 @@ import styled from 'styled-components'
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false)
-  const [width, setWidth] = useState(0)
 
-  useEffect(() => {
-    const resizeHandler = () => setWidth(window.innerWidth)
-    resizeHandler()
-    window.addEventListener('resize', resizeHandler)
-    return () => {
-      window.removeEventListener('resize', resizeHandler)
-    }
-  }, [])
+  const [width] = useResizeHandler()
 
   const clickHandler = () => {
     setOpen(false)

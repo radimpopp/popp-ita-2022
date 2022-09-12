@@ -26,4 +26,19 @@ export const urls = {
     'https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/MortgageCalculator.tsx',
 } as const
 
+export const anchors = {
+  jsWeb: {
+    jsWeb: 'jsWeb',
+    history: 'history',
+    jsxj: 'jsxj',
+    ecma: 'ecma',
+    jst: 'jsToday',
+  },
+  landingPage: {
+    cv: 'cv',
+    projects: 'projects',
+    contact: 'contact',
+  },
+} as const
+
 export const getArticleDetail = (slug: string) => `${urls.blog.blog}${urls.blog.detail}${slug}`

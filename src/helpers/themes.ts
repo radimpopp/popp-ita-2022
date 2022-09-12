@@ -17,6 +17,7 @@ export const theme = {
     black: '#000000',
     white: '#ffffff',
     salmon: 'salmon',
+    whiteTransparent: 'rgba(255, 255, 255, 0.1)',
     pink: 'pink',
   },
 
