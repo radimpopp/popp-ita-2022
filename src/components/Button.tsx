@@ -13,7 +13,7 @@ export const buttonStyles = css`
   border: 1px solid ${theme.color.black};
 `
 
-export const Button_Button = styled.button`
+const Button_Button = styled.button`
   ${buttonStyles}
   width: ${theme.spacing.superSize};
   height: ${theme.spacing.large};

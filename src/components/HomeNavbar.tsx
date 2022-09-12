@@ -12,7 +12,9 @@ export const HomeNavbar = () => {
     <Div_NavbarContainer>
       <Nav_StyledNavbar>
         <Div_NavHeading>
-          <H1_NavHeading>&#60;Radim Popp &#47;&#62;</H1_NavHeading>
+          <H1_NavHeading>
+            <Span_Salmon>&#60;</Span_Salmon>Radim Popp <Span_Salmon>&#47;&#62;</Span_Salmon>
+          </H1_NavHeading>
         </Div_NavHeading>
         <Ul_NavList>
           <Li_NavListItem>
@@ -84,9 +86,6 @@ export const Ul_NavList = styled.ul`
 const Li_NavListItem = styled.li`
   display: flex;
   white-space: nowrap;
-  &:hover {
-    transform: scale(1.01);
-  }
 `
 
 const Link_NavLink = styled(Link)`
@@ -94,9 +93,6 @@ const Link_NavLink = styled(Link)`
   padding: ${theme.spacing.extraSmall};
   white-space: nowrap;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.1);
-  }
   &:focus {
     border-bottom: 1px solid ${theme.color.greyDark};
   }
@@ -104,14 +100,27 @@ const Link_NavLink = styled(Link)`
 
 const H1_NavUl = styled(H1_MainHeading)`
   padding: unset;
-  font-size: ${theme.fontSize.small};
+  font-size: ${theme.fontSize.medium};
+  ${theme.mediaQueries.phone} {
+    font-size: ${theme.fontSize.small};
+  }
+  &:hover {
+    color: ${theme.color.salmon};
+  }
+`
+
+const Span_Salmon = styled.span`
+  color: ${theme.color.salmon};
 `
 
 const H1_NavHeading = styled(H1_MainHeading)`
   padding: unset;
-  font-size: ${theme.fontSize.small};
+  font-size: ${theme.fontSize.large};
   font-weight: ${theme.fontWeight.medium};
   color: ${theme.color.greyBright};
+  ${theme.mediaQueries.phone} {
+    font-size: ${theme.fontSize.small};
+  }
 `
 
 const Div_NavHeading = styled.div`
