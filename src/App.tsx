@@ -1,17 +1,15 @@
-import { Blog } from './blog/Blog'
-import { CounterApp } from './pages/CounterApp'
-import { Cv } from './pages/Cv'
-import { HackerTyper } from './hackertyper/Hackertyper'
+import { Blog } from './pages/blog/Blog'
+import { Cv } from './pages/landingPage/Cv'
+import { HackerTyper } from './pages/hackertyper/Hackertyper'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { Home } from './landingPage/Home'
+import { Home } from './pages/landingPage/Home'
 import { HomeNavbar } from './components/HomeNavbar'
-import { JsWeb } from './pages/JsWeb'
-import { MemoryGame } from './pages/MemoryGame'
-import { MortgageCalculator } from './pages/MortgageCalculator'
+import { JsWeb } from './pages/jsWeb/JsWeb'
+import { MemoryGame } from './pages/memoryGame/MemoryGame'
+import { MortgageCalculator } from './pages/mortgageCalculator/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
-import { TodoListApp } from './todolist/TodoList'
+import { TodoListApp } from './pages/todolist/TodoList'
 import { createGlobalStyle } from 'styled-components'
-import { serviceLayers } from './helpers/serviceLayers'
 import { theme } from './helpers/themes'
 import { urls } from './helpers/urls'
 import React from 'react'
@@ -32,7 +30,6 @@ export function App() {
         <Routes>
           <Route path={urls.home} element={<Home />} />
           <Route path={urls.jsWeb} element={<JsWeb />} />
-          <Route path={urls.counterApp} element={<CounterApp />} />
           <Route path={urls.todoList} element={<TodoListApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
           <Route path={urls.memoryGame} element={<MemoryGame />} />
