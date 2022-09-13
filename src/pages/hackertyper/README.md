@@ -1,6 +1,6 @@
 # HackerTyper
 
-[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/hackertyper)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/hackertyper)
 
 A clone of [HackerTyper](hackertyper.com).
 

@@ -1,6 +1,6 @@
 # JavaScript History Web
 
-[link](https://github.com/radimpopp/popp-ita-2022/blob/main/src/pages/JsWeb.tsx)
+[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/jsWeb)
 
 A static web about JavaScript origin.
 
