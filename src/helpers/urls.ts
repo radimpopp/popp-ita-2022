@@ -3,6 +3,7 @@ export const urls = {
   jsWeb: '/jsweb',
   counterApp: '/counter-app',
   todoList: '/todo-list',
+  todoListRedux: '/todo-list-redux',
   hackerTyper: '/hackertyper',
   memoryGame: '/memory-game',
   mortgageCalculator: '/mortgage-calculator',
@@ -23,6 +24,7 @@ export const urls = {
   gitMemoryGame: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/memoryGame',
   gitBlog: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/blog',
   gitMortgage: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/mortgageCalculator',
+  gitRedux: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todoRedux',
 } as const
 
 export const anchors = {

@@ -4,7 +4,7 @@ import { TodoListStateContext } from '../todolist/TodoList'
 import { theme } from '../../helpers/themes'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import trashicon from './images/trashicon.svg'
+import trashicon from '../../images/trashicon.svg'
 
 type Props = {
   task: Task

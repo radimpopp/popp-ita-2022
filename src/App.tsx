@@ -8,6 +8,7 @@ import { JsWeb } from './pages/jsWeb/JsWeb'
 import { MemoryGame } from './pages/memoryGame/MemoryGame'
 import { MortgageCalculator } from './pages/mortgageCalculator/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
+import { TodoApp } from './pages/todoRedux/TodoApp'
 import { TodoListApp } from './pages/todolist/TodoList'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/themes'
@@ -36,6 +37,7 @@ export function App() {
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
           <Route path={urls.blog.blogPath} element={<Blog />} />
           <Route path={urls.cv} element={<Cv />} />
+          <Route path={urls.todoListRedux} element={<TodoApp />} />
         </Routes>
         <GlobalStyle />
       </Div_StyledApp>
