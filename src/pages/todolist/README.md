@@ -2,6 +2,6 @@
 
 A handy app to organize your task using local storage.
 
-[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todolist)
+[Click here to open the app](https://radimpopp.eu/todo-list)
 
 ![Todo List](/src/images/todo-screenshot.png)

@@ -2,6 +2,6 @@
 
 A handy app to organize your task using local storage and Redux.
 
-[link](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todoRedux)
+[Click here to open the app](https://radimpopp.eu/todo-list-redux)
 
 ![Todo List Redux](/src/images/todo-redux-screenshot.png)
