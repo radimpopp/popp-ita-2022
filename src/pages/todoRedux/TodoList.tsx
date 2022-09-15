@@ -217,6 +217,9 @@ const Div_BorderContainer = styled.div`
   border-radius: 10px;
   margin: ${theme.spacing.medium} 0;
   padding: ${theme.spacing.medium};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const H2_ItemsLeftHeading = styled(H2_FormHeading)`
@@ -240,4 +243,8 @@ const Div_TodoContainer = styled.div`
 const Input_Styled = styled(Input_Input)`
   margin: unset;
   margin-left: ${theme.spacing.medium};
+  ${theme.mediaQueries.phone} {
+    margin-left: unset;
+    margin: ${theme.spacing.medium} 0;
+  }
 `
