@@ -220,6 +220,9 @@ const Div_BorderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${theme.mediaQueries.galaxyFold} {
+    padding: ${theme.spacing.small};
+  }
 `
 
 const H2_ItemsLeftHeading = styled(H2_FormHeading)`

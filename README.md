@@ -42,16 +42,6 @@ A clone of [HackerTyper](hackertyper.com).
 
 ![Hackertyper](/src/images/hackertyper-screenshot.png)
 
-### Todo List
-
-[Click here to open the repository](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todolist)
-
-[Click here to open the app](https://radimpopp.eu/todo-list)
-
-A handy app to organize your task using local storage.
-
-![Todo List](/src/images/todo-screenshot.png)
-
 ### Todo List Redux
 
 [Click here to open the repository](https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todoRedux)
