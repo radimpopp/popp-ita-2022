@@ -1,6 +1,6 @@
 # HackerTyper
 
-[link](https://radimpopp.eu/hackertyper)
+[Click here to open the app](https://radimpopp.eu/hackertyper)
 
 A clone of [HackerTyper](hackertyper.com).
 

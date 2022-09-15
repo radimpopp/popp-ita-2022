@@ -1,6 +1,6 @@
 # JavaScript History Web
 
-[link](https://radimpopp.eu/jsweb)
+[Click here to open the app](https://radimpopp.eu/jsweb)
 
 A static web about JavaScript origin.
 
