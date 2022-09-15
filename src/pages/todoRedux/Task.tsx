@@ -147,12 +147,6 @@ const P_TodoBodyText = styled.p`
   font-size: ${theme.fontSize.small};
   padding: ${theme.spacing.small};
   width: 100%;
-  ${theme.mediaQueries.tablet} {
-    width: 85%;
-  }
-  ${theme.mediaQueries.phone} {
-    width: 60%;
-  }
   &[aria-checked='true'] {
     text-decoration: line-through;
   }
