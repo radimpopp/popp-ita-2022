@@ -17,7 +17,7 @@ const todoSlice = createSlice({
           id: createId(),
           task,
           completed: false,
-        } as Task,
+        },
       }),
     },
     removeTodo(state, action: PayloadAction<string>) {
@@ -30,11 +30,11 @@ const todoSlice = createSlice({
     },
 
     checkAll(state) {
-      return state.map(todo => (todo.completed === false ? { ...todo, completed: true } : todo))
+      return state.map(todo => ({ ...todo, completed: true }))
     },
 
     uncheckAll(state) {
-      return state.map(todo => (todo.completed === true ? { ...todo, completed: false } : todo))
+      return state.map(todo => ({ ...todo, completed: false }))
     },
 
     deleteAllChecked(state) {

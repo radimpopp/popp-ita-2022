@@ -1,7 +1,8 @@
 import { RootState } from './store'
+import { Task } from './TodoApp'
 
-const localStorageKey = 'redux'
-export const loadState = () => {
+export const localStorageKey = 'redux'
+export const loadState = (localStorageKey: string): undefined | Task[] => {
   try {
     const serializedState = localStorage.getItem(localStorageKey)
     if (!serializedState) return undefined

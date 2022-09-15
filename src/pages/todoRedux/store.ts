@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { loadState } from './localStorage'
+import { loadState, localStorageKey } from './localStorage'
 import { todoReducer } from './todoSlice'
 
 export const store = configureStore({
   reducer: todoReducer,
-  preloadedState: loadState(),
+  preloadedState: loadState(localStorageKey),
 })
 
 export type AppDispatch = typeof store.dispatch
