@@ -6,6 +6,7 @@ import jsweb from '../../images/jsweb.png'
 import memoryGame from '../../images/memoryGame.png'
 import mortgage from '../../images/mortgage.png'
 import todo from '../../images/todo.png'
+import todoRedux from '../../images/todoRedux.png'
 
 export const sliderData = [
   {
@@ -33,6 +34,15 @@ export const sliderData = [
     altPreview: 'ToDo List Preview',
     altGit: 'ToDo List Repository',
     srcPreview: todo,
+    srcGit: github,
+  },
+  {
+    title: 'ToDo List Redux',
+    toApp: urls.todoListRedux,
+    toGit: urls.gitRedux,
+    altPreview: 'ToDo List Redux Preview',
+    altGit: 'ToDo List Redux Repository',
+    srcPreview: todoRedux,
     srcGit: github,
   },
   {
