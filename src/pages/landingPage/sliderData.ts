@@ -28,15 +28,6 @@ export const sliderData = [
     srcGit: github,
   },
   {
-    title: 'ToDo List',
-    toApp: urls.todoList,
-    toGit: urls.gitTodo,
-    altPreview: 'ToDo List Preview',
-    altGit: 'ToDo List Repository',
-    srcPreview: todo,
-    srcGit: github,
-  },
-  {
     title: 'ToDo List Redux',
     toApp: urls.todoListRedux,
     toGit: urls.gitRedux,

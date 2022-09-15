@@ -38,7 +38,7 @@ export const TodoItem = (props: DragProps) => {
         )
       }}
     >
-      <>
+      <Div_TaskContainer>
         <Input_Checkbox
           type='checkbox'
           onChange={() => {
@@ -70,7 +70,7 @@ export const TodoItem = (props: DragProps) => {
             <P_TodoBodyText aria-checked={props.completed}>{props.task}</P_TodoBodyText>
           )}
         </Div_TodoItemContainer>
-      </>
+      </Div_TaskContainer>
       <Img_Delete
         src={trashicon}
         onClick={() => {
@@ -102,8 +102,15 @@ const Li_ListItem = styled.li`
   }
 `
 
-const Div_TodoItemContainer = styled.div`
+const Div_TaskContainer = styled.div`
   width: 90%;
+  ${theme.mediaQueries.phone} {
+    width: 75%;
+  }
+`
+
+const Div_TodoItemContainer = styled.div`
+  width: 100%;
   height: 100%;
 `
 
@@ -139,7 +146,7 @@ const Img_Delete = styled.img`
 const P_TodoBodyText = styled.p`
   font-size: ${theme.fontSize.small};
   padding: ${theme.spacing.small};
-  width: 90%;
+  width: 100%;
   ${theme.mediaQueries.tablet} {
     width: 85%;
   }

@@ -9,7 +9,6 @@ import { MemoryGame } from './pages/memoryGame/MemoryGame'
 import { MortgageCalculator } from './pages/mortgageCalculator/MortgageCalculator'
 import { Route, Routes } from 'react-router-dom'
 import { TodoApp } from './pages/todoRedux/TodoApp'
-import { TodoListApp } from './pages/todolist/TodoList'
 import { createGlobalStyle } from 'styled-components'
 import { theme } from './helpers/themes'
 import { urls } from './helpers/urls'
@@ -31,7 +30,6 @@ export function App() {
         <Routes>
           <Route path={urls.home} element={<Home />} />
           <Route path={urls.jsWeb} element={<JsWeb />} />
-          <Route path={urls.todoList} element={<TodoListApp />} />
           <Route path={urls.hackerTyper} element={<HackerTyper />} />
           <Route path={urls.memoryGame} element={<MemoryGame />} />
           <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />
