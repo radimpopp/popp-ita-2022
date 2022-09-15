@@ -20,7 +20,6 @@ export const urls = {
   cv: '/cv',
   gitJsWeb: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/jsWeb',
   gitHackertyper: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/hackertyper',
-  gitTodo: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/todolist',
   gitMemoryGame: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/memoryGame',
   gitBlog: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/blog',
   gitMortgage: 'https://github.com/radimpopp/popp-ita-2022/tree/main/src/pages/mortgageCalculator',
